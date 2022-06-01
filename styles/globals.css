@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.dark .swiper-scrollbar {
+    background: white !important;
+}
+
+.dark .swiper-scrollbar-drag {
+    background: #6200EE !important;
+}
+
+.dark .ant-drawer-header {
+    background: #BB86FC;
+    border-radius: initial;
+}
+
+.dark .ant-drawer-title {
+    color: white;
+}
+
+.dark .ant-drawer-close {
+    color: white;
+}
+
+.dark .ant-drawer-body {
+    background: #BB86FC;
+}
+
+.hero__image {
+    background-image: url("../public/redcity.webp") !important;
+    text-shadow: -18px 30px 16px rgba(0, 0, 0, 0.15)
+}
+
+.ant-drawer-content-wrapper {
+    max-width: 378px !important;
+    width: 100% !important;
+}
+
+.dark .ant-empty-description {
+    color: white;
+}
