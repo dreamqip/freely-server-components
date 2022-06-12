@@ -4,7 +4,7 @@ export default function Document() {
     return (
         <Html lang="en">
             <Head>
-                <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap"
+                <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap"
                       rel="stylesheet"/>
             </Head>
             <body className="font-rubik dark:bg-dark-theme">

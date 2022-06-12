@@ -1,9 +1,10 @@
 import type {NextPage} from 'next'
 import axios from "axios";
-import MoviesList from "../components/MoviesList";
 import Hero from "../components/Hero";
-import UpcomingMovies from "../components/UpcomingMovies";
-import Search from "../components/Search";
+import dynamic from "next/dynamic";
+
+const MoviesList = dynamic(() => import('../components/MoviesList'));
+const UpcomingMovies = dynamic(() => import('../components/UpcomingMovies'));
 
 interface HomeProps {
     popular?: any;

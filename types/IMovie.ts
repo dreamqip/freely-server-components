@@ -19,6 +19,9 @@ export interface IMovie {
     video: boolean;
     vote_average: number;
     genres: IGenres[];
-    budget?: number;
-
+    budget: number;
+    revenue: number;
+    runtime: number;
+    status: string;
+    production_companies: any;
 }

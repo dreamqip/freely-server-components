@@ -1,13 +1,12 @@
 import type {FC} from 'react';
-import {Swiper, SwiperSlide} from "swiper/react";
-
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/scrollbar";
-
-import {FreeMode, Scrollbar} from "swiper";
 import {IMovies} from "../types/IMovies";
 import MovieCard from "./MovieCard";
+import Glider from 'react-glider'
+import Pane from './Pane'
+import {ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/solid";
+import {useEffect, useRef, useState} from "react";
+
+import 'glider-js/glider.min.css';
 
 interface MoviesListProps {
     movies: IMovies;
@@ -15,43 +14,67 @@ interface MoviesListProps {
 }
 
 const MoviesList: FC<MoviesListProps> = ({movies, title}) => {
+    const prev = useRef<HTMLButtonElement>(null)
+    const next = useRef<HTMLButtonElement>(null)
+    const [isInitialized, setIsInitialized] = useState(false);
+
+    useEffect(() => {
+        setIsInitialized(Boolean(prev.current && next.current));
+    }, [prev, next]);
+
     return (
         <div className="py-10">
             <h2 className="text-center dark:text-white font-bold text-6xl">{title}</h2>
             <div className="h-auto">
-                <Swiper
-                    slidesPerView={4}
-                    spaceBetween={30}
-                    freeMode={{
-                        sticky: true,
-                        enabled: true
-                    }}
-                    scrollbar={{
-                        draggable: true,
-                    }}
-                    modules={[FreeMode, Scrollbar]}
-                    breakpoints={{
-                        320: {
-                            slidesPerView: 1,
-                            spaceBetween: 20,
-                        },
-                        640: {
-                            slidesPerView: 3,
-                        },
-                        1024: {
-                            slidesPerView: 4,
-                        }
-                    }}
-                    className="mySwiper"
-                >
-                    {movies.results.map((movie) => {
-                        return (
-                            <SwiperSlide className="mb-10" key={movie.id}>
-                                <MovieCard movie={movie}/>
-                            </SwiperSlide>
-                        )
-                    })}
-                </Swiper>
+                {isInitialized && (
+                    <Glider
+                        draggable
+                        dragVelocity={1}
+                        slidesToShow={2}
+                        hasArrows
+                        arrows={{
+                            prev: prev.current,
+                            next: next.current
+                        }}
+                        slidesToScroll={2}
+                        responsive={[
+
+                            {
+                                breakpoint: 768,
+                                settings: {
+                                    slidesToShow: 4,
+                                    slidesToScroll: 4,
+                                }
+                            }
+                        ]}
+                    >
+                        {movies.results.map((movie) => {
+                            return (
+                                <Pane key={movie.id}>
+                                    <MovieCard movie={movie}/>
+                                </Pane>
+                            )
+                        })}
+                    </Glider>
+                )}
+                <div className="relative left-10">
+                    <button
+                        ref={next}
+                        type="button"
+                        className="glider-prev left-6"
+                        aria-label="Next"
+                    >
+                        <ArrowRightIcon className="w-10 h-10"/>
+                    </button>
+                    <button
+                        ref={prev}
+                        type="button"
+                        className="glider-prev"
+                        aria-label="Previous"
+                    >
+                        <ArrowLeftIcon className="w-10 h-10"/>
+                    </button>
+                </div>
             </div>
         </div>
     );

@@ -1,7 +1,5 @@
 import React from 'react';
 import type {NextPage} from "next";
-import axios from "axios";
-import {Divider, List, Typography} from "antd";
 
 interface AboutProps {
     data?: any
@@ -9,37 +7,22 @@ interface AboutProps {
 
 const data = [
     'Search movies',
-    'Movie recommendations'
+    'Movie recommendations',
+    'Movie video content',
+    'Movie cast'
 ]
 
 const About: NextPage<AboutProps> = () => {
-
     return (
         <div>
             <h1 className="text-7xl text-center dark:text-white">What's coming soon</h1>
-            <List
-                dataSource={data}
-                renderItem={(item: string) => (
-                    <List.Item>
-                        <Typography.Text strong className="dark:text-white text-3xl">{item}</Typography.Text>
-                    </List.Item>
-                )}
-            />
+            <ul className="list-decimal pl-10">
+                {data.map((item: string) => {
+                    return <li key={item} className="text-xl dark:text-white"><strong>{item}</strong></li>
+                })}
+            </ul>
         </div>
     );
 };
 
 export default About;
-
-/*export async function getServerSideProps() {
-    const data = await axios.get(
-        'https://api.themoviedb.org/3/movie/634649/recommendations?api_key=5648f9659b3ae8a99d81df8a941d325e&language=en-US&page=1'
-    )
-        .then(res => res.data)
-
-    return {
-        props: {
-            data
-        }
-    }
-}*/

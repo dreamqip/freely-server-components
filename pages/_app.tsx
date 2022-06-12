@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import 'antd/dist/antd.css'
-import "swiper/css/bundle";
+import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
 
 import type {AppProps} from 'next/app'
 import MainLayout from "../layouts/MainLayout";

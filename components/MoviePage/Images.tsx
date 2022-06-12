@@ -1,32 +1,44 @@
 import type {FC} from 'react';
-import {Col, Empty, Row} from "antd";
-import Image from "next/image";
+import {Skeleton, Empty, Image} from "antd";
+import {useFetch} from "../../hooks/useFetch";
 
 interface Props {
-    images: any;
+    id: any;
 }
 
-const Images: FC<Props> = ({images}) => {
+const Images: FC<Props> = ({id}) => {
+    const {
+        details,
+        isLoading
+    } = useFetch(`https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`)
+
+    console.log(details)
+
+    if (isLoading) return <Skeleton.Image className="w-full"/>
+
     return (
-        <Row className="justify-center">
-            {images?.backdrops.length > 0
-                ? images?.backdrops.map((image: any) => {
-                    return (
-                        <Col xs={2} sm={4} md={6} lg={8} xl={10}>
-                            <Image
-                                src={`https://image.tmdb.org/t/p/original${image.file_path}`}
-                                width={400}
-                                height={600}
-                                alt="backdrop image"
-                            />
-                        </Col>
-                    )
-                })
-                : <Empty description={""}>
-                    <h3 className="dark:text-primary-dark text-xl">No images</h3>
-                </Empty>
-            }
-        </Row>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <Image.PreviewGroup>
+                {details?.backdrops.length > 0
+                    ? details?.backdrops.map((image: any) => {
+                        return (
+                            <div key={image.file_path}>
+                                <Image
+                                    width={400}
+                                    height={225}
+                                    src={`https://image.tmdb.org/t/p/original${image.file_path}`}
+                                    alt="backdrop image"
+                                    fallback="/image-placeholder.webp"
+                                />
+                            </div>
+                        )
+                    })
+                    : <Empty description={""}>
+                        <h3 className="dark:text-primary-dark text-xl">No images</h3>
+                    </Empty>
+                }
+            </Image.PreviewGroup>
+        </div>
     );
 };
 

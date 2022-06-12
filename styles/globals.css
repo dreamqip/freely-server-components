@@ -2,16 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-.swiper {
-    width: 100%;
+#__next {
     height: 100%;
 }
 
-.dark .swiper-scrollbar {
+.ant-image-preview-img {
+    display: initial;
+}
+
+.ant-tabs-top > .ant-tabs-nav::before {
+    content: none !important;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #6200EE !important;
+}
+
+.dark .ant-tabs-tab {
+    color: white !important;
+}
+
+.ant-tabs-tab:hover {
+    color: #3700B3 !important;
+}
+
+.dark .ant-tabs-tab:hover {
+    color: #BB86FC !important;
+}
+
+.dark .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: white !important;
+}
+
+.ant-tabs-ink-bar {
+    background: #6200EE !important;
+}
+
+.dark .ant-tabs-ink-bar {
     background: white !important;
 }
 
-.dark .swiper-scrollbar-drag {
+.ant-switch-checked {
     background: #6200EE !important;
 }
 
