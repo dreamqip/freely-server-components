@@ -3,7 +3,7 @@ import axios from "axios";
 import Hero from "../components/Hero";
 import dynamic from "next/dynamic";
 
-const MoviesList = dynamic(() => import('../components/MoviesList'));
+const MoviesList = dynamic(() => import('../components/MoviesList/MoviesList'));
 const UpcomingMovies = dynamic(() => import('../components/UpcomingMovies'));
 
 interface HomeProps {

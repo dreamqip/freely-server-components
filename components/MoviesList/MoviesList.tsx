@@ -1,12 +1,10 @@
 import type {FC} from 'react';
-import {IMovies} from "../types/IMovies";
+import {IMovies} from "../../types/IMovies";
 import MovieCard from "./MovieCard";
 import Glider from 'react-glider'
-import Pane from './Pane'
+import Pane from '../Pane'
 import {ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/solid";
 import {useEffect, useRef, useState} from "react";
-
-import 'glider-js/glider.min.css';
 
 interface MoviesListProps {
     movies: IMovies;

@@ -2,7 +2,7 @@ import type {FC} from 'react';
 import {Card} from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import {MovieProps} from "../types/MovieProps";
+import {MovieProps} from "../../types/MovieProps";
 
 const MovieCard: FC<MovieProps> = ({movie}) => {
     return (

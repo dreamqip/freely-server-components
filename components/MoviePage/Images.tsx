@@ -12,8 +12,6 @@ const Images: FC<Props> = ({id}) => {
         isLoading
     } = useFetch(`https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`)
 
-    console.log(details)
-
     if (isLoading) return <Skeleton.Image className="w-full"/>
 
     return (
@@ -22,10 +20,8 @@ const Images: FC<Props> = ({id}) => {
                 {details?.backdrops.length > 0
                     ? details?.backdrops.map((image: any) => {
                         return (
-                            <div key={image.file_path}>
+                            <div className="flex" key={image.file_path}>
                                 <Image
-                                    width={400}
-                                    height={225}
                                     src={`https://image.tmdb.org/t/p/original${image.file_path}`}
                                     alt="backdrop image"
                                     fallback="/image-placeholder.webp"

@@ -18,7 +18,7 @@ const Hero: FC<PageProps> = ({details}) => {
                 className="w-6 cursor-pointer lg:w-14 z-10 top-2 left-2 md:top-10 md:left-10 absolute text-white transition hover:-translate-x-3"
             />
             <div className="absolute max-w-xl top-1/4 md:top-1/3 left-10 z-10">
-                <h1 className="text-white text-3xl md:text-4xl m-0">{details?.title}</h1>
+                <h1 className="text-white text-2xl md:text-4xl m-0">{details?.title}</h1>
                 <p className="text-white hidden md:block">{details?.overview}</p>
             </div>
             <Image

@@ -6,8 +6,10 @@ import {useFetch} from "../../hooks/useFetch";
 import ErrorPage from "../404";
 import Hero from "../../components/MoviePage/Hero";
 import dynamic from "next/dynamic";
+import Cast from "../../components/MoviePage/Cast";
 
 const MovieTabs = dynamic(() => import('../../components/MoviePage/Tabs'))
+const Reviews = dynamic(() => import('../../components/MoviePage/Reviews'))
 
 const MoviePage: FC = () => {
     const router = useRouter()
@@ -17,6 +19,8 @@ const MoviePage: FC = () => {
         isLoading,
         isError
     } = useFetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`);
+
+    console.log(typeof id)
 
     if (isLoading) return (
         <>
@@ -34,25 +38,7 @@ const MoviePage: FC = () => {
             />
             <Hero details={details}/>
             <MovieTabs movie={details} id={id}/>
-            <h2 className="mt-4 text-center font-bold dark:text-white text-2xl md:text-5xl">Reviews</h2>
-            {/*<List
-                itemLayout={"vertical"}
-                dataSource={comments.results}
-                renderItem={(item: any) => (
-                    <List.Item>
-                        <Comment
-                            content={(
-                                <p className="dark:text-white w-52 xs:w-auto">{item.content}</p>
-                            )}
-                            author={(
-                                <span className="dark:text-primary-dark">{item.author}</span>
-                            )}
-                            avatar={`https://joeschmoe.io/api/v1/random`}
-                            datetime={item.created_at}
-                        />
-                    </List.Item>
-                )}
-            />*/}
+
         </div>
     );
 };

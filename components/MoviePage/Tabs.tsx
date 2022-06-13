@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Tabs} from "antd";
 import Overview from "./Overview";
 import {IMovie} from "../../types/IMovie";
@@ -19,7 +19,7 @@ const MovieTabs: FC<PageProps> = ({movie, id}) => {
     return (
         <Tabs className="w-full" defaultActiveKey="1" size="large" centered>
             <TabPane tab="Overview" key="1">
-                <Overview movieDetails={movie} details={parsedDetails} />
+                <Overview id={id} movieDetails={movie} details={parsedDetails} />
             </TabPane>
             <TabPane tab="Images" key="2">
                 <Images id={id}/>
