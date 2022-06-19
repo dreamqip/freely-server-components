@@ -22,9 +22,9 @@ const CastList: FC<MoviesListProps> = ({credits, title}) => {
     }, [prev, next]);
 
     return (
-        <div className="py-10 max-w-7xl px-4">
+        <div className="py-10">
             <h2 className="text-center dark:text-white font-bold text-6xl">{title}</h2>
-            {isInitialized && (
+            {isInitialized && credits && (
                 <Glider
                     draggable
                     dragVelocity={1}

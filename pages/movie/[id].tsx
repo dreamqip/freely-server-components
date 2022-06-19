@@ -1,4 +1,3 @@
-import type {FC} from 'react';
 import {Skeleton} from "antd";
 import {useRouter} from "next/router";
 import Meta from "../../components/Meta";
@@ -6,12 +5,11 @@ import {useFetch} from "../../hooks/useFetch";
 import ErrorPage from "../404";
 import Hero from "../../components/MoviePage/Hero";
 import dynamic from "next/dynamic";
-import Cast from "../../components/MoviePage/Cast";
+import {NextPage} from "next";
 
 const MovieTabs = dynamic(() => import('../../components/MoviePage/Tabs'))
-const Reviews = dynamic(() => import('../../components/MoviePage/Reviews'))
 
-const MoviePage: FC = () => {
+const MoviePage: NextPage = () => {
     const router = useRouter()
     const {id} = router.query;
     const {
@@ -20,12 +18,10 @@ const MoviePage: FC = () => {
         isError
     } = useFetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`);
 
-    console.log(typeof id)
-
     if (isLoading) return (
         <>
             <Skeleton.Image className="w-full h-[600px]"/>
-            <Skeleton active/>
+            <Skeleton className="mt-6" active/>
         </>
     )
     if (isError) return <ErrorPage/>
@@ -38,7 +34,6 @@ const MoviePage: FC = () => {
             />
             <Hero details={details}/>
             <MovieTabs movie={details} id={id}/>
-
         </div>
     );
 };

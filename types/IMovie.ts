@@ -1,9 +1,11 @@
+import {ICast} from "./ICast";
+
 interface IGenres {
     id: number;
     name: string;
 }
 
-export interface IMovie {
+export interface IMovie extends ICast{
     poster_path: string | null;
     adult: boolean;
     overview: string;

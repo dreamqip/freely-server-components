@@ -18,7 +18,6 @@ const Home: NextPage<HomeProps> = ({popular, topRated, upcoming}) => {
         <>
             <Hero/>
             <UpcomingMovies movies={upcoming}/>
-            {/*<Search />*/}
             <MoviesList title="Popular now" movies={popular}/>
             <MoviesList title="Top Rated" movies={topRated}/>
         </>

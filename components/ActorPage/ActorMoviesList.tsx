@@ -1,18 +1,18 @@
 import type {FC} from 'react';
-import {IMovies} from "../../types/IMovies";
-import MovieCard from "./MovieCard";
+import ActorMovieCard from "./ActorMovieCard";
 import Glider from 'react-glider'
 import Pane from '../Pane'
 import {ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/solid";
 import {useEffect, useRef, useState} from "react";
-import {Empty} from "antd";
+import {IMovie} from "../../types/IMovie";
+import {sortActorMoviesByPopularity} from "../../utilities/sortActorMoviesByPopularity";
 
 interface MoviesListProps {
-    movies: IMovies;
+    movies: IMovie[];
     title: string;
 }
 
-const MoviesList: FC<MoviesListProps> = ({movies, title}) => {
+const ActorMoviesList: FC<MoviesListProps> = ({movies, title}) => {
     const prev = useRef<HTMLButtonElement>(null)
     const next = useRef<HTMLButtonElement>(null)
     const [isInitialized, setIsInitialized] = useState(false);
@@ -20,8 +20,6 @@ const MoviesList: FC<MoviesListProps> = ({movies, title}) => {
     useEffect(() => {
         setIsInitialized(Boolean(prev.current && next.current));
     }, [prev, next]);
-
-    if (movies && movies.results.length == 0) return <Empty description="No recommendations"/>
 
     return (
         <div className="py-10">
@@ -48,10 +46,10 @@ const MoviesList: FC<MoviesListProps> = ({movies, title}) => {
                             }
                         ]}
                     >
-                        {movies?.results.map((movie) => {
+                        {movies?.sort(sortActorMoviesByPopularity).map((movie) => {
                             return (
                                 <Pane key={movie.id}>
-                                    <MovieCard movie={movie}/>
+                                    <ActorMovieCard movie={movie}/>
                                 </Pane>
                             )
                         })}
@@ -80,4 +78,4 @@ const MoviesList: FC<MoviesListProps> = ({movies, title}) => {
     );
 };
 
-export default MoviesList;
+export default ActorMoviesList;

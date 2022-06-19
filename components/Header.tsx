@@ -29,11 +29,13 @@ const MainHeader: FC = () => {
     };
 
     return (
-        <Header className="flex items-center justify-between bg-inherit p-0 md:px-12">
+        <Header
+            className="flex bg-white dark:bg-dark-theme z-[1000] sticky top-0 items-center justify-between p-0 md:px-12">
             <Link href="/">
                 <div className="flex cursor-pointer items-center gap-4">
                     <Image
                         src="/movie-glass.svg"
+                        priority={true}
                         alt="logo"
                         width={64}
                         height={64}

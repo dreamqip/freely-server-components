@@ -1,8 +1,10 @@
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import Image from "next/image";
 import {IMovie} from "../../types/IMovie";
 import Cast from "./Cast";
 import Reviews from "./Reviews";
+import Similar from "./Similar";
+import Recommended from "./Recommended";
 
 interface PageProps {
     movieDetails: IMovie;
@@ -11,14 +13,19 @@ interface PageProps {
 }
 
 const Overview: FC<PageProps> = ({movieDetails, details, id}) => {
+    const [imgSrc, setImgSrc] = useState(`https://image.tmdb.org/t/p/w440_and_h660_face${movieDetails.poster_path}`);
+
     return (
         <>
             <div className="grid grid-cols-1 md:grid-cols-[250px_minmax(0,_1fr)] gap-8">
                 <Image
-                    src={`https://image.tmdb.org/t/p/w440_and_h660_face${movieDetails.poster_path}`}
+                    src={imgSrc}
                     alt={movieDetails.title}
                     width={250}
                     height={400}
+                    onError={() => {
+                        setImgSrc('/fallback.jpeg')
+                    }}
                     objectFit={"contain"}
                 />
                 <div>
@@ -40,6 +47,8 @@ const Overview: FC<PageProps> = ({movieDetails, details, id}) => {
                 </div>
             </div>
             <Cast id={id}/>
+            <Similar id={id}/>
+            <Recommended id={id}/>
             <h2 className="mt-4 text-center font-bold dark:text-white text-2xl md:text-5xl">Reviews</h2>
             <Reviews id={id}/>
         </>

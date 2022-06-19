@@ -22,6 +22,7 @@ const Images: FC<Props> = ({id}) => {
                         return (
                             <div className="flex" key={image.file_path}>
                                 <Image
+                                    placeholder={true}
                                     src={`https://image.tmdb.org/t/p/original${image.file_path}`}
                                     alt="backdrop image"
                                     fallback="/image-placeholder.webp"

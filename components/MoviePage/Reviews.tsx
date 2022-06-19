@@ -9,7 +9,7 @@ interface Props {
 const Reviews: FC<Props> = ({id}) => {
     const {details, isLoading} = useFetch(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=1`)
 
-    if (isLoading) return <Skeleton />
+    if (isLoading) return <Skeleton active/>
 
     return (
         <List
