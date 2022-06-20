@@ -14,8 +14,8 @@ const CastCard: FC<Props> = ({person}) => {
     const [imgSrc, setImgSrc] = useState(`https://image.tmdb.org/t/p/w342${person.profile_path}`);
 
     return (
-        <Link href={`/actor/${person.id}`}>
-            <div className="flex flex-col justify-center cursor-pointer">
+        <Link href={`/actor/${person.id}`} passHref>
+            <a className="flex flex-col justify-center cursor-pointer">
                 <span className="hover:scale-95 transition-all duration-500 flex">
                     <Image
                         src={imgSrc}
@@ -30,13 +30,15 @@ const CastCard: FC<Props> = ({person}) => {
                         alt={person.name}
                     />
                 </span>
-                <div className="text-lg dark:text-white">{person.name}</div>
-                <div className="text-md text-gray-500">{
-                    person.character.length > 35
-                        ? person.character.substring(0, 35) + '...'
-                        : person.character
-                }</div>
-            </div>
+                <div className="text-lg text-black dark:text-white">{person.name}</div>
+                <div className="text-md text-gray-500">
+                    {
+                        person.character.length > 35
+                            ? person.character.substring(0, 35) + '...'
+                            : person.character
+                    }
+                </div>
+            </a>
         </Link>
     );
 };

@@ -11,12 +11,17 @@ const MovieTabs = dynamic(() => import('../../components/MoviePage/Tabs'))
 
 const MoviePage: NextPage = () => {
     const router = useRouter()
+    const keywords: string[] = [];
     const {id} = router.query;
     const {
         details,
         isLoading,
         isError
-    } = useFetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`);
+    } = useFetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=1&append_to_response=keywords`);
+
+    details?.keywords.keywords.forEach((keyword: any) => {
+        keywords.push(keyword.name)
+    })
 
     if (isLoading) return (
         <>
@@ -31,6 +36,7 @@ const MoviePage: NextPage = () => {
             <Meta
                 description={details?.overview}
                 title={details?.title}
+                keywords={keywords}
             />
             <Hero details={details}/>
             <MovieTabs movie={details} id={id}/>

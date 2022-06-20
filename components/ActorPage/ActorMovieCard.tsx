@@ -14,17 +14,18 @@ const ActorMovieCard: FC<Props> = ({movie}) => {
     const [imgSrc, setImgSrc] = useState(`https://image.tmdb.org/t/p/w440_and_h660_face${movie.poster_path}`);
 
     return (
-        <Link href={`/movie/${movie.id}`}>
-            <Card
-                className="dark:bg-dark-theme flex justify-center cursor-pointer"
-                bordered={false}
-                bodyStyle={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    padding: 0
-                }}
-            >
+        <Link href={`/movie/${movie.id}`} passHref>
+            <a>
+                <Card
+                    className="dark:bg-dark-theme flex justify-center cursor-pointer"
+                    bordered={false}
+                    bodyStyle={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        padding: 0
+                    }}
+                >
                 <span className="hover:scale-95 transition-all duration-500 mb-6 ">
                     <Image
                         src={imgSrc}
@@ -39,9 +40,10 @@ const ActorMovieCard: FC<Props> = ({movie}) => {
                         alt={movie.title}
                     />
                 </span>
-                <div className="text-black hidden sm:block dark:text-white font-medium text-xl">{movie.title}</div>
-                <div className="text-md text-gray-500">{movie.character}</div>
-            </Card>
+                    <div className="text-black hidden sm:block dark:text-white font-medium text-xl">{movie.title}</div>
+                    <div className="text-md text-gray-500">{movie.character}</div>
+                </Card>
+            </a>
         </Link>
     );
 };

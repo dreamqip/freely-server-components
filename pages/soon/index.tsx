@@ -1,6 +1,5 @@
 import React from 'react';
 import type {NextPage} from "next";
-import Search from "../../components/Search";
 
 interface AboutProps {
     data?: any
@@ -22,7 +21,6 @@ const About: NextPage<AboutProps> = () => {
                     return <li key={item} className="text-xl dark:text-white"><strong>{item}</strong></li>
                 })}
             </ul>
-            <Search />
         </div>
     );
 };

@@ -5,6 +5,7 @@ import {useRouter} from "next/router";
 import Details from "../../components/ActorPage/Details";
 import {Skeleton} from "antd";
 import dynamic from "next/dynamic";
+import Meta from "../../components/Meta";
 
 const ActorMovies = dynamic(() => import('../../components/ActorPage/ActorMovies'))
 
