@@ -14,8 +14,8 @@ const PagePagination: FC<Props> = ({pageIndex,setPageIndex, total}) => {
     };
 
     return (
-        <div>
-            <Pagination showSizeChanger={false} onChange={onChange} current={pageIndex} total={total}/>
+        <div className="flex justify-center mt-6">
+            <Pagination showSizeChanger={false} defaultPageSize={20} onChange={onChange} current={pageIndex} total={total}/>
         </div>
     );
 };
