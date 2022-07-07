@@ -1,4 +1,4 @@
-import type {FC} from 'react'
+import type {FC, ReactNode} from 'react'
 import {BackTop, Layout} from "antd";
 import Meta from "../components/Meta";
 import MainHeader from "../components/Header";
@@ -8,7 +8,11 @@ import {ArrowUpIcon} from "@heroicons/react/solid";
 
 export const {Header, Content, Footer} = Layout;
 
-const MainLayout: FC = ({children}) => {
+interface Props {
+    children: ReactNode;
+}
+
+const MainLayout: FC<Props> = ({children}) => {
     return (
         <>
             <Meta/>

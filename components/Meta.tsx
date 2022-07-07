@@ -15,13 +15,13 @@ const Meta: FC<MetaProps> = ({description, keywords, title}) => {
             <meta name="description" content={description} />
             <meta charSet="utf-8" />
             <link rel="icon" href="/favicon.png" />
-            <title>Movie app - {title}</title>
+            <title>Movie app</title>
         </Head>
     );
 };
 
 Meta.defaultProps = {
-    title: 'Enjoy!',
+    title: '',
     keywords: 'movie app, movie details, popular movies, upcoming movies',
     description: 'The Movie app offers movie details and trailers. It also includes popular movies and reviews.'
 }

@@ -1,31 +1,26 @@
 import {FC} from 'react';
 import {Tabs} from "antd";
 import Overview from "./Overview";
-import {IMovie} from "../../types/IMovie";
+import {IMovie} from "../../types/movie";
 import {parseMovieDetails} from "../../utilities/parseMovieDetails";
 import Images from "./Images";
 import Videos from "./Videos";
+import {useAppSelector} from "../../hooks/redux";
 
 const {TabPane} = Tabs;
 
-interface PageProps {
-    movie: IMovie;
-    id: any;
-}
-
-const MovieTabs: FC<PageProps> = ({movie, id}) => {
-    const parsedDetails = parseMovieDetails(movie);
+const MovieTabs: FC = () => {
 
     return (
         <Tabs className="w-full" defaultActiveKey="1" size="large" centered>
             <TabPane tab="Overview" key="1">
-                <Overview id={id} movieDetails={movie} details={parsedDetails} />
+                <Overview />
             </TabPane>
             <TabPane tab="Images" key="2">
-                <Images id={id}/>
+                <Images />
             </TabPane>
             <TabPane tab="Videos" key="3">
-                <Videos id={id}/>
+                <Videos />
             </TabPane>
         </Tabs>
     );

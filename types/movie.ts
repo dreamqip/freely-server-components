@@ -1,4 +1,6 @@
-import {ICast} from "./ICast";
+import {ICast} from "./cast";
+import {Images} from "./images";
+import {IVideos} from "./videos";
 
 interface IGenres {
     id: number;
@@ -26,4 +28,7 @@ export interface IMovie extends ICast{
     runtime: number;
     status: string;
     production_companies: any;
+    keywords?: any;
+    images?: Images;
+    videos?: IVideos;
 }

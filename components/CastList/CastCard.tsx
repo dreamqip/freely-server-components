@@ -2,7 +2,7 @@ import type {FC} from 'react';
 import {Card} from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import {ICast} from "../../types/ICast";
+import {ICast} from "../../types/cast";
 import {useEffect, useState} from "react";
 import {shimmer, toBase64} from "../../utilities/shimmer";
 

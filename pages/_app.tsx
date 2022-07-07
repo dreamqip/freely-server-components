@@ -6,14 +6,18 @@ import 'glider-js/glider.min.css';
 import type {AppProps} from 'next/app'
 import MainLayout from "../layouts/MainLayout";
 import {ThemeProvider} from "next-themes";
+import {Provider} from "react-redux";
+import {store} from "../features/store";
 
 function MyApp({Component, pageProps}: AppProps) {
     return (
-        <ThemeProvider enableSystem={true} attribute="class">
-            <MainLayout>
-                <Component {...pageProps} />
-            </MainLayout>
-        </ThemeProvider>
+        <Provider store={store}>
+            <ThemeProvider enableSystem={true} attribute="class">
+                <MainLayout>
+                    <Component {...pageProps} />
+                </MainLayout>
+            </ThemeProvider>
+        </Provider>
     )
 }
 

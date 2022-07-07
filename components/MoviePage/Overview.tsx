@@ -1,26 +1,27 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import Image from "next/image";
-import {IMovie} from "../../types/IMovie";
 import Cast from "./Cast";
 import Reviews from "./Reviews";
 import Similar from "./Similar";
 import Recommended from "./Recommended";
+import {useAppSelector} from "../../hooks/redux";
+import {parseMovieDetails} from "../../utilities/parseMovieDetails";
 
-interface PageProps {
-    movieDetails: IMovie;
-    details: any;
-    id: any;
-}
+const Overview: FC = () => {
+    const {movie, id} = useAppSelector(state => state.movie)
+    const [imgSrc, setImgSrc] = useState(`https://image.tmdb.org/t/p/w440_and_h660_face${movie.poster_path}`);
+    const parsedDetails = parseMovieDetails(movie);
 
-const Overview: FC<PageProps> = ({movieDetails, details, id}) => {
-    const [imgSrc, setImgSrc] = useState(`https://image.tmdb.org/t/p/w440_and_h660_face${movieDetails.poster_path}`);
+    useEffect(() => {
+        setImgSrc(`https://image.tmdb.org/t/p/w440_and_h660_face${movie.poster_path}`)
+    }, [movie])
 
     return (
         <>
             <div className="grid grid-cols-1 md:grid-cols-[250px_minmax(0,_1fr)] gap-8">
                 <Image
                     src={imgSrc}
-                    alt={movieDetails.title}
+                    alt={movie.title}
                     width={250}
                     height={400}
                     onError={() => {
@@ -30,11 +31,11 @@ const Overview: FC<PageProps> = ({movieDetails, details, id}) => {
                 />
                 <div>
                     <h2 className="text-3xl dark:text-white">Storyline</h2>
-                    <p className="dark:text-primary-dark">{movieDetails.overview}</p>
+                    <p className="dark:text-primary-dark">{movie.overview}</p>
                     <table className="border-spacing-2">
                         <tbody>
-                        {details &&
-                            details.map((detail: any) => {
+                        {parsedDetails &&
+                            parsedDetails.map((detail: any) => {
                                 return (
                                     <tr key={detail.detailName}>
                                         <td className="pr-10 dark:text-white">{detail.detailName}</td>

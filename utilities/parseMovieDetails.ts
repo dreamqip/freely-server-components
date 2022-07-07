@@ -1,4 +1,4 @@
-import {IMovie} from "../types/IMovie";
+import {IMovie} from "../types/movie";
 import {minutesToHoursAndMinutes} from "./minutesToHoursAndMinutes";
 import {getNumberWithCommas} from "./getNumberWithCommas";
 import {getLanguageFullname} from "./getLanguageFullname";

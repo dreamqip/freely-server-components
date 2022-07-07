@@ -1,5 +1,5 @@
 import type {FC} from 'react';
-import {IMovies} from "../../types/IMovies";
+import {IMovies} from "../../types/movies";
 import MovieCard from "./MovieCard";
 import Glider from 'react-glider'
 import Pane from '../Pane'

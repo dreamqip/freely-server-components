@@ -4,7 +4,7 @@ import Glider from 'react-glider'
 import Pane from '../Pane'
 import {ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/solid";
 import {useEffect, useRef, useState} from "react";
-import {IMovie} from "../../types/IMovie";
+import {IMovie} from "../../types/movie";
 import {sortActorMoviesByPopularity} from "../../utilities/sortActorMoviesByPopularity";
 
 interface MoviesListProps {

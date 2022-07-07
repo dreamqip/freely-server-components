@@ -1,4 +1,4 @@
-import {IPerson} from "../types/IPerson";
+import {IPerson} from "../types/person";
 import {getGender} from "./getGender";
 
 export const parsePersonDetails = (person: IPerson | null) => {

@@ -4,8 +4,8 @@ import Glider from 'react-glider'
 import Pane from '../Pane'
 import {ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/solid";
 import {useEffect, useRef, useState} from "react";
-import {ICredits} from "../../types/ICredits";
-import {ICast} from "../../types/ICast";
+import {ICredits} from "../../types/credits";
+import {ICast} from "../../types/cast";
 
 interface MoviesListProps {
     credits: ICredits;

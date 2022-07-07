@@ -1,7 +1,7 @@
 import type {FC} from 'react';
 import {Button, Card, Col, Row} from "antd";
-import {IMovies} from "../types/IMovies";
-import {IMovie} from "../types/IMovie";
+import {IMovies} from "../types/movies";
+import {IMovie} from "../types/movie";
 import {useState} from "react";
 import UpcomingMovie from "./UpcomingMovie";
 

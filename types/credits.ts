@@ -1,5 +1,5 @@
-import {ICast} from "./ICast";
-import {ICrew} from "./ICrew";
+import {ICast} from "./cast";
+import {ICrew} from "./crew";
 
 export interface ICredits {
     id: number;

@@ -22,7 +22,7 @@ const MainHeader: FC = () => {
                     break
             }
         }
-    }, [])
+    }, [setTheme, systemTheme])
 
     const onClick = () => {
         theme === 'light' ? setTheme('dark') : setTheme('light')

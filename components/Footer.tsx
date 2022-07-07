@@ -11,7 +11,11 @@ const MainFooter: FC = () => {
                 <a
                     className="ml-2 underline text-primary-500 dark:text-primary-dark"
                     href="https://github.com/dreamqip"
-                    target="_blank">dreamqip</a>
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    dreamqip
+                </a>
             </div>
         </Footer>
     );

@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {IPerson} from "../../types/IPerson";
+import {IPerson} from "../../types/person";
 import Image from "next/image";
 import {parsePersonDetails} from "../../utilities/parsePersonDetails";
 import Meta from "../Meta";

@@ -1,6 +1,6 @@
 import type {FC} from 'react';
 import {Empty, Spin} from "antd";
-import {IMovie} from "../types/IMovie";
+import {IMovie} from "../types/movie";
 import MovieCard from "./MoviesList/MovieCard";
 import dynamic from "next/dynamic";
 
