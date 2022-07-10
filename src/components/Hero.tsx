@@ -4,7 +4,7 @@ import wanda from "../../public/wanda.jpeg";
 import {useEffect, useState} from "react";
 
 const Hero: FC = () => {
-    const [width, setWidth] = useState<number>(0)
+    const [width, setWidth] = useState<number | null>(null)
 
     useEffect(() => {
         if (window.innerWidth >= 768) {
