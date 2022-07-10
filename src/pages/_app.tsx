@@ -3,10 +3,12 @@ import 'antd/dist/antd.css'
 import 'swiper/css';
 
 import type {AppProps, NextWebVitalsMetric} from 'next/app'
-import MainLayout from "../layouts/MainLayout";
 import {ThemeProvider} from "next-themes";
 import {Provider} from "react-redux";
 import {store} from "../store";
+import dynamic from "next/dynamic";
+
+const MainLayout = dynamic(() => import('../layouts/MainLayout'))
 
 // export function reportWebVitals(metric: NextWebVitalsMetric) {
 //     if (metric.label === 'web-vital') {

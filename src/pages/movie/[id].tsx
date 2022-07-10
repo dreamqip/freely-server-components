@@ -6,11 +6,14 @@ import Hero from "../../components/MoviePage/Hero";
 import dynamic from "next/dynamic";
 import {NextPage} from "next";
 import {useGetMovieByIdQuery} from "../../services/movie";
-import {useEffect} from "react";
+import {useEffect, Suspense} from "react";
 import {useAppDispatch} from "../../hooks/redux";
 import {setId, setMovieDetails, setImages, setVideos} from '../../features/movie/movieSlice'
+import Spinner from "../../components/Spinner";
 
-const MovieTabs = dynamic(() => import('../../components/MoviePage/Tabs'))
+const MovieTabs = dynamic(() => import('../../components/MoviePage/Tabs'), {
+    suspense: true
+})
 
 const MoviePage: NextPage = () => {
     const router = useRouter();
@@ -47,7 +50,9 @@ const MoviePage: NextPage = () => {
                 keywords={keywords}
             />
             <Hero />
-            <MovieTabs />
+            <Suspense fallback={<Spinner />}>
+                <MovieTabs />
+            </Suspense>
         </div>
     );
 };

@@ -16,7 +16,7 @@ const Images: FC = () => {
                                     placeholder={true}
                                     src={`https://image.tmdb.org/t/p/original${image.file_path}`}
                                     alt="backdrop image"
-                                    fallback="/image-placeholder.webp"
+                                    fallback="./fallback.jpeg"
                                 />
                             </div>
                         )
