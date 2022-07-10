@@ -1,8 +1,17 @@
 import type {FC} from 'react';
 import Image from "next/future/image";
 import wanda from "../../public/wanda.jpeg";
+import {useEffect, useState} from "react";
 
 const Hero: FC = () => {
+    const [width, setWidth] = useState<number>(0)
+
+    useEffect(() => {
+        if (window.innerWidth >= 768) {
+            setWidth(window.innerWidth)
+        }
+    }, [width, setWidth])
+
     return (
         <div className="flex items-center md:flex-row flex-col justify-between">
             <h1
@@ -29,7 +38,7 @@ const Hero: FC = () => {
             >
                 Movie <br/> change <br/> the world
             </h1>
-            <Image
+            {width && <Image
                 src={wanda}
                 alt="Wanda Maximoff from MCU"
                 width={400}
@@ -37,7 +46,7 @@ const Hero: FC = () => {
                 placeholder="blur"
                 priority={true}
                 className="hidden md:block rounded-2xl md:rounded-tr-full md:rounded-bl-full"
-            />
+            />}
         </div>
     );
 };
