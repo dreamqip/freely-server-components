@@ -31,5 +31,6 @@ export const swiperOptions: SwiperOptions = {
                 enabled: false
             }
         }
-    }
+    },
+    preloadImages: false
 }

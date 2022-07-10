@@ -6,7 +6,7 @@ import {Suspense} from "react";
 import Spinner from "../components/Spinner";
 
 const MoviesList = dynamic(() => import('../components/MoviesList/MoviesList'), {
-    suspense: true
+    suspense: true,
 });
 
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({popular, topRated, upcoming, now_playing}) => {

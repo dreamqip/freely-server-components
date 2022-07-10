@@ -10,7 +10,7 @@ interface MetaProps {
 const Meta: FC<MetaProps> = ({description, keywords, title}) => {
     return (
         <Head>
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
             <meta name="keywords" content={keywords} />
             <meta name="description" content={description} />
             <meta charSet="utf-8" />

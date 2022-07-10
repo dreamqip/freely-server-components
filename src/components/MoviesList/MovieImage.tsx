@@ -4,7 +4,6 @@ import {IMovie} from "../../types/movie";
 import Image from "next/image";
 import {motion} from "framer-motion";
 import {animationVariants} from "../../utilities/animationVariants";
-import {shimmer, toBase64} from "../../utilities/shimmer";
 
 interface Props {
     width: number;
