@@ -85,3 +85,10 @@
     color: white !important;
     top: 40% !important;
 }
+
+@media screen and (max-width: 1024px){
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none;
+    }
+}
