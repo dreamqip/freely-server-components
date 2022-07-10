@@ -2,18 +2,24 @@ import type {InferGetStaticPropsType, NextPage} from 'next'
 import axios from "axios";
 import Hero from "../components/Hero";
 import dynamic from "next/dynamic";
+import {Suspense} from "react";
+import Spinner from "../components/Spinner";
 
-const MoviesList = dynamic(() => import('../components/MoviesList/MoviesList'));
+const MoviesList = dynamic(() => import('../components/MoviesList/MoviesList'), {
+    suspense: true
+});
 
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({popular, topRated, upcoming, now_playing}) => {
 
     return (
         <>
             <Hero/>
-            <MoviesList title="Now In Theaters" movies={now_playing}/>
-            <MoviesList title="Upcoming movies" movies={upcoming}/>
-            <MoviesList title="Popular now" movies={popular}/>
-            <MoviesList title="Top Rated" movies={topRated}/>
+            <Suspense fallback={<Spinner />}>
+                <MoviesList title="Now In Theaters" movies={now_playing}/>
+                <MoviesList title="Upcoming movies" movies={upcoming}/>
+                <MoviesList title="Popular now" movies={popular}/>
+                <MoviesList title="Top Rated" movies={topRated}/>
+            </Suspense>
         </>
     )
 }

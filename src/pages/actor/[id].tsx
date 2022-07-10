@@ -20,8 +20,6 @@ const ActorPage: NextPage<Props> = () => {
         isLoading
     } = useFetch(`https://api.themoviedb.org/3/person/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=combined_credits,images`)
 
-    console.log(details)
-
     if (isLoading) {
         return (
             <div className="grid gap-8 grid-cols-2">
