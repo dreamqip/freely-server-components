@@ -1,26 +1,36 @@
 import {NextPage} from "next";
-import Search from "../../components/Search";
-import {Input} from "antd";
-import {useState} from "react";
-import {useFetch} from "../../hooks/useFetch";
+import dynamic from "next/dynamic";
+import SearchResults from "../../components/SearchPage/SearchResults";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux";
+import {useSearchMoviesQuery} from "../../services/themoviedb";
+import {useEffect} from "react";
+import {setSearchResults} from "../../features/search/searchSlice";
+
+const SearchInput = dynamic(() => import('../../components/SearchPage/SearchInput'))
+const Pagination = dynamic(() => import('../../components/SearchPage/Pagination'))
 
 const Index: NextPage = () => {
-    const [search, setSearch] = useState('');
-    const [pageIndex, setPageIndex] = useState(1);
+    const {query, pageIndex} = useAppSelector(state => state.search)
+    const dispatch = useAppDispatch()
 
-    const {
-        details,
-        isLoading
-    } = useFetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${search}&page=${pageIndex}`)
+    const {data, isLoading, isFetching, isError} = useSearchMoviesQuery({
+        searchQuery: query,
+        page: pageIndex
+    })
 
-
-    const onSearch = (value: string) => setSearch(value);
+    useEffect(() => {
+        dispatch(setSearchResults(data))
+    }, [isLoading, isFetching, data, dispatch])
 
     return (
         <div>
-            <Input.Search placeholder="Search for a movie ..." size="large" enterButton="Search" onSearch={onSearch}/>
-            <Search pageIndex={pageIndex} setPageIndex={setPageIndex} search={search} details={details}
-                    isLoading={isLoading}/>
+            <SearchInput />
+            {data && query && (
+                <div className="pt-[111px]">
+                    <SearchResults loading={isLoading} refetching={isFetching} error={isError} />
+                    <Pagination />
+                </div>
+            )}
         </div>
     );
 };

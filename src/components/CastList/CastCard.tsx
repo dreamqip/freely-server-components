@@ -1,10 +1,10 @@
 import type {FC} from 'react';
 import Link from "next/link";
-import {ICast} from "../../types/cast";
+import {IMovieCast} from "../../types/cast";
 import CastImage from "./CastImage";
 
 interface Props {
-    person: ICast;
+    person: IMovieCast;
 }
 
 const CastCard: FC<Props> = ({person}) => {

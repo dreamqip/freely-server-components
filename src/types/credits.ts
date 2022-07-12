@@ -1,8 +1,8 @@
-import {ICast} from "./cast";
-import {ICrew} from "./crew";
+import {IMovieCast} from "./cast";
+import {IMovieCrew} from "./crew";
 
 export interface ICredits {
     id: number;
-    cast: ICast[];
-    crew: ICrew[];
+    cast: IMovieCast[];
+    crew: IMovieCrew[];
 }

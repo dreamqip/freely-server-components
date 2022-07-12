@@ -16,7 +16,7 @@ const MainLayout: FC<Props> = ({children}) => {
     return (
         <>
             <Meta/>
-            <Layout className="max-w-7xl px-4 mx-auto bg-inherit min-h-full">
+            <Layout className="max-w-7xl px-2 md:px-4 mx-auto bg-inherit min-h-full">
                 <MainHeader/>
                 <Main>
                     {children}

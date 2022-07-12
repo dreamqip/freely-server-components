@@ -12,7 +12,7 @@ interface Props {
 }
 
 const MovieImage: FC<Props> = ({width, height, movie}) => {
-    const [src, setSrc] = useState(`https://image.tmdb.org/t/p/w440_and_h660_face${movie.poster_path}`);
+    const [src, setSrc] = useState(`https://image.tmdb.org/t/p/w300${movie.poster_path}`);
     const [loaded, setLoaded] = useState(false);
     const animationControls = useAnimation();
 
@@ -24,6 +24,7 @@ const MovieImage: FC<Props> = ({width, height, movie}) => {
 
     return (
         <motion.div
+            className="flex"
             initial="hidden"
             animate={animationControls}
             variants={animationVariants}
@@ -33,7 +34,7 @@ const MovieImage: FC<Props> = ({width, height, movie}) => {
                 src={src}
                 width={width}
                 height={height}
-                className="sm:rounded-lg"
+                quality={100}
                 alt={movie.title}
                 onError={() => {
                     setSrc('/fallback.jpeg')

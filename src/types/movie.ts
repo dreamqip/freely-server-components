@@ -1,4 +1,4 @@
-import {ICast} from "./cast";
+import {IMovieCast} from "./cast";
 import {Images} from "./images";
 import {IVideos} from "./videos";
 
@@ -7,7 +7,7 @@ interface IGenres {
     name: string;
 }
 
-export interface IMovie extends ICast{
+export interface IMovie extends IMovieCast{
     poster_path: string | null;
     adult: boolean;
     overview: string;

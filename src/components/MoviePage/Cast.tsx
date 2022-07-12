@@ -1,20 +1,18 @@
 import {FC} from 'react';
-import {useFetch} from "../../hooks/useFetch";
 import CastList from "../CastList/CastList";
-import {Spin} from "antd";
+import {useAppSelector} from "../../hooks/redux";
+import {useGetMovieCreditsQuery} from "../../services/themoviedb";
+import Spinner from "../Spinner";
 
-interface Props {
-    id: any;
-}
+const Cast: FC = () => {
+    const {id} = useAppSelector(state => state.movie)
+    const {data: cast, isLoading} = useGetMovieCreditsQuery(id)
 
-const Cast: FC<Props> = ({id}) => {
-    const {details, isLoading} = useFetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}`)
-
-    if (isLoading) return <Spin />
+    if (isLoading) return <Spinner />
 
     return (
         <div>
-            <CastList credits={details} title={'Cast'} />
+            <CastList credits={cast} title={'Cast'} />
         </div>
     );
 };

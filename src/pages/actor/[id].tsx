@@ -1,10 +1,10 @@
 import React from 'react';
 import {NextPage} from "next";
-import {useFetch} from "../../hooks/useFetch";
 import {useRouter} from "next/router";
 import Details from "../../components/ActorPage/Details";
 import {Skeleton} from "antd";
 import dynamic from "next/dynamic";
+import {useGetActorByIdQuery} from "../../services/themoviedb";
 
 const ActorMovies = dynamic(() => import('../../components/ActorPage/ActorMovies'))
 
@@ -15,15 +15,14 @@ interface Props {
 const ActorPage: NextPage<Props> = () => {
     const router = useRouter()
     const {id} = router.query;
-    const {
-        details,
-        isLoading
-    } = useFetch(`https://api.themoviedb.org/3/person/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=combined_credits,images`)
+    const {data, isLoading} = useGetActorByIdQuery(id)
+
+    console.log(data)
 
     if (isLoading) {
         return (
-            <div className="grid gap-8 grid-cols-2">
-                <Skeleton.Image className="w-full h-full"/>
+            <div className="grid gap-8 grid-cols-1 md:grid-cols-2">
+                <Skeleton.Image className="w-full h-[300px] md:h-full"/>
                 <Skeleton paragraph={{rows: 12}} active/>
             </div>
         )
@@ -31,8 +30,8 @@ const ActorPage: NextPage<Props> = () => {
 
     return (
         <div>
-            <Details person={details}/>
-            <ActorMovies movies={details?.combined_credits.cast}/>
+            <Details person={data}/>
+            <ActorMovies movies={data?.combined_credits.cast}/>
         </div>
     );
 };

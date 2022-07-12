@@ -47,13 +47,12 @@ const Overview: FC = () => {
                     </table>
                 </div>
             </div>
-            <Cast id={id}/>
-            <Similar id={id}/>
-            <Recommended id={id}/>
+            <Cast />
+            <Similar />
+            <Recommended />
             <h2 className="mt-4 text-center font-bold dark:text-white text-2xl md:text-5xl">Reviews</h2>
             <Reviews />
         </>
-
     );
 };
 

@@ -1,13 +1,13 @@
 import {FC, useEffect, useState} from 'react';
 import Image from "next/image";
 import {motion, useAnimation} from "framer-motion";
-import {ICast} from "../../types/cast";
+import {IMovieCast} from "../../types/cast";
 import {animationVariants} from "../../utilities/animationVariants";
 
 interface Props {
     width: number;
     height: number;
-    path: ICast;
+    path: IMovieCast;
 }
 
 const CastImage: FC<Props> = ({width, height, path}) => {

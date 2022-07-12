@@ -1,7 +1,7 @@
 import type {FC} from 'react';
 import CastCard from "./CastCard";
 import {ICredits} from "../../types/credits";
-import {ICast} from "../../types/cast";
+import {IMovieCast} from "../../types/cast";
 import {swiperOptions} from "../../utilities/swiperConfig";
 import {Swiper, SwiperSlide} from 'swiper/react';
 
@@ -21,7 +21,7 @@ const CastList: FC<MoviesListProps> = ({credits, title}) => {
             <Swiper
                 {...swiperOptions}
             >
-                {credits && credits.cast.map((person: ICast) => {
+                {credits && credits.cast.map((person: IMovieCast) => {
                     return (
                         <SwiperSlide key={person.id}>
                             <CastCard person={person}/>

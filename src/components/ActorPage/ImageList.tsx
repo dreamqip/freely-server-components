@@ -1,6 +1,6 @@
 import {FC} from 'react';
 
-const Content: FC = () => {
+const ImageList: FC = () => {
     return (
         <div>
 
@@ -8,4 +8,4 @@ const Content: FC = () => {
     );
 };
 
-export default Content;
+export default ImageList;

@@ -32,5 +32,6 @@ export const swiperOptions: SwiperOptions = {
             }
         }
     },
-    preloadImages: false
+    preloadImages: false,
+    speed: 700
 }

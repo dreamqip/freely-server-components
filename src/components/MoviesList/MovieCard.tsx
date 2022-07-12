@@ -6,16 +6,13 @@ import MovieImage from "./MovieImage";
 const MovieCard: FC<MovieProps> = ({movie}) => {
     return (
         <Link href={`/movie/${movie.id}`} passHref>
-            <a className="flex flex-col justify-center cursor-pointer">
-                <span className="hover:scale-95 transition-all duration-500 mb-6 ">
+            <a className="flex items-center justify-center cursor-pointer">
+                <div className="movie-card sm:rounded-lg hover:scale-105 transition-all duration-500">
                     <MovieImage
-                        width={250}
-                        height={400}
+                        width={300}
+                        height={450}
                         movie={movie}
                     />
-                </span>
-                <div className="text-black hidden sm:block dark:text-white text-center font-medium text-xl">
-                    {movie.title}
                 </div>
             </a>
         </Link>

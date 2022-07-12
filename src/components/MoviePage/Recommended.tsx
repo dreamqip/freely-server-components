@@ -1,17 +1,15 @@
 import {FC} from 'react';
 import MoviesList from "../MoviesList/MoviesList";
-import {useFetch} from "../../hooks/useFetch";
+import {useAppSelector} from "../../hooks/redux";
+import {useGetRecommendedMoviesQuery} from "../../services/themoviedb";
 
-interface Props {
-    id: any;
-}
-
-const Recommended: FC<Props> = ({id}) => {
-    const {details} = useFetch(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=1`)
+const Recommended: FC = () => {
+    const {id} = useAppSelector(state => state.movie)
+    const {data} = useGetRecommendedMoviesQuery(id)
 
     return (
         <div>
-            <MoviesList movies={details} title={'Recommended'}/>
+            <MoviesList movies={data} title={'Recommended'}/>
         </div>
     );
 };

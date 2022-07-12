@@ -5,7 +5,7 @@ import ErrorPage from "../404";
 import Hero from "../../components/MoviePage/Hero";
 import dynamic from "next/dynamic";
 import {NextPage} from "next";
-import {useGetMovieByIdQuery} from "../../services/movie";
+import {useGetMovieByIdQuery} from "../../services/themoviedb";
 import {useEffect, Suspense} from "react";
 import {useAppDispatch} from "../../hooks/redux";
 import {setId, setMovieDetails, setImages, setVideos} from '../../features/movie/movieSlice'

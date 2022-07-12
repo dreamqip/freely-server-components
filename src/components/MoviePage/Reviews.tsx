@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Comment, List, Skeleton} from "antd";
-import {useGetMovieReviewsQuery} from "../../services/movie";
+import {useGetMovieReviewsQuery} from "../../services/themoviedb";
 import {useAppSelector} from "../../hooks/redux";
 
 const Reviews: FC = () => {

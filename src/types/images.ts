@@ -4,7 +4,7 @@ export interface Images {
     posters: Poster[];
 }
 
-interface Backdrop {
+export interface Backdrop {
     aspect_ratio: number;
     file_path: string;
     height: number;
@@ -14,7 +14,7 @@ interface Backdrop {
     width: number;
 }
 
-interface Poster {
+export interface Poster {
     aspect_ratio: number;
     file_path: string;
     height: number;
@@ -24,7 +24,17 @@ interface Poster {
     width: number;
 }
 
-interface Logo {
+export interface Logo {
+    aspect_ratio: number;
+    file_path: string;
+    height: number;
+    iso_639_1: string | null;
+    vote_average: number;
+    vote_count: number;
+    width: number;
+}
+
+export interface IProfile {
     aspect_ratio: number;
     file_path: string;
     height: number;

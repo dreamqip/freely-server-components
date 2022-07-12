@@ -30,7 +30,7 @@ const MainHeader: FC = () => {
 
     return (
         <Header
-            className="flex bg-white dark:bg-dark-theme z-[1000] sticky top-0 items-center justify-between p-0 md:px-12">
+            className="flex bg-inherit items-center justify-between p-0 md:px-12">
             <Link href="/">
                 <div className="flex cursor-pointer items-center gap-4">
                     <Image

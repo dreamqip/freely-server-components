@@ -1,11 +1,13 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
-import {movieApi} from "./services/movie";
+import {movieApi} from "./services/themoviedb";
 import {setupListeners} from "@reduxjs/toolkit/query";
 import movieReducer from './features/movie/movieSlice'
+import searchReducer from './features/search/searchSlice'
 
 export const rootReducer = combineReducers({
     [movieApi.reducerPath]: movieApi.reducer,
-    movie: movieReducer
+    movie: movieReducer,
+    search: searchReducer
 })
 
 export const store = configureStore({

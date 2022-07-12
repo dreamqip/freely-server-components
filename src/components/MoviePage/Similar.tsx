@@ -1,17 +1,16 @@
 import {FC} from 'react';
 import MoviesList from "../MoviesList/MoviesList";
 import {useFetch} from "../../hooks/useFetch";
+import {useAppSelector} from "../../hooks/redux";
+import {useGetMovieCreditsQuery, useGetSimilarMoviesQuery} from "../../services/themoviedb";
 
-interface Props {
-    id: any;
-}
-
-const Similar: FC<Props> = ({id}) => {
-    const {details} = useFetch(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=1`)
+const Similar: FC = () => {
+    const {id} = useAppSelector(state => state.movie)
+    const {data: similar} = useGetSimilarMoviesQuery(id)
 
     return (
         <div>
-            <MoviesList movies={details} title={'Similar'} />
+            <MoviesList movies={similar} title={'Similar'}/>
         </div>
     );
 };
