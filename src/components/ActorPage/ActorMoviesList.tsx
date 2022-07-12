@@ -17,7 +17,7 @@ const ActorMoviesList: FC<MoviesListProps> = ({movies, title}) => {
 
     const sortedArray = useMemo(() => {
         return arrayToSort.sort(sortActorMoviesByPopularity)
-    }, [movies])
+    }, [movies, arrayToSort])
 
     return (
         <div className="py-10">

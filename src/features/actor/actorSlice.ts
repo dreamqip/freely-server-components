@@ -9,14 +9,14 @@ interface ActorState {
 
 const initialState: ActorState = {
     cast: [] as IActorCast[],
-    images: [] as IProfile[];
+    images: [] as IProfile[]
 }
 
 
-export const actorSlice = createSlice({
+/*export const actorSlice = createSlice({
     name: 'actor',
     initialState,
     reducers: {
 
     }
-})
+})*/
