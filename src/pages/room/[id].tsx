@@ -6,6 +6,7 @@ import Link from "next/link";
 const Room: NextPage = () => {
     const router = useRouter();
     const {id} = router.query;
+
     return (
         <>
             <Link href={`/movie/${id}`} passHref>
@@ -13,7 +14,7 @@ const Room: NextPage = () => {
                     <ArrowLeftIcon className="w-8 h-8 dark:text-white cursor-pointer mb-6"/>
                 </a>
             </Link>
-            <iframe allowFullScreen src={`/se_player.php?video_id=${id}&tmdb=1`} className="w-full h-screen"/>
+            <iframe allowFullScreen src={`https://2embed.org/embed/${id}`} className="w-full h-screen"/>
         </>
     );
 };
