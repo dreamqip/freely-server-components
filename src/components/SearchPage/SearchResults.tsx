@@ -1,8 +1,8 @@
-import {FC} from 'react';
-import {useAppSelector} from "../../hooks/redux";
+import {FC, memo} from 'react';
+import {useAppSelector} from "@/hooks/redux";
 import {Empty} from "antd";
-import {IMovie} from "../../types/movie";
-import MovieCard from "../MoviesList/MovieCard";
+import {IMovie} from "@/types/movie";
+import MovieCard from "../MovieCarousel/MovieCard";
 import Spinner from "../Spinner";
 
 interface Props {
@@ -35,4 +35,4 @@ const SearchResults: FC<Props> = ({loading, refetching, error}) => {
     );
 };
 
-export default SearchResults;
+export default memo(SearchResults);

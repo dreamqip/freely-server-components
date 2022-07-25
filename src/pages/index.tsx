@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import {Suspense} from "react";
 import Spinner from "../components/Spinner";
 
-const MoviesList = dynamic(() => import('../components/MoviesList/MoviesList'), {
+const MoviesList = dynamic(() => import('../components/MovieCarousel/MoviesList'), {
     suspense: true,
 });
 

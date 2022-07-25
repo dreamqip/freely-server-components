@@ -10,7 +10,7 @@ const ErrorPage = () => {
             <div className="max-w-[500px] dark:text-white mx-auto text-center text-xl">Unfortunately, this is only a 404 page. You may have mistyped the address, or the page has been moved
                 to another URL.
             </div>
-            <Link href="/src/pages" passHref>
+            <Link href="/" passHref>
                 <Button className="bg-primary-500 mt-10 hover:scale-105 dark:bg-primary-dark" type={"primary"} shape={"round"} size={"large"}>Take me back to home page</Button>
             </Link>
         </div>

@@ -1,56 +1,91 @@
 import type {FC} from 'react';
-import Image from "next/image";
-import {ArrowLeftIcon} from "@heroicons/react/solid";
-import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
-import {useAppSelector} from "../../hooks/redux";
-import {motion} from "framer-motion";
-import {animationVariants} from "../../utilities/animationVariants";
+import Image from "next/image";
+import {useAppSelector} from "@/hooks/redux";
+import {motion, useMotionValue, useScroll} from "framer-motion";
+import {animationVariants} from "@/utilities/animationVariants";
+import {PlayIcon} from "@heroicons/react/solid";
+import Link from "next/link";
 
 const Hero: FC = () => {
-    const router = useRouter();
     const {movie} = useAppSelector(state => state.movie);
     const [imgSrc, setImgSrc] = useState(`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`);
     const [loaded, setLoaded] = useState(false);
+    const [loadedLogo, setLoadedLogo] = useState(false);
+    const {scrollYProgress} = useScroll();
+    const scrollProgress = useMotionValue(1)
 
     useEffect(() => {
         setImgSrc(`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`)
     }, [movie])
 
+    useEffect(() => {
+        scrollYProgress.onChange(progress => {
+            const newProgress = Math.max((1 - 8 * progress), 0.2);
+            scrollProgress.set(newProgress);
+        })
+
+        return () => {
+            scrollYProgress.clearListeners()
+        }
+    }, [])
+
     return (
-        <div className="w-full relative">
-            <ArrowLeftIcon
-                onClick={() => router.back()}
-                className="w-6 cursor-pointer lg:w-14 z-20 top-2 left-2 md:top-10 md:left-10 absolute text-white transition hover:-translate-x-3"
-            />
-            <div className="absolute max-w-xl top-1/4 md:top-1/3 left-10 z-10">
-                <h1 className="text-white text-2xl md:text-4xl m-0">{movie?.title}</h1>
-                <p className="text-white hidden md:block">{movie?.overview}</p>
-            </div>
+        <>
             <motion.div
                 initial="hidden"
                 animate={loaded ? 'visible' : 'hidden'}
                 variants={animationVariants}
                 transition={{ease: "easeOut", duration: 1.25}}
+                className="fixed w-full inset-0 z-0 select-none"
+                style={{opacity: scrollProgress}}
             >
                 <Image
                     src={imgSrc}
                     alt={movie?.title}
-                    width={1280}
-                    height={700}
-                    className="rounded-md"
-                    onError={() => {
-                        setImgSrc('/fallback.jpeg')
-                    }}
-                    onLoad={() => {
-                        setLoaded(false)
-                    }}
-                    onLoadingComplete={() => {
-                        setLoaded(true)
-                    }}
+                    layout={"fill"}
+                    objectFit={"cover"}
+                    onError={() => setImgSrc('/fallback.jpeg')}
+                    onLoad={() => setLoaded(false)}
+                    onLoadingComplete={() => setLoaded(true)}
                 />
+                <div className="absolute z-0 inset-0 h-full radial-gradient"></div>
             </motion.div>
-        </div>
+            <div className="relative">
+                <div className="max-w-xl">
+                    {movie?.images?.logos && movie.images.logos.length > 0
+                        ? <div className="py-6">
+                            <motion.div
+                                initial="hidden"
+                                animate={loadedLogo ? 'visible' : 'hidden'}
+                                variants={animationVariants}
+                                transition={{ease: "easeOut", duration: 1}}
+                                className="relative max-w-[341px] min-h-[170px]"
+                            >
+                                <Image
+                                    alt={movie?.title}
+                                    layout={"fill"}
+                                    src={`https://image.tmdb.org/t/p/original${movie?.images?.logos[0].file_path}`}
+                                    onLoad={() => setLoadedLogo(false)}
+                                    onLoadingComplete={() => setLoadedLogo(true)}
+                                />
+                            </motion.div>
+                        </div>
+                        : <h1 className="text-white text-2xl py-10 md:text-5xl m-0">{movie?.title}</h1>
+                    }
+                    <span
+                        className="text-white text-lg hidden md:block">{movie?.overview?.substring(0, 150) + '...'}</span>
+                    <div
+                        className="text-white tracking-widest leading-6 my-4">{movie?.genres?.map((genre) => genre.name).join(', ')}</div>
+                    <Link href={`/room/${movie?.id}`}>
+                        <button className="play-btn">
+                            <PlayIcon className="w-10 h-10 fill-current"/>
+                            <span className="ml-2">play</span>
+                        </button>
+                    </Link>
+                </div>
+            </div>
+        </>
     );
 };
 

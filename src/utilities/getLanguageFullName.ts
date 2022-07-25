@@ -1,4 +1,4 @@
-export const getLanguageFullname = (shortName: string): string => {
+export const getLanguageFullName = (shortName: string): string => {
     switch (shortName) {
         case 'en':
             return 'English';

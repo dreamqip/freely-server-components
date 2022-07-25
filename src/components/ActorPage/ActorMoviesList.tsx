@@ -1,10 +1,10 @@
 import type {FC} from 'react';
 import ActorMovieCard from "./ActorMovieCard";
-import {IMovie} from "../../types/movie";
-import {sortActorMoviesByPopularity} from "../../utilities/sortActorMoviesByPopularity";
-import {swiperOptions} from "../../utilities/swiperConfig";
+import {IMovie} from "@/types/movie";
+import {sortActorMoviesByPopularity} from "@/utilities/sortActorMoviesByPopularity";
+import {swiperOptions} from "@/utilities/swiperConfig";
 import {Swiper, SwiperSlide} from "swiper/react";
-import {useMemo} from "react";
+import {memo, useMemo} from "react";
 
 interface MoviesListProps {
     movies: IMovie[];
@@ -13,11 +13,9 @@ interface MoviesListProps {
 
 const ActorMoviesList: FC<MoviesListProps> = ({movies, title}) => {
 
-    const arrayToSort = [...movies]
+    const arrayToSort = useMemo(() => ([...movies]), [movies]);
 
-    const sortedArray = useMemo(() => {
-        return arrayToSort.sort(sortActorMoviesByPopularity)
-    }, [movies, arrayToSort])
+    const sortedArray = useMemo(() => (arrayToSort.sort(sortActorMoviesByPopularity)), [arrayToSort])
 
     return (
         <div className="py-10">
@@ -37,4 +35,4 @@ const ActorMoviesList: FC<MoviesListProps> = ({movies, title}) => {
     );
 };
 
-export default ActorMoviesList;
+export default memo(ActorMoviesList);

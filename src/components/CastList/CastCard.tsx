@@ -1,6 +1,6 @@
 import type {FC} from 'react';
 import Link from "next/link";
-import {IMovieCast} from "../../types/cast";
+import {IMovieCast} from "@/types/cast";
 import CastImage from "./CastImage";
 
 interface Props {

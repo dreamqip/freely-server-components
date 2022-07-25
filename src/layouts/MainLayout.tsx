@@ -1,18 +1,15 @@
-import type {FC, ReactNode} from 'react'
+import type {FC, PropsWithChildren} from 'react'
 import {Layout, BackTop} from "antd";
 import Meta from "../components/Meta";
 import MainHeader from "../components/Header";
 import Main from "../components/Main";
 import MainFooter from "../components/Footer";
 import {ArrowUpIcon} from "@heroicons/react/solid";
+import {memo} from "react";
 
 export const {Header, Content, Footer} = Layout;
 
-interface Props {
-    children: ReactNode;
-}
-
-const MainLayout: FC<Props> = ({children}) => {
+const MainLayout: FC<PropsWithChildren> = ({children}) => {
     return (
         <>
             <Meta/>
@@ -32,4 +29,4 @@ const MainLayout: FC<Props> = ({children}) => {
     );
 };
 
-export default MainLayout;
+export default memo(MainLayout);

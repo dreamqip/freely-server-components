@@ -1,6 +1,7 @@
 import type {FC} from 'react';
-import {Footer} from "../layouts/MainLayout";
+import {Footer} from "@/layouts/MainLayout";
 import {CodeIcon} from "@heroicons/react/solid";
+import {memo} from "react";
 
 const MainFooter: FC = () => {
     return (
@@ -21,4 +22,4 @@ const MainFooter: FC = () => {
     );
 };
 
-export default MainFooter;
+export default memo(MainFooter);

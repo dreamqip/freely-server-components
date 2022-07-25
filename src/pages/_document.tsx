@@ -7,7 +7,7 @@ export default function Document() {
                 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap"
                       rel="stylesheet"/>
             </Head>
-            <body className="font-rubik dark:bg-dark-theme">
+            <body className="font-rubik dark:bg-dark-theme pt-[62px]">
             <Main/>
             <NextScript/>
             </body>

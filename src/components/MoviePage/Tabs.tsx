@@ -7,9 +7,8 @@ import Videos from "./Videos";
 const {TabPane} = Tabs;
 
 const MovieTabs: FC = () => {
-
     return (
-        <Tabs className="w-full" defaultActiveKey="1" size="large" centered>
+        <Tabs className="w-full pt-10" defaultActiveKey="1" size="large" centered>
             <TabPane tab="Overview" key="1">
                 <Overview />
             </TabPane>

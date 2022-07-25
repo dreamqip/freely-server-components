@@ -1,11 +1,7 @@
-import type {FC, ReactNode} from 'react';
-import {Content} from "../layouts/MainLayout";
+import type {FC, PropsWithChildren} from 'react';
+import {Content} from "@/layouts/MainLayout";
 
-interface Props {
-    children: ReactNode;
-}
-
-const Main: FC<Props> = ({children}) => {
+const Main: FC<PropsWithChildren> = ({children}) => {
     return (
         <Content>
             {children}

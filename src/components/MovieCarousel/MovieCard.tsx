@@ -1,16 +1,15 @@
 import type {FC} from 'react';
 import Link from "next/link";
-import {MovieProps} from "../../types/MovieProps";
+import {MovieProps} from "@/types/MovieProps";
 import MovieImage from "./MovieImage";
+import {memo} from "react";
 
 const MovieCard: FC<MovieProps> = ({movie}) => {
     return (
         <Link href={`/movie/${movie.id}`} passHref>
-            <a className="flex items-center justify-center cursor-pointer">
-                <div className="movie-card sm:rounded-lg hover:scale-105 transition-all duration-500">
+            <a className="movie-card">
+                <div className="rounded-md">
                     <MovieImage
-                        width={300}
-                        height={450}
                         movie={movie}
                     />
                 </div>
@@ -19,4 +18,4 @@ const MovieCard: FC<MovieProps> = ({movie}) => {
     );
 };
 
-export default MovieCard;
+export default memo(MovieCard);

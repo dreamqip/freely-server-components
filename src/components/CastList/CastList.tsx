@@ -1,8 +1,8 @@
 import type {FC} from 'react';
 import CastCard from "./CastCard";
-import {ICredits} from "../../types/credits";
-import {IMovieCast} from "../../types/cast";
-import {swiperOptions} from "../../utilities/swiperConfig";
+import {ICredits} from "@/types/credits";
+import {IMovieCast} from "@/types/cast";
+import {swiperOptions} from "@/utilities/swiperConfig";
 import {Swiper, SwiperSlide} from 'swiper/react';
 
 import 'swiper/css/navigation';

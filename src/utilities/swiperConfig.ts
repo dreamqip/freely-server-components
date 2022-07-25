@@ -25,7 +25,8 @@ export const swiperOptions: SwiperOptions = {
             slidesPerGroup: 3,
             spaceBetween: 20,
             navigation: {
-                enabled: true
+                enabled: true,
+                hideOnClick: true
             },
             freeMode: {
                 enabled: false
@@ -33,5 +34,6 @@ export const swiperOptions: SwiperOptions = {
         }
     },
     preloadImages: false,
-    speed: 700
+    speed: 700,
+    preventInteractionOnTransition: true
 }

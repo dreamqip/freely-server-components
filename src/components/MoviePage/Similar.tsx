@@ -1,8 +1,7 @@
 import {FC} from 'react';
-import MoviesList from "../MoviesList/MoviesList";
-import {useFetch} from "../../hooks/useFetch";
-import {useAppSelector} from "../../hooks/redux";
-import {useGetMovieCreditsQuery, useGetSimilarMoviesQuery} from "../../services/themoviedb";
+import MoviesList from "../MovieCarousel/MoviesList";
+import {useAppSelector} from "@/hooks/redux";
+import {useGetSimilarMoviesQuery} from "@/services/themoviedb";
 
 const Similar: FC = () => {
     const {id} = useAppSelector(state => state.movie)

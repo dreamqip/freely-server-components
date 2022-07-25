@@ -1,7 +1,7 @@
 import {FC} from 'react';
-import MoviesList from "../MoviesList/MoviesList";
-import {useAppSelector} from "../../hooks/redux";
-import {useGetRecommendedMoviesQuery} from "../../services/themoviedb";
+import MoviesList from "../MovieCarousel/MoviesList";
+import {useAppSelector} from "@/hooks/redux";
+import {useGetRecommendedMoviesQuery} from "@/services/themoviedb";
 
 const Recommended: FC = () => {
     const {id} = useAppSelector(state => state.movie)

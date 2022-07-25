@@ -1,18 +1,25 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
-import {IMovie} from "../types/movie";
+import {IMovie} from "@/types/movie";
+import {HYDRATE} from "next-redux-wrapper";
 
 export const movieApi = createApi({
     reducerPath: 'movieApi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://api.themoviedb.org/3/'
     }),
+    extractRehydrationInfo: (action, {reducerPath}) => {
+        if (action.type === HYDRATE) {
+            return action.payload[reducerPath];
+        }
+    },
     endpoints: (builder) => ({
-        getMovieById: builder.query<IMovie, any>({
-            query: (id: any) => ({
+        getMovieById: builder.query<IMovie, number>({
+            query: (id: number) => ({
                 url: `movie/${id}`,
                 params: {
                     api_key: process.env.NEXT_PUBLIC_API_KEY,
-                    append_to_response: 'keywords,videos,images'
+                    append_to_response: 'keywords,videos,images',
+                    include_image_language: 'en,null'
                 }
             })
         }),
@@ -52,8 +59,8 @@ export const movieApi = createApi({
             })
         }),
         searchMovies: builder.query({
-            query: ({searchQuery, page = 1}: {searchQuery: string, page: number}) => ({
-              url: 'search/multi',
+            query: ({searchQuery, page = 1}: { searchQuery: string, page: number }) => ({
+                url: 'search/multi',
                 params: {
                     api_key: process.env.NEXT_PUBLIC_API_KEY,
                     query: searchQuery,
@@ -80,5 +87,16 @@ export const {
     useGetSimilarMoviesQuery,
     useGetRecommendedMoviesQuery,
     useSearchMoviesQuery,
-    useGetActorByIdQuery
-} = movieApi
+    useGetActorByIdQuery,
+    util: {getRunningOperationPromises}
+} = movieApi;
+
+export const {
+    getMovieById,
+    getMovieReviews,
+    getMovieCredits,
+    getSimilarMovies,
+    getRecommendedMovies,
+    searchMovies,
+    getActorById
+} = movieApi.endpoints;

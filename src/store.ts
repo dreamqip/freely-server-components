@@ -1,8 +1,8 @@
-import {combineReducers, configureStore} from '@reduxjs/toolkit'
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {movieApi} from "./services/themoviedb";
-import {setupListeners} from "@reduxjs/toolkit/query";
-import movieReducer from './features/movie/movieSlice'
-import searchReducer from './features/search/searchSlice'
+import movieReducer from './features/movie/movieSlice';
+import searchReducer from './features/search/searchSlice';
+import {createWrapper} from "next-redux-wrapper";
 
 export const rootReducer = combineReducers({
     [movieApi.reducerPath]: movieApi.reducer,
@@ -10,14 +10,17 @@ export const rootReducer = combineReducers({
     search: searchReducer
 })
 
-export const store = configureStore({
-    reducer: rootReducer,
-    devTools: process.env.NODE_ENV !== 'production',
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(movieApi.middleware)
-})
+export const makeStore = () => {
+    return configureStore({
+        reducer: rootReducer,
+        devTools: process.env.NODE_ENV !== 'production',
+        middleware: (gDM) =>
+            gDM().concat(movieApi.middleware),
+    })
+}
 
-setupListeners(store.dispatch)
+export type AppStore = ReturnType<typeof makeStore>
+export type AppDispatch = AppStore['dispatch']
+export type RootState = ReturnType<AppStore['getState']>
 
-export type RootState = ReturnType<typeof rootReducer>
-export type AppDispatch = typeof store.dispatch
+export const wrapper = createWrapper<AppStore>(makeStore, {debug: process.env.NODE_ENV !== 'production'})

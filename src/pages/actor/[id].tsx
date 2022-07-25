@@ -17,8 +17,6 @@ const ActorPage: NextPage<Props> = () => {
     const {id} = router.query;
     const {data, isLoading} = useGetActorByIdQuery(id)
 
-    console.log(data)
-
     if (isLoading) {
         return (
             <div className="grid gap-8 grid-cols-1 md:grid-cols-2">

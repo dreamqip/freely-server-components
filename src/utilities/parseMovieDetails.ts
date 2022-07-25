@@ -1,7 +1,7 @@
-import {IMovie} from "../types/movie";
+import {IMovie} from "@/types/movie";
 import {minutesToHoursAndMinutes} from "./minutesToHoursAndMinutes";
 import {getNumberWithCommas} from "./getNumberWithCommas";
-import {getLanguageFullname} from "./getLanguageFullname";
+import {getLanguageFullName} from "./getLanguageFullName";
 
 
 export const parseMovieDetails = (movie: IMovie) => {
@@ -32,7 +32,7 @@ export const parseMovieDetails = (movie: IMovie) => {
         },
         {
             detailName: 'Language',
-            detailValue: getLanguageFullname(movie.original_language),
+            detailValue: getLanguageFullName(movie.original_language),
         },
         {
             detailName: 'Production',

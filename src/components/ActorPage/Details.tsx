@@ -1,7 +1,7 @@
-import React, {FC} from 'react';
-import {IPerson} from "../../types/person";
+import React, {FC, memo, useMemo} from 'react';
+import {IPerson} from "@/types/person";
 import Image from "next/image";
-import {parsePersonDetails} from "../../utilities/parsePersonDetails";
+import {parsePersonDetails} from "@/utilities/parsePersonDetails";
 import Meta from "../Meta";
 
 interface Props {
@@ -9,7 +9,9 @@ interface Props {
 }
 
 const Details: FC<Props> = ({person}) => {
-    const parsedDetails = parsePersonDetails(person);
+    const parsedDetails = useMemo(() => {
+        return parsePersonDetails(person);
+    }, [person])
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3">
@@ -44,4 +46,4 @@ const Details: FC<Props> = ({person}) => {
     );
 };
 
-export default Details;
+export default memo(Details);

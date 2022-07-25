@@ -1,7 +1,7 @@
-import {FC} from 'react';
+import {FC, memo} from 'react';
 import {Pagination, PaginationProps} from "antd";
-import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import {setPageIndex} from '../../features/search/searchSlice'
+import {useAppDispatch, useAppSelector} from "@/hooks/redux";
+import {setPageIndex} from '@/features/search/searchSlice'
 
 const SearchPagination: FC = () => {
     const {pageIndex, results} = useAppSelector(state => state.search)
@@ -18,4 +18,4 @@ const SearchPagination: FC = () => {
     );
 };
 
-export default SearchPagination;
+export default memo(SearchPagination);

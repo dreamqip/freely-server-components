@@ -1,11 +1,12 @@
-import {IMovie} from "../../types/movie";
+import {IMovie} from "@/types/movie";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {Images} from "../../types/images";
-import {IVideos} from "../../types/videos";
+import {Images} from "@/types/images";
+import {IVideos} from "@/types/videos";
+import {HYDRATE} from "next-redux-wrapper";
 
 interface MovieState {
     movie: IMovie;
-    id: string | null;
+    id: number | null;
     images: Images;
     videos: IVideos;
 }
@@ -21,7 +22,7 @@ export const movieSlice = createSlice({
     name: 'movie',
     initialState,
     reducers: {
-        setId: (state, action: PayloadAction<any>) => {
+        setId: (state, action: PayloadAction<number>) => {
             state.id = action.payload
         },
         setMovieDetails: (state, action: PayloadAction<IMovie | any>) => {

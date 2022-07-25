@@ -1,7 +1,7 @@
 import type {FC} from 'react';
 import Image from "next/future/image";
 import wanda from "../../public/wanda.jpeg";
-import {useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 
 const Hero: FC = () => {
     const [width, setWidth] = useState<number | null>(null)
@@ -51,4 +51,4 @@ const Hero: FC = () => {
     );
 };
 
-export default Hero;
+export default memo(Hero);

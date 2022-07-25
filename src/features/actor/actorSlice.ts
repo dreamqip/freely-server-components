@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {IActorCast} from "../../types/cast";
-import {IProfile} from "../../types/images";
+import {IActorCast} from "@/types/cast";
+import {IProfile} from "@/types/images";
 
 interface ActorState {
     cast: IActorCast[];

@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import VideoCard from "./VideoCard";
 import {Empty} from "antd";
-import {useAppSelector} from "../../hooks/redux";
+import {useAppSelector} from "@/hooks/redux";
 import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
 
 const Videos: FC = () => {

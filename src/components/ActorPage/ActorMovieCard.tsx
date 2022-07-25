@@ -1,9 +1,8 @@
 import type {FC} from 'react';
-import {Card} from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import {shimmer, toBase64} from "../../utilities/shimmer";
-import {IMovie} from "../../types/movie";
+import {shimmer, toBase64} from "@/utilities/shimmer";
+import {IMovie} from "@/types/movie";
 import {useState} from "react";
 
 interface Props {

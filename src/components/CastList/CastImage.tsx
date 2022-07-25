@@ -1,8 +1,8 @@
 import {FC, useEffect, useState} from 'react';
 import Image from "next/image";
 import {motion, useAnimation} from "framer-motion";
-import {IMovieCast} from "../../types/cast";
-import {animationVariants} from "../../utilities/animationVariants";
+import {IMovieCast} from "@/types/cast";
+import {animationVariants} from "@/utilities/animationVariants";
 
 interface Props {
     width: number;

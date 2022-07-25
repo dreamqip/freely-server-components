@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from 'react';
 import {Input} from "antd";
-import {useAppDispatch} from "../../hooks/redux";
-import {setSearchQuery} from '../../features/search/searchSlice'
+import {useAppDispatch} from "@/hooks/redux";
+import {setSearchQuery} from '@/features/search/searchSlice'
 
 const SearchInput: FC = () => {
     const dispatch = useAppDispatch()
