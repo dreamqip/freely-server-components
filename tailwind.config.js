@@ -27,8 +27,6 @@ module.exports = {
             ...defaultTheme.screens,
         }
     },
-    plugins: [],
     important: true,
     darkMode: 'class',
-
 }
