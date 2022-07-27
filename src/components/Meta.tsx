@@ -21,9 +21,9 @@ const Meta: FC<MetaProps> = ({description, keywords, title}) => {
 };
 
 Meta.defaultProps = {
-    title: 'The Movie app',
+    title: 'Freely',
     keywords: 'movie app, movie details, popular movies, upcoming movies',
-    description: 'The Movie app offers movie details and trailers. It also includes popular movies and reviews.'
+    description: 'Freely offers movie details and trailers. It also includes popular movies and reviews.'
 }
 
 export default Meta;
