@@ -35,7 +35,7 @@ const Overview: FC = () => {
                 />
                 <div className="relative">
                     <h2 className="text-3xl dark:text-white">Storyline</h2>
-                    <p className="dark:text-primary-dark">{movie?.overview}</p>
+                    <p className="dark:text-primary-dark text-lg">{movie?.overview}</p>
                     <table className="border-spacing-2">
                         <tbody>
                         {parsedDetails &&

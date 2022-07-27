@@ -19,6 +19,7 @@ const CastList: FC<MoviesListProps> = ({credits, title}) => {
         <div className="py-10">
             <h2 className="text-center dark:text-white font-bold text-6xl">{title}</h2>
             <Swiper
+                className="p-4"
                 {...swiperOptions}
             >
                 {credits && credits.cast.map((person: IMovieCast) => {

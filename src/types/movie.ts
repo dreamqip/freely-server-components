@@ -7,7 +7,7 @@ interface IGenres {
     name: string;
 }
 
-export interface IMovie extends IMovieCast{
+export interface IMovie extends IMovieCast {
     poster_path: string | null;
     adult: boolean;
     overview: string;
@@ -29,6 +29,7 @@ export interface IMovie extends IMovieCast{
     status: string;
     production_companies: any;
     keywords?: any;
+    media_type: string;
     images?: Images;
     videos?: IVideos;
 }

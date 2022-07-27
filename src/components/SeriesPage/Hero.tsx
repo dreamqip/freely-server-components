@@ -8,16 +8,16 @@ import {PlayIcon} from "@heroicons/react/solid";
 import Link from "next/link";
 
 const Hero: FC = () => {
-    const {movie} = useAppSelector(state => state.movie);
-    const [imgSrc, setImgSrc] = useState(`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`);
+    const {series} = useAppSelector(state => state.series);
+    const [imgSrc, setImgSrc] = useState(`https://image.tmdb.org/t/p/original${series?.backdrop_path}`);
     const [loaded, setLoaded] = useState(false);
     const [loadedLogo, setLoadedLogo] = useState(false);
     const {scrollYProgress} = useScroll();
     const scrollProgress = useMotionValue(1)
 
     useEffect(() => {
-        setImgSrc(`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`)
-    }, [movie])
+        setImgSrc(`https://image.tmdb.org/t/p/original${series?.backdrop_path}`)
+    }, [series])
 
     useEffect(() => {
         scrollYProgress.onChange(progress => {
@@ -40,7 +40,7 @@ const Hero: FC = () => {
             >
                 <Image
                     src={imgSrc}
-                    alt={movie?.title}
+                    alt={series?.name}
                     layout={"fill"}
                     objectFit={"cover"}
                     onError={() => setImgSrc('/fallback.jpeg')}
@@ -51,7 +51,7 @@ const Hero: FC = () => {
             </motion.div>
             <div className="relative">
                 <div className="max-w-xl">
-                    {movie?.images?.logos && movie.images.logos.length > 0
+                    {series?.images?.logos && series?.images?.logos.length > 0
                         ? <div className="py-6">
                             <motion.div
                                 initial="hidden"
@@ -61,25 +61,25 @@ const Hero: FC = () => {
                                 className="relative max-w-[180px] min-h-[100px] md:max-w-[341px] md:min-h-[170px]"
                             >
                                 <Image
-                                    alt={movie?.title}
+                                    alt={series?.name}
                                     layout={"fill"}
                                     objectFit={'contain'}
                                     objectPosition={'center'}
-                                    src={`https://image.tmdb.org/t/p/original${movie?.images?.logos[0].file_path}`}
+                                    src={`https://image.tmdb.org/t/p/original${series?.images?.logos[0].file_path}`}
                                     onLoad={() => setLoadedLogo(false)}
                                     onLoadingComplete={() => setLoadedLogo(true)}
                                 />
                             </motion.div>
                         </div>
-                        : <h1 className="text-white text-2xl py-6 md:py-10 md:text-5xl m-0">{movie?.title}</h1>
+                        : <h1 className="text-white text-2xl py-6 md:py-10 md:text-5xl m-0">{series?.name}</h1>
                     }
                     <span
-                        className="text-white text-lg hidden md:block">{movie?.overview?.substring(0, 150) + '...'}</span>
+                        className="text-white text-lg hidden md:block">{series?.overview?.substring(0, 150) + '...'}</span>
                     <div
-                        className="text-white tracking-widest leading-6 my-4">{movie?.genres?.map((genre) => genre.name).join(', ')}</div>
+                        className="text-white tracking-widest leading-6 my-4">{series?.genres?.map((genre) => genre.name).join(', ')}</div>
                     <Link href={{
                         pathname: '/room/[id]',
-                        query: { type: 'movie', id: movie?.id }
+                        query: {type: 'series', id: series?.id}
                     }}>
                         <button className="play-btn">
                             <PlayIcon className="w-10 h-10 fill-current"/>

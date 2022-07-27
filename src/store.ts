@@ -2,12 +2,16 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {movieApi} from "./services/themoviedb";
 import movieReducer from './features/movie/movieSlice';
 import searchReducer from './features/search/searchSlice';
+import seriesReducer from './features/series/seriesSlice';
+import roomReducer from './features/room/roomSlice';
 import {createWrapper} from "next-redux-wrapper";
 
 export const rootReducer = combineReducers({
     [movieApi.reducerPath]: movieApi.reducer,
     movie: movieReducer,
-    search: searchReducer
+    search: searchReducer,
+    series: seriesReducer,
+    room: roomReducer
 })
 
 export const makeStore = () => {

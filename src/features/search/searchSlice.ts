@@ -1,14 +1,13 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {ISearch} from "@/types/search";
 
 interface SearchState {
     query: string;
-    pageIndex: number;
-    results: any;
+    results: ISearch | null;
 }
 
 const initialState: SearchState = {
     query: '',
-    pageIndex: 1,
     results: null
 }
 
@@ -19,15 +18,12 @@ export const searchSlice = createSlice({
         setSearchQuery: (state, action: PayloadAction<string>) => {
             state.query = action.payload
         },
-        setPageIndex: (state, action: PayloadAction<number>) => {
-            state.pageIndex = action.payload
-        },
-        setSearchResults: (state, action: PayloadAction<any>) => {
+        setSearchResults: (state, action: PayloadAction<ISearch>) => {
             state.results = action.payload
         }
     }
 })
 
-export const {setSearchQuery, setPageIndex, setSearchResults} = searchSlice.actions
+export const {setSearchQuery, setSearchResults} = searchSlice.actions
 
 export default searchSlice.reducer

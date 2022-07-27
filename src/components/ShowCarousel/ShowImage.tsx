@@ -1,17 +1,16 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, memo, useEffect, useState} from 'react';
+import {useAnimation} from "framer-motion";
 import Image from "next/image";
-import {motion, useAnimation} from "framer-motion";
-import {IMovieCast} from "@/types/cast";
+import {motion} from "framer-motion";
 import {animationVariants} from "@/utilities/animationVariants";
+import {MixedShow} from "@/types/search";
 
 interface Props {
-    width: number;
-    height: number;
-    path: IMovieCast;
+    show: MixedShow;
 }
 
-const CastImage: FC<Props> = ({width, height, path}) => {
-    const [imgSrc, setImgSrc] = useState(`https://image.tmdb.org/t/p/w342${path.profile_path}`);
+const ShowImage: FC<Props> = ({show}) => {
+    const [src, setSrc] = useState(`https://image.tmdb.org/t/p/w400${show.poster_path}`);
     const [loaded, setLoaded] = useState(false);
     const animationControls = useAnimation();
 
@@ -23,19 +22,22 @@ const CastImage: FC<Props> = ({width, height, path}) => {
 
     return (
         <motion.div
+            className="block relative w-full overflow-hidden rounded-md"
             initial="hidden"
+            style={{paddingTop: 100 / (400 / 650) + '%'}}
             animate={animationControls}
             variants={animationVariants}
             transition={{ease: "easeOut", duration: 1.25}}
         >
             <Image
-                src={imgSrc}
-                width={width}
-                height={height}
-                className="sm:rounded-lg"
-                alt={path.name}
+                className="rounded-md"
+                src={src}
+                objectFit={'cover'}
+                layout={"fill"}
+                quality={100}
+                alt={"title" in show && show.title || show.name}
                 onError={() => {
-                    setImgSrc('/fallback.jpeg')
+                    setSrc('/fallback.jpeg')
                 }}
                 onLoadingComplete={() => {
                     setLoaded(true)
@@ -45,4 +47,4 @@ const CastImage: FC<Props> = ({width, height, path}) => {
     );
 };
 
-export default CastImage;
+export default memo(ShowImage);

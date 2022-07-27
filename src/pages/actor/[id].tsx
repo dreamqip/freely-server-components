@@ -1,37 +1,51 @@
-import React from 'react';
 import {NextPage} from "next";
 import {useRouter} from "next/router";
 import Details from "../../components/ActorPage/Details";
-import {Skeleton} from "antd";
 import dynamic from "next/dynamic";
-import {useGetActorByIdQuery} from "../../services/themoviedb";
+import {
+    getActorById,
+    getRunningOperationPromises,
+    useGetActorByIdQuery,
+} from "@/services/themoviedb";
+import {wrapper} from "../../store";
+import {skipToken} from "@reduxjs/toolkit/query";
+import ImageList from "@/components/ActorPage/ImageList";
 
 const ActorMovies = dynamic(() => import('../../components/ActorPage/ActorMovies'))
 
-interface Props {
-    id: any
-}
-
-const ActorPage: NextPage<Props> = () => {
-    const router = useRouter()
+const ActorPage: NextPage = () => {
+    const router = useRouter();
     const {id} = router.query;
-    const {data, isLoading} = useGetActorByIdQuery(id)
-
-    if (isLoading) {
-        return (
-            <div className="grid gap-8 grid-cols-1 md:grid-cols-2">
-                <Skeleton.Image className="w-full h-[300px] md:h-full"/>
-                <Skeleton paragraph={{rows: 12}} active/>
-            </div>
-        )
-    }
+    const result = useGetActorByIdQuery(
+        typeof id === 'string' ? parseInt(id) : skipToken,
+        {
+            skip: router.isFallback
+        }
+    );
+    const {data} = result;
 
     return (
         <div>
             <Details person={data}/>
             <ActorMovies movies={data?.combined_credits.cast}/>
+            <ImageList images={data?.images.profiles} />
         </div>
     );
 };
 
 export default ActorPage;
+
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+    const id = context.params?.id;
+
+    if (typeof id === 'string') {
+        store.dispatch(getActorById.initiate(parseInt(id)))
+    }
+
+    await Promise.all(getRunningOperationPromises());
+
+    return {
+        props: {}
+    }
+
+});

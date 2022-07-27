@@ -1,22 +1,19 @@
 import {NextPage} from "next";
 import dynamic from "next/dynamic";
 import SearchResults from "../../components/SearchPage/SearchResults";
-import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import {useSearchMoviesQuery} from "../../services/themoviedb";
+import {useAppDispatch, useAppSelector} from "@/hooks/redux";
+import {getRunningOperationPromises, searchMovies, useSearchMoviesQuery} from "@/services/themoviedb";
 import {useEffect} from "react";
-import {setSearchResults} from "../../features/search/searchSlice";
+import {setSearchResults} from "@/features/search/searchSlice";
+import {wrapper} from "../../store";
 
 const SearchInput = dynamic(() => import('../../components/SearchPage/SearchInput'))
-const Pagination = dynamic(() => import('../../components/SearchPage/Pagination'))
 
 const Index: NextPage = () => {
-    const {query, pageIndex} = useAppSelector(state => state.search)
+    const {query} = useAppSelector(state => state.search)
     const dispatch = useAppDispatch()
 
-    const {data, isLoading, isFetching, isError} = useSearchMoviesQuery({
-        searchQuery: query,
-        page: pageIndex
-    })
+    const {data, isLoading, isFetching, isError} = useSearchMoviesQuery(query)
 
     useEffect(() => {
         dispatch(setSearchResults(data))
@@ -27,8 +24,7 @@ const Index: NextPage = () => {
             <SearchInput />
             {data && query && (
                 <div className="pt-[111px]">
-                    <SearchResults loading={isLoading} refetching={isFetching} error={isError} />
-                    <Pagination />
+                    <SearchResults refetching={isFetching} error={isError} />
                 </div>
             )}
         </div>
@@ -36,3 +32,13 @@ const Index: NextPage = () => {
 };
 
 export default Index;
+
+export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
+    store.dispatch(searchMovies.initiate('a'))
+
+    await Promise.all(getRunningOperationPromises());
+
+    return {
+        props: {}
+    }
+});

@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import CastList from "../CastList/CastList";
+import CastList from "../CastCarousel/CastList";
 import {useAppSelector} from "@/hooks/redux";
 import {useGetMovieCreditsQuery} from "@/services/themoviedb";
 import Spinner from "../Spinner";

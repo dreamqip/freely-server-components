@@ -16,13 +16,13 @@ const MainHeader: FC = () => {
     const router = useRouter();
 
     const headerClasses = classNames("flex absolute z-[100] inset-0 items-center justify-between p-0 md:px-12", {
-        'bg-transparent': router.route !== '/',
+        'bg-transparent px-4': router.route !== '/',
         'bg-inherit': router.route === '/',
     })
 
 
     const searchClasses = classNames("w-8 cursor-pointer", {
-        'text-white': router.route !== '/',
+        'dark:text-white': router.route !== '/',
         'dark:text-primary-dark': router.route === '/',
     })
 

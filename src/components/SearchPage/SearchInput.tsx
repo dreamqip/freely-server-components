@@ -16,7 +16,6 @@ const SearchInput: FC = () => {
     return (
         <Input.Search
             placeholder="Search for a movie"
-            type={"search"}
             allowClear
             onSearch={onSearch}
             size="large"

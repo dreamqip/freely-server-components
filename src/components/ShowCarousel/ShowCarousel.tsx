@@ -1,35 +1,36 @@
 import type {FC} from 'react';
 import {IMovies} from "@/types/movies";
-import MovieCard from "./MovieCard";
 import {Empty} from "antd";
 import {swiperOptions} from "@/utilities/swiperConfig";
-import {IMovie} from "@/types/movie";
 import {Swiper, SwiperSlide} from 'swiper/react';
 
 import 'swiper/css/navigation';
 import "swiper/css/free-mode";
+import ShowCard from "./ShowCard";
+import {MixedShow} from "@/types/search";
+import {ITvShows} from "@/types/series";
 
-interface MoviesListProps {
-    movies: IMovies;
+interface Props {
+    series: IMovies | ITvShows;
     title: string;
 }
 
-const MoviesList: FC<MoviesListProps> = ({movies, title}) => {
+const ShowCarousel: FC<Props> = ({series, title}) => {
 
-    if (movies && movies.results.length == 0) return <Empty description="No recommendations"/>
+    if (series && series.results.length == 0) return <Empty description="Sorry, but we got nothing"/>
 
     return (
         <div className="py-10 relative">
             <h2 className="text-center dark:text-white font-bold text-3xl md:text-6xl">{title}</h2>
-            {movies && (
+            {series && (
                 <Swiper
                     {...swiperOptions}
                     className="p-4"
                 >
-                    {movies.results.map((movie: IMovie) => {
+                    {series.results.map((show: MixedShow) => {
                         return (
-                            <SwiperSlide key={movie.id}>
-                                <MovieCard movie={movie}></MovieCard>
+                            <SwiperSlide key={show.id}>
+                                <ShowCard show={show}></ShowCard>
                             </SwiperSlide>
                         )
                     })}
@@ -39,4 +40,4 @@ const MoviesList: FC<MoviesListProps> = ({movies, title}) => {
     );
 };
 
-export default MoviesList;
+export default ShowCarousel;

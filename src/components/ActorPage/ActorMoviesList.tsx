@@ -21,6 +21,7 @@ const ActorMoviesList: FC<MoviesListProps> = ({movies, title}) => {
         <div className="py-10">
             <h2 className="text-center dark:text-white font-bold text-3xl md:text-6xl">{title}</h2>
             <Swiper
+                className="p-4"
                 {...swiperOptions}
             >
                 {sortedArray && sortedArray.map((movie) => {

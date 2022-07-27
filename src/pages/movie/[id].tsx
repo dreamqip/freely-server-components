@@ -1,6 +1,6 @@
 import {useRouter} from "next/router";
 import Meta from "../../components/Meta";
-import Hero from "../../components/MoviePage/Hero";
+import Hero from "@/components/MoviePage/Hero";
 import dynamic from "next/dynamic";
 import {NextPage} from "next";
 import {getMovieById, getRunningOperationPromises, useGetMovieByIdQuery} from "@/services/themoviedb";
@@ -38,7 +38,7 @@ const MoviePage: NextPage = () => {
             dispatch(setImages(movie?.images))
             dispatch(setVideos(movie?.videos))
         }
-    }, [router.isReady, isLoading, dispatch, movie, router.query.id]);
+    }, [router.isReady, isLoading, dispatch, movie, router.query, isError]);
 
     return (
         <article className="flex flex-col">

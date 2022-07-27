@@ -11,11 +11,9 @@ const CastCard: FC<Props> = ({person}) => {
 
     return (
         <Link href={`/actor/${person.id}`} passHref>
-            <a className="flex flex-col justify-center cursor-pointer">
-                <span className="hover:scale-95 transition-all duration-500 flex">
+            <a className="flex flex-col justify-center cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out">
+                <span className="flex">
                     <CastImage
-                        width={250}
-                        height={400}
                         path={person}
                     />
                 </span>

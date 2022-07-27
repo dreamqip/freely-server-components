@@ -12,12 +12,14 @@ const Images: FC = () => {
                 {images?.backdrops.length > 0
                     ? images?.backdrops.map((image: Backdrop) => {
                         return (
-                            <div className="flex object-cover" key={image.file_path}>
+                            <div className="min-h-[100px] md:min-h-[200px]" key={image.file_path}>
                                 <Image
+                                    rootClassName="flex h-full"
                                     placeholder={true}
                                     src={`https://image.tmdb.org/t/p/original${image.file_path}`}
                                     alt="backdrop"
                                     fallback="./fallback.jpeg"
+                                    loading="lazy"
                                 />
                             </div>
                         );

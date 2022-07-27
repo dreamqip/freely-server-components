@@ -1,6 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
 import {IMovie} from "@/types/movie";
 import {HYDRATE} from "next-redux-wrapper";
+import {ITvShow} from "@/types/series";
 
 export const movieApi = createApi({
     reducerPath: 'movieApi',
@@ -59,12 +60,12 @@ export const movieApi = createApi({
             })
         }),
         searchMovies: builder.query({
-            query: ({searchQuery, page = 1}: { searchQuery: string, page: number }) => ({
+            query: (searchQuery: string) => ({
                 url: 'search/multi',
                 params: {
                     api_key: process.env.NEXT_PUBLIC_API_KEY,
                     query: searchQuery,
-                    page: page
+                    page: 1,
                 }
             })
         }),
@@ -74,6 +75,16 @@ export const movieApi = createApi({
                 params: {
                     api_key: process.env.NEXT_PUBLIC_API_KEY,
                     append_to_response: 'combined_credits,images'
+                }
+            })
+        }),
+        getTvShowById: builder.query<ITvShow, number>({
+            query: (id: number) => ({
+                url: `tv/${id}`,
+                params: {
+                    api_key: process.env.NEXT_PUBLIC_API_KEY,
+                    append_to_response: 'keywords,videos,images',
+                    include_image_language: 'en,null'
                 }
             })
         })
@@ -88,6 +99,7 @@ export const {
     useGetRecommendedMoviesQuery,
     useSearchMoviesQuery,
     useGetActorByIdQuery,
+    useGetTvShowByIdQuery,
     util: {getRunningOperationPromises}
 } = movieApi;
 
@@ -98,5 +110,6 @@ export const {
     getSimilarMovies,
     getRecommendedMovies,
     searchMovies,
-    getActorById
+    getActorById,
+    getTvShowById
 } = movieApi.endpoints;
