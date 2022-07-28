@@ -30,10 +30,10 @@ const MainHeader: FC = () => {
         if (!localStorage.getItem('theme')) {
             switch (systemTheme) {
                 case 'dark':
-                    setTheme('light')
+                    setTheme('dark')
                     break
                 case 'light':
-                    setTheme('dark')
+                    setTheme('light')
                     break
             }
         }
