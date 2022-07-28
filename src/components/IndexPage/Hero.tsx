@@ -1,6 +1,6 @@
 import type {FC} from 'react';
 import Image from "next/image";
-import wanda from "../../public/wanda.jpeg";
+import wanda from "../../../public/wanda.jpeg";
 import {memo} from "react";
 import {isMobile} from 'react-device-detect';
 

@@ -2,13 +2,14 @@ import type {InferGetStaticPropsType, NextPage} from 'next'
 import axios from "axios";
 import dynamic from "next/dynamic";
 import {Suspense} from "react";
-import Spinner from "../components/Spinner";
+import Spinner from "@/components/Spinner";
 
-const Hero = dynamic(() => import("../components/Hero"), {
+const Hero = dynamic(() => import("@/components/IndexPage/Hero"), {
     ssr: false
 });
-
-const ShowCarousel = dynamic(() => import('../components/ShowCarousel/ShowCarousel'), {
+const DiscoverSection = dynamic(() => import("@/components/IndexPage/Explore"));
+const WatchSection = dynamic(() => import("@/components/IndexPage/Watch"));
+const ShowCarousel = dynamic(() => import('@/components/ShowCarousel/ShowCarousel'), {
     suspense: true,
 });
 
@@ -17,7 +18,9 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({popular
     return (
         <>
             <Hero/>
-            <Suspense fallback={<Spinner />}>
+            <DiscoverSection/>
+            <WatchSection/>
+            <Suspense fallback={<Spinner/>}>
                 <ShowCarousel title="Now In Theaters" series={now_playing}/>
                 <ShowCarousel title="Upcoming movies" series={upcoming}/>
                 <ShowCarousel title="Popular now" series={popular}/>

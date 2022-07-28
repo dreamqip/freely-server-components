@@ -6,7 +6,7 @@ const antIcon = <LoadingOutlined style={{fontSize: 50}} spin/>;
 
 const Spinner: FC = () => {
     return (
-        <div className="flex h-full items-center justify-center">
+        <div className="flex min-h-screen items-center justify-center">
             <Spin indicator={antIcon}/>
         </div>
     );
