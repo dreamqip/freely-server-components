@@ -14,7 +14,8 @@ This is study project to improve my knowledge of React & Next.js
 
 ## Demo
 
-https://movies-dreamqip.vercel.app/
+https://freely-dreamqip.vercel.app/
+
 ## Tech Stack
 
 - [React](https://reactjs.org/)

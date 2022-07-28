@@ -1,25 +1,28 @@
-import type {InferGetStaticPropsType, NextPage} from 'next'
+import type {GetStaticProps, InferGetStaticPropsType, NextPage} from 'next';
 import axios from "axios";
 import dynamic from "next/dynamic";
 import {Suspense} from "react";
 import Spinner from "@/components/Spinner";
+import Hero from "@/components/IndexPage/Hero";
 
-const Hero = dynamic(() => import("@/components/IndexPage/Hero"), {
-    ssr: false
+const DiscoverSection = dynamic(() => import("@/components/IndexPage/Explore"), {
+    suspense: true
 });
-const DiscoverSection = dynamic(() => import("@/components/IndexPage/Explore"));
-const WatchSection = dynamic(() => import("@/components/IndexPage/Watch"));
+const WatchSection = dynamic(() => import("@/components/IndexPage/Watch"), {
+    suspense: true
+});
 const ShowCarousel = dynamic(() => import('@/components/ShowCarousel/ShowCarousel'), {
     suspense: true,
 });
 
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({popular, topRated, upcoming, now_playing}) => {
-
     return (
         <>
             <Hero/>
-            <DiscoverSection/>
-            <WatchSection/>
+            <Suspense fallback={<Spinner/>}>
+                <DiscoverSection/>
+                <WatchSection/>
+            </Suspense>
             <Suspense fallback={<Spinner/>}>
                 <ShowCarousel title="Now In Theaters" series={now_playing}/>
                 <ShowCarousel title="Upcoming movies" series={upcoming}/>
@@ -32,7 +35,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({popular
 
 export default Home;
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
     const popularMovies = await axios.get(
         `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}&language=en-US&page=1`
     )
@@ -51,7 +54,7 @@ export async function getStaticProps() {
             topRated: topRated.data,
             popular: popularMovies.data,
             upcoming: upcoming.data,
-            now_playing: playing.data
+            now_playing: playing.data,
         }
     }
 }
