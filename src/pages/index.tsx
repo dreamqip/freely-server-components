@@ -12,15 +12,17 @@ const WatchSection = dynamic(() => import("@/components/IndexPage/Watch"), {
     suspense: true
 });
 const ShowCarousel = dynamic(() => import('@/components/ShowCarousel/ShowCarousel'), {
-    suspense: true,
+    suspense: true
 });
 
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({popular, topRated, upcoming, now_playing}) => {
     return (
         <>
             <Hero/>
-            <Suspense fallback={<Spinner/>}>
+            <Suspense fallback={<div className="flex items-center justify-center text-4xl">Loading...</div>}>
                 <DiscoverSection/>
+            </Suspense>
+            <Suspense fallback={<div className="flex items-center justify-center text-4xl">Loading...</div>}>
                 <WatchSection/>
             </Suspense>
             <Suspense fallback={<Spinner/>}>

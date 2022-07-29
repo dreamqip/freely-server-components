@@ -24,10 +24,10 @@ const ActorMoviesList: FC<MoviesListProps> = ({movies, title}) => {
                 className="p-4"
                 {...swiperOptions}
             >
-                {sortedArray && sortedArray.map((movie) => {
+                {sortedArray && sortedArray.map((movie: any) => {
                     return (
                         <SwiperSlide key={movie.credit_id}>
-                            <ActorMovieCard movie={movie}/>
+                            <ActorMovieCard show={movie}/>
                         </SwiperSlide>
                     )
                 })}

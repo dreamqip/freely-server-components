@@ -11,30 +11,32 @@ interface Props {
 }
 
 const ShowCard: FC<Props> = ({show}) => {
+
+    if (show.media_type === 'movie') {
+        return (
+            <Link href={`/movie/${show.id}`} passHref>
+                <a className="movie-card">
+                    <div className="rounded-md">
+                        <ShowImage
+                            show={show as IMovie}
+                        />
+                    </div>
+                </a>
+            </Link>
+        )
+    }
+
     return (
         <>
-            {show.media_type === 'movie' || "title" in show && show.title
-                ? (<Link href={`/movie/${show.id}`} passHref>
-                    <a className="movie-card">
-                        <div className="rounded-md">
-                            <ShowImage
-                                show={show as IMovie}
-                            />
-                        </div>
-                    </a>
-                </Link>)
-                : (
-                    <Link href={`/series/${show.id}`} passHref>
-                        <a className="movie-card">
-                            <div className="rounded-md">
-                                <ShowImage
-                                    show={show as ITvShow}
-                                />
-                            </div>
-                        </a>
-                    </Link>
-                )
-            }
+            <Link href={`/series/${show.id}`} passHref>
+                <a className="movie-card">
+                    <div className="rounded-md">
+                        <ShowImage
+                            show={show as ITvShow}
+                        />
+                    </div>
+                </a>
+            </Link>
         </>
     );
 };
