@@ -1,10 +1,6 @@
-import {FC, Suspense} from 'react';
-import dynamic from "next/dynamic";
-import Spinner from "@/components/Spinner";
-
-const LottieExplore = dynamic(() => import("@/components/Lottie/Explore"), {
-    suspense: true
-});
+import {FC} from 'react';
+import Image from "next/image";
+import explore from '../../../public/explore.png';
 
 const Explore: FC = () => {
     return (
@@ -15,10 +11,13 @@ const Explore: FC = () => {
                     of movies, TV
                     shows and people</h3>
             </div>
-            <div className="flex">
-                <Suspense fallback={<Spinner />}>
-                    <LottieExplore/>
-                </Suspense>
+            <div className="flex relative min-h-[400px] w-full">
+                <Image
+                    src={explore}
+                    alt="explore"
+                    layout={'fill'}
+                    quality={100}
+                />
             </div>
         </section>
     );
