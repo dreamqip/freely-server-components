@@ -1,14 +1,14 @@
-import '../styles/globals.css'
-import 'antd/dist/antd.css'
+import '../styles/globals.css';
+// import 'antd/dist/antd.css'
 import 'swiper/css';
 
-import type {AppProps} from 'next/app'
+import type {AppProps} from 'next/app';
 import {ThemeProvider} from "next-themes";
 import {wrapper} from "../store";
 import dynamic from "next/dynamic";
 import NextNProgress from "nextjs-progressbar";
 
-const MainLayout = dynamic(() => import('../layouts/MainLayout'))
+const MainLayout = dynamic(() => import('../layouts/MainLayout'));
 
 function MyApp({Component, pageProps}: AppProps) {
     return (
