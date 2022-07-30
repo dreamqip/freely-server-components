@@ -50,7 +50,7 @@ const MainHeader: FC = () => {
     return (
         <Header
             className={headerClasses}>
-            <Link href="/src/pages">
+            <Link href="/">
                 <div className="flex cursor-pointer items-center gap-4">
                     <Image
                         src="/movie-glass.svg"
