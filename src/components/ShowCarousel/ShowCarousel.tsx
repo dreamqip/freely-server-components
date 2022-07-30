@@ -25,7 +25,7 @@ const ShowCarousel: FC<Props> = ({series, title}) => {
             <h2 className="text-center dark:text-white font-bold text-3xl md:text-6xl">{title}</h2>
             <Suspense fallback={<div className="flex items-center justify-center text-4xl">Loading...</div>}>
                 <Swiper>
-                    {series.results.map((show: MixedShow) => {
+                    {series && series.results.map((show: MixedShow) => {
                         return (
                             <SwiperSlide key={show.id}>
                                 <ShowCard show={show}></ShowCard>

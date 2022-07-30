@@ -1,7 +1,7 @@
 import {FC} from 'react';
-import MoviesList from "../MovieCarousel/MoviesList";
 import {useAppSelector} from "@/hooks/redux";
 import {useGetRecommendedMoviesQuery} from "@/services/themoviedb";
+import ShowCarousel from "@/components/ShowCarousel/ShowCarousel";
 
 const Recommended: FC = () => {
     const {id} = useAppSelector(state => state.movie)
@@ -9,7 +9,7 @@ const Recommended: FC = () => {
 
     return (
         <div>
-            <MoviesList movies={data} title={'Recommended'}/>
+            <ShowCarousel series={data} title={'Recommended'}/>
         </div>
     );
 };
