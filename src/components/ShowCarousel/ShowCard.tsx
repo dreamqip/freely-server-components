@@ -12,7 +12,7 @@ interface Props {
 
 const ShowCard: FC<Props> = ({show}) => {
 
-    if (show.media_type === 'movie') {
+    if ("title" in show && show.title) {
         return (
             <Link href={`/movie/${show.id}`} passHref>
                 <a className="movie-card">

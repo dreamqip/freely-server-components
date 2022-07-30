@@ -15,8 +15,8 @@ const MainHeader: FC = () => {
     const [visible, setVisible] = useState(false);
     const router = useRouter();
 
-    const headerClasses = classNames("flex absolute z-[100] inset-0 items-center justify-between p-0 md:px-12", {
-        'bg-transparent px-4': router.route !== '/',
+    const headerClasses = classNames("flex absolute px-4 z-[100] inset-0 items-center justify-between md:px-12", {
+        'bg-transparent': router.route !== '/',
         'bg-inherit': router.route === '/',
     })
 

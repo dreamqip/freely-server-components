@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import {Suspense} from "react";
 import Spinner from "@/components/Spinner";
 import Hero from "@/components/IndexPage/Hero";
+import {Device} from "@/components/Device";
 
 const DiscoverSection = dynamic(() => import("@/components/IndexPage/Explore"), {
     suspense: true
@@ -19,9 +20,11 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({popular
     return (
         <>
             <Hero/>
-            <Suspense fallback={<div className="flex items-center justify-center text-4xl">Loading...</div>}>
-                <DiscoverSection/>
-            </Suspense>
+            <Device desktop>
+                <Suspense fallback={<div className="flex items-center justify-center text-4xl">Loading...</div>}>
+                    <DiscoverSection/>
+                </Suspense>
+            </Device>
             <Suspense fallback={<div className="flex items-center justify-center text-4xl">Loading...</div>}>
                 <WatchSection/>
             </Suspense>
