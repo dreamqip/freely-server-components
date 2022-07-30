@@ -1,9 +1,9 @@
 import type {FC, PropsWithChildren} from 'react'
 import {Layout, BackTop} from "antd";
-import Meta from "../components/Meta";
-import MainHeader from "../components/Header";
-import Main from "../components/Main";
-import MainFooter from "../components/Footer";
+import Meta from "@/components/Meta";
+import MainHeader from "@/components/Header";
+import Main from "@/components/Main";
+import MainFooter from "@/components/Footer";
 import {ArrowUpIcon} from "@heroicons/react/solid";
 import {memo} from "react";
 

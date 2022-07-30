@@ -1,5 +1,5 @@
 import {useRouter} from "next/router";
-import Meta from "../../components/Meta";
+import Meta from "@/components/Meta";
 import Hero from "@/components/MoviePage/Hero";
 import dynamic from "next/dynamic";
 import {NextPage} from "next";
@@ -10,7 +10,7 @@ import {setId, setImages, setMovieDetails, setVideos} from '@/features/movie/mov
 import {wrapper} from "../../store";
 import {skipToken} from "@reduxjs/toolkit/query";
 
-const MovieTabs = dynamic(() => import('../../components/MoviePage/Tabs'), {
+const MovieTabs = dynamic(() => import('@/components/MoviePage/Tabs'), {
     ssr: false
 })
 

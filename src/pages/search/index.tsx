@@ -1,13 +1,13 @@
 import {NextPage} from "next";
 import dynamic from "next/dynamic";
-import SearchResults from "../../components/SearchPage/SearchResults";
+import SearchResults from "@/components/SearchPage/SearchResults";
 import {useAppDispatch, useAppSelector} from "@/hooks/redux";
 import {getRunningOperationPromises, searchMovies, useSearchMoviesQuery} from "@/services/themoviedb";
 import {useEffect} from "react";
 import {setSearchResults} from "@/features/search/searchSlice";
 import {wrapper} from "../../store";
 
-const SearchInput = dynamic(() => import('../../components/SearchPage/SearchInput'))
+const SearchInput = dynamic(() => import('@/components/SearchPage/SearchInput'))
 
 const Index: NextPage = () => {
     const {query} = useAppSelector(state => state.search)

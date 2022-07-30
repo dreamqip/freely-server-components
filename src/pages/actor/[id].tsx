@@ -1,6 +1,6 @@
 import {NextPage} from "next";
 import {useRouter} from "next/router";
-import Details from "../../components/ActorPage/Details";
+import Details from "@/components/ActorPage/Details";
 import dynamic from "next/dynamic";
 import {
     getActorById,
@@ -11,7 +11,7 @@ import {wrapper} from "../../store";
 import {skipToken} from "@reduxjs/toolkit/query";
 import ImageList from "@/components/ActorPage/ImageList";
 
-const ActorMovies = dynamic(() => import('../../components/ActorPage/ActorMovies'))
+const ActorMovies = dynamic(() => import('@/components/ActorPage/ActorMovies'))
 
 const ActorPage: NextPage = () => {
     const router = useRouter();

@@ -10,11 +10,12 @@ interface MetaProps {
 const Meta: FC<MetaProps> = ({description, keywords, title}) => {
     return (
         <Head>
-            <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-            <meta name="keywords" content={keywords} />
-            <meta name="description" content={description} />
-            <meta charSet="utf-8" />
-            <link rel="icon" href="/favicon.png" />
+            <meta name='viewport'
+                  content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'/>
+            <meta name="keywords" content={keywords}/>
+            <meta name="description" content={description}/>
+            <meta charSet="utf-8"/>
+            <link rel="icon" href="/favicon.png"/>
             <title>{title}</title>
         </Head>
     );

@@ -1,8 +1,8 @@
-import React from 'react';
 import Link from "next/link";
 import {Button} from "antd";
+import {NextPage} from "next";
 
-const ErrorPage = () => {
+const Error: NextPage = () => {
     return (
         <div className="flex flex-col items-center">
             <div className="text-center mb-6 font-black text-[120px] md:text-[220px] leading-none text-gray-700 dark:text-gray-400">404</div>
@@ -17,4 +17,4 @@ const ErrorPage = () => {
     );
 };
 
-export default ErrorPage;
+export default Error;

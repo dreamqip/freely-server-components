@@ -1,7 +1,7 @@
 import type {FC} from 'react';
 import Image from "next/image";
 import wanda from "../../../public/wanda.jpeg";
-import {Device} from "@/components/Device";
+import {Device} from "../Device";
 
 const Hero: FC = () => {
     return (

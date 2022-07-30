@@ -1,5 +1,5 @@
-import {Images} from "@/types/images";
-import {IVideos} from "@/types/videos";
+import {Images} from "./images";
+import {IVideos} from "./videos";
 
 export interface ITvShows {
     page: number;

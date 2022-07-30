@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {useAppSelector} from "@/hooks/redux";
 import {useGetSimilarMoviesQuery} from "@/services/themoviedb";
-import ShowCarousel from "@/components/ShowCarousel/ShowCarousel";
+import ShowCarousel from "../ShowCarousel/ShowCarousel";
 
 const Similar: FC = () => {
     const {id} = useAppSelector(state => state.movie)

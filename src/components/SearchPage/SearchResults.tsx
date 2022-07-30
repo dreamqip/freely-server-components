@@ -3,7 +3,7 @@ import {useAppSelector} from "@/hooks/redux";
 import {Empty} from "antd";
 import Spinner from "../Spinner";
 import {MixedShow} from "@/types/search";
-import ShowCard from "@/components/ShowCarousel/ShowCard";
+import ShowCard from "../ShowCarousel/ShowCard";
 
 interface Props {
     refetching: boolean;
