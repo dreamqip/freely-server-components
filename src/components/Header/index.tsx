@@ -12,7 +12,7 @@ import {useTheme} from "next-themes";
 const MainHeader: FC = () => {
     const router = useRouter();
     const [logoSrc, setLogoSrc] = useState<string>("/logo-white.webp");
-    const {theme} = useTheme();
+    const {theme, forcedTheme} = useTheme();
 
     const headerClasses = classNames("flex absolute px-4 z-[100] inset-0 items-center justify-between md:px-12 w-full", {
         'bg-transparent': router.route !== '/',
@@ -20,12 +20,12 @@ const MainHeader: FC = () => {
     })
 
     useEffect(() => {
-        if (theme === 'dark') {
+        if (theme || forcedTheme === 'dark') {
             setLogoSrc("/logo-dark.webp");
         } else {
             setLogoSrc("/logo-white.webp");
         }
-    }, [theme])
+    }, [theme, forcedTheme]);
 
     return (
         <Header

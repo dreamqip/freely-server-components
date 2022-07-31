@@ -1,5 +1,5 @@
 import {ReactElement} from 'react';
-import {useDevice} from '@/hooks/useDevice';
+import {useMediaQuery} from "react-responsive";
 
 export interface DeviceProps {
     desktop?: boolean;
@@ -8,7 +8,13 @@ export interface DeviceProps {
 }
 
 export const Device = ({ desktop, mobile, children }: DeviceProps): ReactElement | null => {
-    const { isMobile } = useDevice();
+    const isDesktopOrLaptop = useMediaQuery({
+        minWidth: 1224
+    });
+    const isMobile = useMediaQuery({
+        maxWidth: 568
+    });
 
-    return (isMobile && mobile) || (!isMobile && desktop) ? children : null;
+
+    return (isMobile && mobile) || (isDesktopOrLaptop && desktop) ? children : null;
 };

@@ -11,11 +11,13 @@ const Explore: FC = () => {
                     of movies, TV
                     shows and people</h3>
             </div>
-            <div className="flex relative min-h-[400px] w-full">
+            <div className="flex relative justify-center min-h-[400px] w-full">
                 <Image
                     src={explore}
                     alt="explore"
-                    layout={'fill'}
+                    width={800}
+                    height={400}
+                    placeholder="blur"
                 />
             </div>
         </section>
