@@ -53,6 +53,9 @@ const MoviePage: NextPage = () => {
     );
 };
 
+// @ts-ignore
+MoviePage.theme = 'dark';
+
 export default MoviePage;
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {

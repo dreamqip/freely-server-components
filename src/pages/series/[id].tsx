@@ -6,6 +6,7 @@ import {useEffect} from "react";
 import {useAppDispatch} from "@/hooks/redux";
 import Meta from "@/components/Meta";
 import {setSeries, setSeriesId, setSeriesImages, setSeriesVideos} from "@/features/series/seriesSlice";
+import MoviePage from "../movie/[id]";
 
 const TvShow: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({id}) => {
     const {data: series, isLoading, isError} = useGetTvShowByIdQuery(id);
@@ -34,6 +35,9 @@ const TvShow: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
         </div>
     );
 };
+
+// @ts-ignore
+TvShow.theme = 'dark';
 
 export default TvShow;
 

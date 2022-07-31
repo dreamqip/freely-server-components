@@ -1,28 +1,11 @@
+@import "https://unpkg.com/open-props/easings.min.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 #__next {
     height: 100%;
-}
-
-#nprogress {
-    position: absolute;
-    z-index: 10000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    overflow: hidden;
-}
-
-#nprogress div.bar {
-    height: inherit;
-    @apply bg-primary-500;
-}
-
-#nprogress div.bar .peg {
-    @apply shadow-primary-500;
 }
 
 .ant-image-preview-img {
@@ -70,18 +53,6 @@
     border-radius: initial;
 }
 
-.dark .ant-drawer-title {
-    color: white;
-}
-
-.dark .ant-drawer-close {
-    color: white;
-}
-
-.dark .ant-drawer-body {
-    background: #BB86FC;
-}
-
 .hero__image {
     text-shadow: -18px 30px 16px rgba(0, 0, 0, 0.15);
     @apply m-0
@@ -101,11 +72,6 @@
     md:bg-cover
     lg:relative
     lg:z-10
-}
-
-.ant-drawer-content-wrapper {
-    max-width: 378px !important;
-    width: 100% !important;
 }
 
 .dark .ant-empty-description {
@@ -250,9 +216,6 @@
     .select-container .select__option {
         @apply text-neutral-600 dark:text-neutral-200 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-700 dark:hover:bg-neutral-800;
     }
-    /* .select-container .select__option--is-focused {
-      @apply bg-neutral-200 dark:bg-neutral-800;
-    } */
 
     .select-container .select__indicator-separator {
         @apply bg-neutral-400;
@@ -262,5 +225,187 @@
     .select-container .select__placeholder,
     .select-container .select__single-value {
         @apply text-neutral-600 dark:text-neutral-200;
+    }
+}
+
+.link {
+    @apply flex uppercase items-center relative cursor-pointer justify-center;
+}
+
+.link-name {
+    @apply tracking-wide leading-6 m-0 relative hidden md:block;
+}
+
+.link:hover a p::before, .link:focus a p::before, .link:hover a span::before, .link:focus a span::before, .link.active .link:hover a p::before, .link:focus a p::before, .link:hover a span::before, .link:focus a span::before {
+    background-color: rgb(75, 78, 90);
+    transform: scaleX(1);
+    @apply visible opacity-100;
+}
+
+.dark .link:hover a p::before, .dark .link:focus a p::before, .dark .link:hover a span::before, .dark .link:focus a span::before, .dark .link.active .link:hover a p::before, .dark .link:focus a p::before, .dark .link:hover a span::before, .dark .link:focus a span::before {
+    background-color: rgb(249, 249, 249);
+    transform: scaleX(1);
+    @apply visible opacity-100;
+}
+
+.link a p::before {
+    background-color: rgba(249, 249, 249, 0.4);
+    border-radius: 0 0 4px 4px;
+    bottom: -6px;
+    content: "";
+    height: 2px;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+    visibility: hidden;
+    width: auto;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+
+    inline-size: 2rem;
+    block-size: 2rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    outline-offset: 5px;
+}
+
+.theme-toggle > svg {
+    inline-size: 100%;
+    block-size: 100%;
+    stroke-linecap: round;
+}
+
+.sun-and-moon > :is(.moon,.sun,.sun-beams) {
+    transform-origin: center center
+}
+
+.sun-and-moon > :is(.moon,.sun) {
+    fill: var(--icon-fill)
+}
+
+.theme-toggle:is(:hover,:focus-visible) > .sun-and-moon > :is(.moon,.sun) {
+    fill: var(--icon-fill-hover)
+}
+
+.sun-and-moon > .sun-beams {
+    stroke: var(--icon-fill);
+    stroke-width: 2px
+}
+
+.theme-toggle:is(:hover,:focus-visible) .sun-and-moon > .sun-beams {
+    stroke: var(--icon-fill-hover)
+}
+
+.dark .sun-and-moon > .sun {
+    transform: scale(1.75)
+}
+
+.dark .sun-and-moon > .sun-beams {
+    opacity: 0
+}
+
+.dark .sun-and-moon > .moon > circle {
+    transform: translate(-7px)
+}
+
+@supports (cx: 1) {
+    .dark .sun-and-moon > .moon > circle {
+        transform: translate(0);
+        cx: 17
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .sun-and-moon > .sun {
+        transition: transform .5s var(--ease-elastic-3)
+    }
+
+    .sun-and-moon > .sun-beams {
+        transition: transform .5s var(--ease-elastic-4), opacity .5s var(--ease-3)
+    }
+
+    .sun-and-moon .moon > circle {
+        transition: transform .25s var(--ease-out-5)
+    }
+
+    @supports (cx: 1) {
+        .sun-and-moon .moon > circle {
+            transition: cx .25s var(--ease-out-5)
+        }
+    }
+
+    .dark .sun-and-moon > .sun {
+        transform: scale(1.75);
+        transition-timing-function: var(--ease-3);
+        transition-duration: .25s
+    }
+
+    .dark .sun-and-moon > .sun-beams {
+        transform: rotate(-25deg);
+        transition-duration: .15s
+    }
+
+    .dark .sun-and-moon > .moon > circle {
+        transition-delay: .25s;
+        transition-duration: .5s
+    }
+}
+
+.theme-toggle {
+    --size: 2rem;
+    --icon-fill: hsl(210 10% 30%);
+    --icon-fill-hover: hsl(210 10% 15%);
+    background: none;
+    border: none;
+    padding: 0;
+    inline-size: var(--size);
+    block-size: var(--size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    outline-offset: 5px
+}
+
+.theme-toggle > svg {
+    inline-size: 100%;
+    block-size: 100%;
+    stroke-linecap: round
+}
+
+.dark .theme-toggle {
+    --icon-fill: hsl(210 10% 70%);
+    --icon-fill-hover: hsl(210 15% 90%)
+}
+
+@media screen and (max-width: 768px) {
+    .link a span::before {
+        background-color: rgba(249, 249, 249, 0.4);
+        border-radius: 0 0 4px 4px;
+        bottom: -6px;
+        content: "";
+        height: 2px;
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        right: 0;
+        transform-origin: left center;
+        transform: scaleX(0);
+        transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+        visibility: hidden;
+        width: auto;
     }
 }

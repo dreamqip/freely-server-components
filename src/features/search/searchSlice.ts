@@ -7,7 +7,7 @@ interface SearchState {
 }
 
 const initialState: SearchState = {
-    query: '',
+    query: 'a',
     results: null
 }
 
