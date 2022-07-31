@@ -16,7 +16,6 @@ const Explore: FC = () => {
                     src={explore}
                     alt="explore"
                     layout={'fill'}
-                    quality={100}
                 />
             </div>
         </section>

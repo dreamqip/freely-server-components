@@ -13,7 +13,6 @@ const Watch: FC = () => {
                     alt="devices"
                     width={600}
                     height={600}
-                    quality={100}
                 />
             </div>
         </section>

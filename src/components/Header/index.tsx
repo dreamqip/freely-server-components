@@ -1,5 +1,5 @@
 import type {FC} from 'react';
-import {memo} from "react";
+import {memo, useEffect, useState} from "react";
 import Image from "next/image";
 import {Header} from '@/layouts/MainLayout'
 import Link from "next/link";
@@ -7,14 +7,25 @@ import {useRouter} from "next/router";
 import classNames from "classnames";
 import HeaderMenu from "@/components/Header/Menu";
 import SwitchButton from "@/components/Header/SwitchButton";
+import {useTheme} from "next-themes";
 
 const MainHeader: FC = () => {
     const router = useRouter();
+    const [logoSrc, setLogoSrc] = useState<string>("/logo-white.webp");
+    const {theme} = useTheme();
 
     const headerClasses = classNames("flex absolute px-4 z-[100] inset-0 items-center justify-between md:px-12 w-full", {
         'bg-transparent': router.route !== '/',
         'bg-inherit': router.route === '/',
     })
+
+    useEffect(() => {
+        if (theme === 'dark') {
+            setLogoSrc("/logo-dark.webp");
+        } else {
+            setLogoSrc("/logo-white.webp");
+        }
+    }, [theme])
 
     return (
         <Header
@@ -23,14 +34,13 @@ const MainHeader: FC = () => {
                 <Link href="/" passHref>
                     <a className="items-center flex">
                         <Image
-                            src="/logo.png"
+                            src={logoSrc}
                             priority={true}
                             quality={100}
                             alt="logo"
                             width={48}
                             height={48}
                             title="To home page"
-                            className="h-full w-full"
                         />
                     </a>
                 </Link>
