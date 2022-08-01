@@ -1,5 +1,6 @@
 import {Images} from "./images";
 import {IVideos} from "./videos";
+import {IReviews} from "@/types/reviews";
 
 export interface ITvShows {
     page: number;
@@ -42,6 +43,10 @@ export interface ITvShow {
     videos: IVideos;
     images: Images;
     keywords: any;
+    reviews: IReviews;
+    similar: any;
+    recommendations: any;
+    credits: any;
 }
 
 interface CreatedBy {

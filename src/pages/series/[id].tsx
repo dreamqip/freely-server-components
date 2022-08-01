@@ -5,8 +5,17 @@ import Hero from "@/components/SeriesPage/Hero";
 import {useEffect} from "react";
 import {useAppDispatch} from "@/hooks/redux";
 import Meta from "@/components/Meta";
-import {setSeries, setSeriesId, setSeriesImages, setSeriesVideos} from "@/features/series/seriesSlice";
-import MoviePage from "../movie/[id]";
+import {
+    setSeries,
+    setSeriesId,
+    setSeriesImages,
+    setSeriesVideos,
+    setSeriesRecommendations,
+    setSeriesSimilar,
+    setSeriesReviews,
+    setSeriesCast
+} from "@/features/series/seriesSlice";
+import Tabs from "@/components/SeriesPage/Tabs";
 
 const TvShow: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({id}) => {
     const {data: series, isLoading, isError} = useGetTvShowByIdQuery(id);
@@ -20,6 +29,10 @@ const TvShow: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
             dispatch(setSeriesId(id));
             dispatch(setSeriesImages(series.images));
             dispatch(setSeriesVideos(series.videos));
+            dispatch(setSeriesSimilar(series.similar));
+            dispatch(setSeriesRecommendations(series.recommendations));
+            dispatch(setSeriesReviews(series.reviews));
+            dispatch(setSeriesCast(series.credits));
             console.log(series);
         }
     }, [isLoading, dispatch, series, id, isError]);
@@ -32,6 +45,7 @@ const TvShow: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
                 keywords={keywords}
             />
             <Hero />
+            <Tabs />
         </div>
     );
 };

@@ -20,7 +20,7 @@ const CastCard: FC<Props> = ({person}) => {
                 <div className="text-lg text-black dark:text-white">{person.name}</div>
                 <div className="text-md text-gray-500">
                     {
-                        person.character.length > 35
+                        person?.character?.length > 35
                             ? person.character.substring(0, 35) + '...'
                             : person.character
                     }

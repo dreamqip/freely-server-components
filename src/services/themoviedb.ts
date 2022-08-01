@@ -83,7 +83,7 @@ export const movieApi = createApi({
                 url: `tv/${id}`,
                 params: {
                     api_key: process.env.NEXT_PUBLIC_API_KEY,
-                    append_to_response: 'keywords,videos,images',
+                    append_to_response: 'keywords,videos,images,recommendations,similar,reviews,credits',
                     include_image_language: 'en,null'
                 }
             })

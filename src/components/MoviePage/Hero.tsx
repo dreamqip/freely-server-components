@@ -42,6 +42,7 @@ const Hero: FC = () => {
                     src={imgSrc}
                     alt={movie?.title}
                     layout={"fill"}
+                    priority={true}
                     objectFit={"cover"}
                     onError={() => setImgSrc('/fallback.jpeg')}
                     onLoad={() => setLoaded(false)}
@@ -65,6 +66,7 @@ const Hero: FC = () => {
                                     layout={"fill"}
                                     objectFit={'contain'}
                                     objectPosition={'center'}
+                                    priority={true}
                                     src={`https://image.tmdb.org/t/p/original${movie?.images?.logos[0].file_path}`}
                                     onLoad={() => setLoadedLogo(false)}
                                     onLoadingComplete={() => setLoadedLogo(true)}

@@ -74,7 +74,8 @@ const Hero: FC = () => {
                         : <h1 className="text-white text-2xl py-6 md:py-10 md:text-5xl m-0">{series?.name}</h1>
                     }
                     <span
-                        className="text-white text-lg hidden md:block">{series?.overview?.substring(0, 150) + '...'}</span>
+                        className="text-white font-medium text-lg hidden md:block">{series?.overview?.substring(0, 150) + '...'}</span>
+                    <div className="my-4 font-light text-white tracking-widest">{series?.number_of_seasons} {series && series.number_of_seasons > 1 ? 'Seasons' : 'Season'}</div>
                     <div
                         className="text-white tracking-widest leading-6 my-4">{series?.genres?.map((genre) => genre.name).join(', ')}</div>
                     <Link href={{

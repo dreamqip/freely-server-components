@@ -36,7 +36,6 @@ const MainHeader: FC = () => {
                         <Image
                             src={logoSrc}
                             priority={true}
-                            quality={100}
                             alt="logo"
                             width={48}
                             height={48}

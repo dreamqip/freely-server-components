@@ -15,6 +15,7 @@ const Explore: FC = () => {
                 <Image
                     src={explore}
                     alt="explore"
+                    priority={true}
                     width={800}
                     height={400}
                     placeholder="blur"
