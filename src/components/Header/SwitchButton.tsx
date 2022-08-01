@@ -1,8 +1,9 @@
-import {FC, useEffect} from 'react';
+import {FC, useEffect, useRef} from 'react';
 import {useTheme} from "next-themes";
 
 const SwitchButton: FC = () => {
     const {theme, systemTheme, setTheme, forcedTheme} = useTheme();
+    const ref = useRef<HTMLButtonElement>(null);
 
     useEffect(() => {
         if (!localStorage.getItem('theme')) {
@@ -19,14 +20,18 @@ const SwitchButton: FC = () => {
 
     const handleTheme = () => {
         theme === 'light' ? setTheme('dark') : setTheme('light')
+        if (ref.current) {
+            ref.current.ariaLabel = theme === 'light' ? 'dark theme' : 'light theme'
+        }
     }
 
     return (
         <button
+            ref={ref}
             className="theme-toggle"
             id="theme-toggle"
             title="Toggles light & dark"
-            aria-label="auto"
+            aria-label={"auto"}
             aria-live="polite"
             onClick={handleTheme}
             disabled={!!forcedTheme}

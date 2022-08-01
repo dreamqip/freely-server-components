@@ -236,13 +236,13 @@
     @apply tracking-wide leading-6 m-0 relative hidden md:block;
 }
 
-.link:hover a p::before, .link:focus a p::before, .link:hover a span::before, .link:focus a span::before, .link.active .link:hover a p::before, .link:focus a p::before, .link:hover a span::before, .link:focus a span::before {
+.link:hover a p::before, .link:focus a p::before, .link:hover a span::before, .link:focus a span::before, .link.active a p::before, .link:focus a p::before, .link:hover a span::before, .link:focus a span::before {
     background-color: rgb(75, 78, 90);
     transform: scaleX(1);
     @apply visible opacity-100;
 }
 
-.dark .link:hover a p::before, .dark .link:focus a p::before, .dark .link:hover a span::before, .dark .link:focus a span::before, .dark .link.active .link:hover a p::before, .dark .link:focus a p::before, .dark .link:hover a span::before, .dark .link:focus a span::before {
+.dark .link:hover a p::before, .dark .link:focus a p::before, .dark .link:hover a span::before, .dark .link:focus a span::before, .dark .link.active a p::before, .dark .link:focus a p::before, .dark .link:hover a span::before, .dark .link:focus a span::before {
     background-color: rgb(249, 249, 249);
     transform: scaleX(1);
     @apply visible opacity-100;
