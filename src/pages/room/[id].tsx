@@ -112,13 +112,13 @@ const Room: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
                 </>
             )}
 
-            {show && type === 'movie' && (
+            {/*{show && type === 'movie' && (
                 <iframe
                     allowFullScreen
                     src={`https://2embed.org/embed/movie?tmdb=${id}`}
                     className="w-full h-screen"
                 />
-            )}
+            )}*/}
         </>
     );
 }
