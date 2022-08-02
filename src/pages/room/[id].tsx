@@ -15,6 +15,7 @@ import {
 import {setShow} from "@/features/room/roomSlice";
 import {IMovie} from "@/types/movie";
 import {ITvShow} from "@/types/series";
+import axios from "axios";
 
 const Room: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({id, type}) => {
     const dispatch = useAppDispatch();
@@ -28,6 +29,13 @@ const Room: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
     const resultTvShow = useGetTvShowByIdQuery(id, {
         skip: type === 'movie'
     });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await axios.get(`https://seapi.link/?type=tmdb&id=634649&max_results=1`).then(res => console.log(res.data));
+        }
+        fetchData();
+    }, [])
 
     useEffect(() => {
         if (!resultMovie.isLoading && resultMovie.data && !resultMovie.isError) {
