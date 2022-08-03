@@ -13,7 +13,7 @@ const Hero: FC = () => {
     const [loaded, setLoaded] = useState(false);
     const [loadedLogo, setLoadedLogo] = useState(false);
     const {scrollYProgress} = useScroll();
-    const scrollProgress = useMotionValue(1)
+    const scrollProgress = useMotionValue(1);
 
     useEffect(() => {
         setImgSrc(`https://image.tmdb.org/t/p/original${series?.backdrop_path}`)

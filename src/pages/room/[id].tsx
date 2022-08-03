@@ -15,13 +15,19 @@ import {
 import {setShow} from "@/features/room/roomSlice";
 import {IMovie} from "@/types/movie";
 import {ITvShow} from "@/types/series";
-import axios from "axios";
+import {useGetMovieLinkByIdQuery, useGetTvShowLinkByIdQuery} from "@/services/seapi";
 
 const Room: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({id, type}) => {
     const dispatch = useAppDispatch();
     const {show} = useAppSelector(state => state.room);
     const [selectedSeason, setSelectedSeason] = useState<any>('');
     const [selectedEpisode, setSelectedEpisode] = useState<any>('');
+    const {data} = useGetMovieLinkByIdQuery(id, {
+        skip: type !== 'movie',
+    });
+    const {data: links} = useGetTvShowLinkByIdQuery({id, season: selectedSeason.value, episode: selectedEpisode.value}, {
+        skip: type !== 'series',
+    })
 
     const resultMovie = useGetMovieByIdQuery(id, {
         skip: type === 'series'
@@ -29,13 +35,6 @@ const Room: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
     const resultTvShow = useGetTvShowByIdQuery(id, {
         skip: type === 'movie'
     });
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await axios.get(`https://seapi.link/?type=tmdb&id=634649&max_results=1`).then(res => console.log(res.data));
-        }
-        fetchData();
-    }, [])
 
     useEffect(() => {
         if (!resultMovie.isLoading && resultMovie.data && !resultMovie.isError) {
@@ -106,19 +105,19 @@ const Room: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
                     />
                     <iframe
                         allowFullScreen
-                        src={`https://2embed.org/embed/series?tmdb=${id}&sea=${selectedSeason.value}&epi=${selectedEpisode.value}`}
+                        src={links?.results?.[0]?.url}
                         className="w-full h-screen"
                     />
                 </>
             )}
 
-            {/*{show && type === 'movie' && (
+            {show && type === 'movie' && (
                 <iframe
                     allowFullScreen
-                    src={`https://2embed.org/embed/movie?tmdb=${id}`}
+                    src={data?.results.filter((item: any) => item.server === 'doodstream')[0]?.url}
                     className="w-full h-screen"
                 />
-            )}*/}
+            )}
         </>
     );
 }

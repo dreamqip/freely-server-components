@@ -33,7 +33,6 @@ const TvShow: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
             dispatch(setSeriesRecommendations(series.recommendations));
             dispatch(setSeriesReviews(series.reviews));
             dispatch(setSeriesCast(series.credits));
-            console.log(series);
         }
     }, [isLoading, dispatch, series, id, isError]);
 
