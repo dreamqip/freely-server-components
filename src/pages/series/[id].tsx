@@ -16,6 +16,7 @@ import {
     setSeriesVideos
 } from "@/features/series/seriesSlice";
 import dynamic from "next/dynamic";
+import Spinner from "@/components/Spinner";
 
 const Tabs = dynamic(() => import("@/components/SeriesPage/Tabs"), {suspense: true});
 
@@ -39,17 +40,17 @@ const TvShow: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
     }, [isLoading, dispatch, series, id, isError]);
 
     return (
-        <div>
+        <article>
             <Meta
                 description={series?.overview}
                 title={series?.name}
                 keywords={keywords}
             />
             <Hero/>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Spinner/>}>
                 <Tabs/>
             </Suspense>
-        </div>
+        </article>
     );
 };
 

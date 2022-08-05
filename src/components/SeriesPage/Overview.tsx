@@ -10,16 +10,10 @@ import Reviews from "@/components/SeriesPage/Reviews";
 const Overview: FC = () => {
     const {series} = useAppSelector(state => state.series)
     const [imgSrc, setImgSrc] = useState(`https://image.tmdb.org/t/p/w400${series?.poster_path}`);
-    const [parsedDetails, setParsedDetails] = useState<any>(null);
+    const parsedDetails = series && parseSeriesDetails(series);
 
     useEffect(() => {
         setImgSrc(`https://image.tmdb.org/t/p/w400${series?.poster_path}`)
-    }, [series])
-
-    useEffect(() => {
-        if (series) {
-            setParsedDetails(parseSeriesDetails(series))
-        }
     }, [series])
 
     return (

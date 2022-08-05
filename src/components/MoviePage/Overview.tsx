@@ -10,14 +10,10 @@ import {parseMovieDetails} from "@/utilities/parseMovieDetails";
 const Overview: FC = () => {
     const {movie} = useAppSelector(state => state.movie)
     const [imgSrc, setImgSrc] = useState(`https://image.tmdb.org/t/p/w400${movie.poster_path}`);
-    const [parsedDetails, setParsedDetails] = useState<any>(null);
+    const parsedDetails = movie && parseMovieDetails(movie);
 
     useEffect(() => {
         setImgSrc(`https://image.tmdb.org/t/p/w400${movie.poster_path}`)
-    }, [movie])
-
-    useEffect(() => {
-        setParsedDetails(parseMovieDetails(movie))
     }, [movie])
 
     return (

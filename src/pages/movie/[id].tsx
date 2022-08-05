@@ -1,44 +1,30 @@
-import {useRouter} from "next/router";
 import Meta from "@/components/Meta";
 import Hero from "@/components/MoviePage/Hero";
 import dynamic from "next/dynamic";
-import {NextPage} from "next";
+import {InferGetServerSidePropsType, NextPage} from "next";
 import {getMovieById, getRunningOperationPromises, useGetMovieByIdQuery} from "@/services/themoviedb";
-import {useEffect} from "react";
+import {Suspense, useEffect} from "react";
 import {useAppDispatch} from "@/hooks/redux";
 import {setId, setImages, setMovieDetails, setVideos} from '@/features/movie/movieSlice'
 import {wrapper} from "../../store";
-import {skipToken} from "@reduxjs/toolkit/query";
+import Spinner from "@/components/Spinner";
 
-const MovieTabs = dynamic(() => import('@/components/MoviePage/Tabs'), {
-    ssr: false
-})
+const MovieTabs = dynamic(() => import('@/components/MoviePage/Tabs'), {suspense: true});
 
-const MoviePage: NextPage = () => {
-    const router = useRouter();
+const MoviePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({id}) => {
     const dispatch = useAppDispatch();
-    const id = router.query.id;
-    const result = useGetMovieByIdQuery(
-        typeof id === 'string' ? parseInt(id) : skipToken,
-        {
-            skip: router.isFallback
-        }
-    );
+    const result = useGetMovieByIdQuery(id);
     const {data: movie, isLoading, isError} = result;
     const keywords: string[] = movie?.keywords.keywords.map((keyword: any) => keyword.name);
 
     useEffect(() => {
-        if (router.isReady) {
-            const {id} = router.query;
-            dispatch(setId(parseInt(id as string)));
-        }
-
         if (!isLoading && !isError && movie) {
+            dispatch(setId(id));
             dispatch(setMovieDetails(movie))
             dispatch(setImages(movie?.images))
             dispatch(setVideos(movie?.videos))
         }
-    }, [router.isReady, isLoading, dispatch, movie, router.query, isError]);
+    }, [isLoading, dispatch, movie, isError, id]);
 
     return (
         <article className="flex flex-col">
@@ -48,7 +34,9 @@ const MoviePage: NextPage = () => {
                 keywords={keywords}
             />
             <Hero/>
-            <MovieTabs/>
+            <Suspense fallback={<Spinner/>}>
+                <MovieTabs/>
+            </Suspense>
         </article>
     );
 };
@@ -58,16 +46,20 @@ MoviePage.theme = 'dark';
 
 export default MoviePage;
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const id = context.params?.id;
-    if (typeof id === 'string') {
-        store.dispatch(getMovieById.initiate(parseInt(id)))
+export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx) => {
+    const {id} = ctx.query;
+    const parsedId = parseInt(id as string, 10);
+
+    if (parsedId) {
+        store.dispatch(getMovieById.initiate(parsedId));
     }
 
     await Promise.all(getRunningOperationPromises());
 
     return {
-        props: {}
+        props: {
+            id: parsedId
+        }
     }
 
 })
