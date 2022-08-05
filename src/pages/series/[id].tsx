@@ -2,20 +2,22 @@ import {InferGetServerSidePropsType, NextPage} from "next";
 import {wrapper} from "../../store";
 import {getRunningOperationPromises, getTvShowById, useGetTvShowByIdQuery} from "@/services/themoviedb";
 import Hero from "@/components/SeriesPage/Hero";
-import {useEffect} from "react";
+import {Suspense, useEffect} from "react";
 import {useAppDispatch} from "@/hooks/redux";
 import Meta from "@/components/Meta";
 import {
     setSeries,
+    setSeriesCast,
     setSeriesId,
     setSeriesImages,
-    setSeriesVideos,
     setSeriesRecommendations,
-    setSeriesSimilar,
     setSeriesReviews,
-    setSeriesCast
+    setSeriesSimilar,
+    setSeriesVideos
 } from "@/features/series/seriesSlice";
-import Tabs from "@/components/SeriesPage/Tabs";
+import dynamic from "next/dynamic";
+
+const Tabs = dynamic(() => import("@/components/SeriesPage/Tabs"), {suspense: true});
 
 const TvShow: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({id}) => {
     const {data: series, isLoading, isError} = useGetTvShowByIdQuery(id);
@@ -43,8 +45,10 @@ const TvShow: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
                 title={series?.name}
                 keywords={keywords}
             />
-            <Hero />
-            <Tabs />
+            <Hero/>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Tabs/>
+            </Suspense>
         </div>
     );
 };
@@ -57,7 +61,7 @@ export default TvShow;
 export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx) => {
     const {id} = ctx.query;
     const parsedId = parseInt(id as string, 10);
-    
+
     if (parsedId) {
         store.dispatch(getTvShowById.initiate(parsedId));
     }

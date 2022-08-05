@@ -33,7 +33,7 @@ const Index: NextPage = () => {
 
 export default Index;
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
+export const getStaticProps = wrapper.getStaticProps(store => async () => {
     store.dispatch(searchMovies.initiate('a'))
 
     await Promise.all(getRunningOperationPromises());

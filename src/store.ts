@@ -5,11 +5,9 @@ import searchReducer from '@/features/search/searchSlice';
 import seriesReducer from '@/features/series/seriesSlice';
 import roomReducer from '@/features/room/roomSlice';
 import {createWrapper} from "next-redux-wrapper";
-import {seapiApi} from "@/services/seapi";
 
 export const rootReducer = combineReducers({
     [movieApi.reducerPath]: movieApi.reducer,
-    [seapiApi.reducerPath]: seapiApi.reducer,
     movie: movieReducer,
     search: searchReducer,
     series: seriesReducer,

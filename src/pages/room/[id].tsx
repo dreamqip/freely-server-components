@@ -15,19 +15,12 @@ import {
 import {setShow} from "@/features/room/roomSlice";
 import {IMovie} from "@/types/movie";
 import {ITvShow} from "@/types/series";
-import {useGetMovieLinkByIdQuery, useGetTvShowLinkByIdQuery} from "@/services/seapi";
 
 const Room: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({id, type}) => {
     const dispatch = useAppDispatch();
     const {show} = useAppSelector(state => state.room);
     const [selectedSeason, setSelectedSeason] = useState<any>('');
     const [selectedEpisode, setSelectedEpisode] = useState<any>('');
-    const {data} = useGetMovieLinkByIdQuery(id, {
-        skip: type !== 'movie',
-    });
-    const {data: links} = useGetTvShowLinkByIdQuery({id, season: selectedSeason.value, episode: selectedEpisode.value}, {
-        skip: type !== 'series',
-    })
 
     const resultMovie = useGetMovieByIdQuery(id, {
         skip: type === 'series'
@@ -105,7 +98,7 @@ const Room: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
                     />
                     <iframe
                         allowFullScreen
-                        src={links?.results?.[0]?.url}
+                        src={`https://2embed.org/embed/series?tmdb=${id}&sea=${selectedSeason.value}&epi=${selectedEpisode.value}`}
                         className="w-full h-screen"
                     />
                 </>
@@ -114,7 +107,7 @@ const Room: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
             {show && type === 'movie' && (
                 <iframe
                     allowFullScreen
-                    src={data?.results.filter((item: any) => item.server === 'doodstream')[0]?.url}
+                    src={`https://2embed.org/embed/movie?tmdb=${id}`}
                     className="w-full h-screen"
                 />
             )}
