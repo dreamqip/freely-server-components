@@ -4,6 +4,8 @@ import movieReducer from '@/features/movie/movieSlice';
 import searchReducer from '@/features/search/searchSlice';
 import seriesReducer from '@/features/series/seriesSlice';
 import roomReducer from '@/features/room/roomSlice';
+import popularSeriesReducer from '@/features/series/popularSlice';
+import popularMoviesReducer from '@/features/movie/popularSlice';
 import {createWrapper} from "next-redux-wrapper";
 
 export const rootReducer = combineReducers({
@@ -11,7 +13,9 @@ export const rootReducer = combineReducers({
     movie: movieReducer,
     search: searchReducer,
     series: seriesReducer,
-    room: roomReducer
+    room: roomReducer,
+    popularSeries: popularSeriesReducer,
+    popularMovies: popularMoviesReducer,
 })
 
 export const makeStore = () => {

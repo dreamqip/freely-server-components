@@ -3,13 +3,12 @@ import Hero from "@/components/MoviePage/Hero";
 import dynamic from "next/dynamic";
 import {InferGetServerSidePropsType, NextPage} from "next";
 import {getMovieById, getRunningOperationPromises, useGetMovieByIdQuery} from "@/services/themoviedb";
-import {Suspense, useEffect} from "react";
+import {useEffect} from "react";
 import {useAppDispatch} from "@/hooks/redux";
 import {setId, setImages, setMovieDetails, setVideos} from '@/features/movie/movieSlice'
 import {wrapper} from "../../store";
-import Spinner from "@/components/Spinner";
 
-const MovieTabs = dynamic(() => import('@/components/MoviePage/Tabs'), {suspense: true});
+const MovieTabs = dynamic(() => import('@/components/MoviePage/Tabs'), {ssr: false});
 
 const MoviePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({id}) => {
     const dispatch = useAppDispatch();
@@ -34,9 +33,7 @@ const MoviePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
                 keywords={keywords}
             />
             <Hero/>
-            <Suspense fallback={<Spinner/>}>
-                <MovieTabs/>
-            </Suspense>
+            <MovieTabs/>
         </article>
     );
 };

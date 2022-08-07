@@ -8,13 +8,13 @@ export interface DeviceProps {
 }
 
 export const Device = ({ desktop, mobile, children }: DeviceProps): ReactElement | null => {
-    const isDesktopOrLaptop = useMediaQuery({
-        minWidth: 1224
+    const isDesktopOrTablet = useMediaQuery({
+        minWidth: 768,
     });
     const isMobile = useMediaQuery({
         maxWidth: 568
     });
 
 
-    return (isMobile && mobile) || (isDesktopOrLaptop && desktop) ? children : null;
+    return (isMobile && mobile) || (isDesktopOrTablet && desktop) ? children : null;
 };

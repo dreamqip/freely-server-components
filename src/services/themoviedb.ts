@@ -87,6 +87,24 @@ export const movieApi = createApi({
                     include_image_language: 'en,null'
                 }
             })
+        }),
+        getPopularTvShows: builder.query({
+            query: (page: number = 1) => ({
+                url: 'tv/popular',
+                params: {
+                    api_key: process.env.NEXT_PUBLIC_API_KEY,
+                    page
+                }
+            })
+        }),
+        getPopularMovies: builder.query({
+            query: (page: number = 1) => ({
+                url: 'movie/popular',
+                params: {
+                    api_key: process.env.NEXT_PUBLIC_API_KEY,
+                    page
+                }
+            })
         })
     })
 })
@@ -100,16 +118,16 @@ export const {
     useSearchMoviesQuery,
     useGetActorByIdQuery,
     useGetTvShowByIdQuery,
+    useGetPopularTvShowsQuery,
+    useGetPopularMoviesQuery,
     util: {getRunningOperationPromises}
 } = movieApi;
 
 export const {
     getMovieById,
-    getMovieReviews,
-    getMovieCredits,
-    getSimilarMovies,
-    getRecommendedMovies,
     searchMovies,
     getActorById,
-    getTvShowById
+    getTvShowById,
+    getPopularTvShows,
+    getPopularMovies
 } = movieApi.endpoints;

@@ -2,7 +2,7 @@ import {InferGetServerSidePropsType, NextPage} from "next";
 import {wrapper} from "../../store";
 import {getRunningOperationPromises, getTvShowById, useGetTvShowByIdQuery} from "@/services/themoviedb";
 import Hero from "@/components/SeriesPage/Hero";
-import {Suspense, useEffect} from "react";
+import {useEffect} from "react";
 import {useAppDispatch} from "@/hooks/redux";
 import Meta from "@/components/Meta";
 import {
@@ -16,9 +16,8 @@ import {
     setSeriesVideos
 } from "@/features/series/seriesSlice";
 import dynamic from "next/dynamic";
-import Spinner from "@/components/Spinner";
 
-const Tabs = dynamic(() => import("@/components/SeriesPage/Tabs"), {suspense: true});
+const Tabs = dynamic(() => import("@/components/SeriesPage/Tabs"), {ssr: false});
 
 const TvShow: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({id}) => {
     const {data: series, isLoading, isError} = useGetTvShowByIdQuery(id);
@@ -47,9 +46,7 @@ const TvShow: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
                 keywords={keywords}
             />
             <Hero/>
-            <Suspense fallback={<Spinner/>}>
-                <Tabs/>
-            </Suspense>
+            <Tabs/>
         </article>
     );
 };

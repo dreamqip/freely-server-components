@@ -9,11 +9,11 @@ import {parseMovieDetails} from "@/utilities/parseMovieDetails";
 
 const Overview: FC = () => {
     const {movie} = useAppSelector(state => state.movie)
-    const [imgSrc, setImgSrc] = useState(`https://image.tmdb.org/t/p/w400${movie.poster_path}`);
+    const [imgSrc, setImgSrc] = useState(`https://image.tmdb.org/t/p/w400${movie?.poster_path}`);
     const parsedDetails = movie && parseMovieDetails(movie);
 
     useEffect(() => {
-        setImgSrc(`https://image.tmdb.org/t/p/w400${movie.poster_path}`)
+        setImgSrc(`https://image.tmdb.org/t/p/w400${movie?.poster_path}`)
     }, [movie])
 
     return (
@@ -47,10 +47,14 @@ const Overview: FC = () => {
                     </table>
                 </div>
             </div>
-            <Cast />
-            <Similar />
-            <Recommended />
-            <Reviews />
+            {movie && (
+                <>
+                    <Cast/>
+                    <Similar/>
+                    <Recommended/>
+                    <Reviews/>
+                </>
+            )}
         </>
     );
 };

@@ -2,10 +2,12 @@ import type {FC} from 'react';
 import {useEffect, useState} from "react";
 import Image from "next/image";
 import {useAppSelector} from "@/hooks/redux";
-import {motion, useMotionValue, useScroll} from "framer-motion";
+import {LazyMotion, m, useMotionValue, useScroll} from "framer-motion";
 import {animationVariants} from "@/utilities/animationVariants";
 import {PlayIcon} from "@heroicons/react/solid";
 import Link from "next/link";
+
+const loadFeatures = () => import('../Animated/DomAnimation').then(res => res.default);
 
 const Hero: FC = () => {
     const {series} = useAppSelector(state => state.series);
@@ -16,7 +18,9 @@ const Hero: FC = () => {
     const scrollProgress = useMotionValue(1);
 
     useEffect(() => {
-        setImgSrc(`https://image.tmdb.org/t/p/original${series?.backdrop_path}`)
+        setImgSrc(`https://image.tmdb.org/t/p/original${series?.backdrop_path}`);
+        setLoaded(false);
+        setLoadedLogo(false);
     }, [series])
 
     useEffect(() => {
@@ -30,52 +34,58 @@ const Hero: FC = () => {
 
     return (
         <>
-            <motion.div
-                initial="hidden"
-                animate={loaded ? 'visible' : 'hidden'}
-                variants={animationVariants}
-                transition={{ease: "easeOut", duration: 1.25}}
-                className="absolute sm:fixed w-full max-h-[300px] sm:max-h-full inset-0 z-0 select-none"
-                style={{opacity: scrollProgress}}
-            >
-                <Image
-                    src={imgSrc}
-                    alt={series?.name}
-                    layout={"fill"}
-                    objectFit={"cover"}
-                    onError={() => setImgSrc('/fallback.jpeg')}
-                    onLoad={() => setLoaded(false)}
-                    onLoadingComplete={() => setLoaded(true)}
-                />
-                <div className="absolute z-0 inset-0 h-full radial-gradient"></div>
-            </motion.div>
+            <LazyMotion features={loadFeatures}>
+                <m.div
+                    initial="hidden"
+                    animate={loaded ? "visible" : "hidden"}
+                    variants={animationVariants}
+                    transition={{ease: "easeOut", duration: 1.25}}
+                    className="absolute sm:fixed w-full max-h-[300px] sm:max-h-full inset-0 z-0 select-none"
+                    style={{opacity: scrollProgress}}
+                >
+                    <Image
+                        src={imgSrc}
+                        alt={series?.name}
+                        layout={"fill"}
+                        objectFit={"cover"}
+                        onError={() => setImgSrc('/fallback.jpeg')}
+                        onLoad={() => setLoaded(false)}
+                        onLoadingComplete={() => setLoaded(true)}
+                    />
+                    <div className="absolute z-0 inset-0 h-full radial-gradient"></div>
+                </m.div>
+            </LazyMotion>
+
             <div className="relative">
                 <div className="max-w-xl">
                     {series?.images?.logos && series?.images?.logos.length > 0
                         ? <div className="py-6">
-                            <motion.div
-                                initial="hidden"
-                                animate={loadedLogo ? 'visible' : 'hidden'}
-                                variants={animationVariants}
-                                transition={{ease: "easeOut", duration: 1}}
-                                className="relative max-w-[180px] min-h-[100px] md:max-w-[341px] md:min-h-[170px]"
-                            >
-                                <Image
-                                    alt={series?.name}
-                                    layout={"fill"}
-                                    objectFit={'contain'}
-                                    objectPosition={'center'}
-                                    src={`https://image.tmdb.org/t/p/original${series?.images?.logos[0].file_path}`}
-                                    onLoad={() => setLoadedLogo(false)}
-                                    onLoadingComplete={() => setLoadedLogo(true)}
-                                />
-                            </motion.div>
+                            <LazyMotion features={loadFeatures}>
+                                <m.div
+                                    initial="hidden"
+                                    animate={loadedLogo ? "visible" : "hidden"}
+                                    variants={animationVariants}
+                                    transition={{ease: "easeOut", duration: 1}}
+                                    className="relative max-w-[180px] min-h-[100px] md:max-w-[341px] md:min-h-[170px]"
+                                >
+                                    <Image
+                                        alt={series?.name}
+                                        layout={"fill"}
+                                        objectFit={'contain'}
+                                        objectPosition={'center'}
+                                        src={`https://image.tmdb.org/t/p/original${series?.images?.logos[0].file_path}`}
+                                        onLoad={() => setLoaded(false)}
+                                        onLoadingComplete={() => setLoadedLogo(true)}
+                                    />
+                                </m.div>
+                            </LazyMotion>
                         </div>
                         : <h1 className="text-white text-2xl py-6 md:py-10 md:text-5xl m-0">{series?.name}</h1>
                     }
                     <span
                         className="text-white font-medium text-lg hidden md:block">{series?.overview?.substring(0, 150) + '...'}</span>
-                    <div className="my-4 font-light text-white tracking-widest">{series?.number_of_seasons} {series && series.number_of_seasons > 1 ? 'Seasons' : 'Season'}</div>
+                    <div
+                        className="my-4 font-light text-white tracking-widest">{series?.number_of_seasons} {series && series.number_of_seasons > 1 ? 'Seasons' : 'Season'}</div>
                     <div
                         className="text-white tracking-widest leading-6 my-4">{series?.genres?.map((genre) => genre.name).join(', ')}</div>
                     <Link href={{

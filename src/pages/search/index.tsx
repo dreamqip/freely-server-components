@@ -9,7 +9,7 @@ import {wrapper} from "../../store";
 
 const SearchInput = dynamic(() => import('@/components/SearchPage/SearchInput'))
 
-const Index: NextPage = () => {
+const Search: NextPage = () => {
     const {query} = useAppSelector(state => state.search)
     const dispatch = useAppDispatch()
 
@@ -31,7 +31,7 @@ const Index: NextPage = () => {
     );
 };
 
-export default Index;
+export default Search;
 
 export const getStaticProps = wrapper.getStaticProps(store => async () => {
     store.dispatch(searchMovies.initiate('a'))
