@@ -10,6 +10,7 @@ const withPlugins = require('next-compose-plugins');
  **/
 const nextConfig = {
     reactStrictMode: true,
+    swcMinify: true,
     images: {
         domains: ['image.tmdb.org']
     },

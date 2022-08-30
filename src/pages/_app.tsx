@@ -5,25 +5,14 @@ import 'swiper/css';
 import {ThemeProvider} from "next-themes";
 import {wrapper} from "../store";
 import dynamic from "next/dynamic";
-import NextNProgress from "nextjs-progressbar";
 
 const MainLayout = dynamic(() => import('@/layouts/MainLayout'));
-
+const Progress = dynamic(() => import('@/components/ProgressBar'));
 
 function MyApp({Component, pageProps}: any) {
     return (
         <>
-            <NextNProgress
-                color="#6200EE"
-                startPosition={0.3}
-                stopDelayMs={200}
-                height={2}
-                showOnShallow={true}
-                options={{
-                    trickleSpeed: 100,
-                    showSpinner: false,
-                }}
-            />
+            <Progress/>
             <ThemeProvider enableSystem={true} attribute="class" forcedTheme={Component.theme || null}>
                 <MainLayout>
                     <Component {...pageProps} />
