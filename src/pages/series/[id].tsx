@@ -4,7 +4,6 @@ import {getRunningOperationPromises, getTvShowById, useGetTvShowByIdQuery} from 
 import Hero from "@/components/SeriesPage/Hero";
 import {useEffect} from "react";
 import {useAppDispatch} from "@/hooks/redux";
-import Meta from "@/components/Meta";
 import {
     setSeries,
     setSeriesCast,
@@ -16,6 +15,7 @@ import {
     setSeriesVideos
 } from "@/features/series/seriesSlice";
 import dynamic from "next/dynamic";
+import {NextSeo} from "next-seo";
 
 const Tabs = dynamic(() => import("@/components/SeriesPage/Tabs"), {ssr: false});
 
@@ -24,6 +24,17 @@ const TvShow: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
     const dispatch = useAppDispatch();
 
     const keywords: string[] = series?.keywords.results.map((keyword: any) => keyword.name);
+
+    const seoOptions = {
+        title: series?.name,
+        description: series?.overview,
+        additionalMetaTags: [
+            {
+                property: 'keywords',
+                content: keywords.join(', ')
+            }
+        ]
+    }
 
     useEffect(() => {
         if (!isLoading && !isError && series) {
@@ -40,11 +51,7 @@ const TvShow: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
 
     return (
         <article>
-            <Meta
-                description={series?.overview}
-                title={series?.name}
-                keywords={keywords}
-            />
+            <NextSeo {...seoOptions}/>
             <Hero/>
             <Tabs/>
         </article>

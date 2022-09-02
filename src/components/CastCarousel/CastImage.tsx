@@ -31,7 +31,7 @@ const CastImage: FC<Props> = ({path}) => {
             <Image
                 src={imgSrc}
                 layout={'fill'}
-                className=""
+                objectFit={'cover'}
                 alt={path.name}
                 onError={() => setImgSrc('/fallback.jpeg')}
                 onLoadingComplete={() => setLoaded(true)}

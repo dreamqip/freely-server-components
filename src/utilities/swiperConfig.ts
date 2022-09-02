@@ -35,5 +35,6 @@ export const swiperOptions: SwiperOptions = {
     },
     preloadImages: false,
     speed: 700,
-    preventInteractionOnTransition: true
+    preventInteractionOnTransition: true,
+    grabCursor: true,
 }

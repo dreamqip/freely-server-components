@@ -1,11 +1,10 @@
 import type {FC, PropsWithChildren} from 'react';
-import {Content} from "@/layouts/MainLayout";
 
 const Main: FC<PropsWithChildren> = ({children}) => {
     return (
-        <Content>
+        <main className="min-h-0 flex-auto">
             {children}
-        </Content>
+        </main>
     );
 };
 

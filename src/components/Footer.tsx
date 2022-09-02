@@ -1,11 +1,10 @@
 import type {FC} from 'react';
-import {Footer} from "@/layouts/MainLayout";
 import {CodeIcon} from "@heroicons/react/solid";
 import {memo} from "react";
 
 const MainFooter: FC = () => {
     return (
-        <Footer className="flex bg-inherit justify-center items-center gap-8">
+        <footer className="flex bg-inherit justify-center items-center gap-8 py-6 px-12 flex-0-auto">
             <div className="flex dark:text-white text-xl leading-8">
                 <CodeIcon className="w-8 h-8 mr-2"/>
                 by
@@ -18,7 +17,7 @@ const MainFooter: FC = () => {
                     dreamqip
                 </a>
             </div>
-        </Footer>
+        </footer>
     );
 };
 

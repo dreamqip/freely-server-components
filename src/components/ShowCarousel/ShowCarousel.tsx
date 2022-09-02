@@ -1,10 +1,11 @@
+import type {MixedShow} from "@/types/search";
+import type {ITvShows} from "@/types/series";
+import type {IMovies} from "@/types/movies";
 import {FC, Suspense} from 'react';
-import {IMovies} from "@/types/movies";
 import {Empty} from "antd";
 import {SwiperSlide} from 'swiper/react';
 import ShowCard from "./ShowCard";
-import {MixedShow} from "@/types/search";
-import {ITvShows} from "@/types/series";
+
 import dynamic from "next/dynamic";
 
 const Swiper = dynamic(() => import('./SwiperLazy'), {

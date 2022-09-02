@@ -1,4 +1,3 @@
-import Meta from "@/components/Meta";
 import Hero from "@/components/MoviePage/Hero";
 import dynamic from "next/dynamic";
 import {InferGetServerSidePropsType, NextPage} from "next";
@@ -7,6 +6,7 @@ import {useEffect} from "react";
 import {useAppDispatch} from "@/hooks/redux";
 import {setId, setImages, setMovieDetails, setVideos} from '@/features/movie/movieSlice'
 import {wrapper} from "../../store";
+import {NextSeo} from "next-seo";
 
 const MovieTabs = dynamic(() => import('@/components/MoviePage/Tabs'), {ssr: false});
 
@@ -15,6 +15,17 @@ const MoviePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
     const result = useGetMovieByIdQuery(id);
     const {data: movie, isLoading, isError} = result;
     const keywords: string[] = movie?.keywords.keywords.map((keyword: any) => keyword.name);
+
+    const seoOptions = {
+        title: movie?.title,
+        description: movie?.overview,
+        additionalMetaTags: [
+            {
+                property: 'keywords',
+                content: keywords.join(', ')
+            }
+        ]
+    }
 
     useEffect(() => {
         if (!isLoading && !isError && movie) {
@@ -27,11 +38,7 @@ const MoviePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
 
     return (
         <article className="flex flex-col">
-            <Meta
-                description={movie?.overview}
-                title={movie?.title}
-                keywords={keywords}
-            />
+            <NextSeo {...seoOptions}/>
             <Hero/>
             <MovieTabs/>
         </article>

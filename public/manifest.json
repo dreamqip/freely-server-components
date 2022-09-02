@@ -4,8 +4,8 @@
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "freely",
-    "short_name": "freely",
+    "name": "Freely",
+    "short_name": "Freely",
     "description": "Freely offers movie details and trailers. It also includes popular movies and reviews.",
     "icons": [
         {

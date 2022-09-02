@@ -2,7 +2,6 @@ import React, {FC, memo, useMemo} from 'react';
 import {IPerson} from "@/types/person";
 import Image from "next/image";
 import {parsePersonDetails} from "@/utilities/parsePersonDetails";
-import Meta from "../Meta";
 
 interface Props {
     person: IPerson;
@@ -15,7 +14,6 @@ const Details: FC<Props> = ({person}) => {
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3">
-            <Meta title={person?.name} description={person?.biography}/>
             <div className="flex justify-center lg:items-start">
                 <Image
                     src={`https://image.tmdb.org/t/p/w342${person?.profile_path}`}

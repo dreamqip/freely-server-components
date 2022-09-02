@@ -1,7 +1,6 @@
 import type {FC} from 'react';
 import {memo, useEffect, useState} from "react";
 import Image from "next/image";
-import {Header} from '@/layouts/MainLayout'
 import Link from "next/link";
 import {useRouter} from "next/router";
 import classNames from "classnames";
@@ -14,7 +13,7 @@ const MainHeader: FC = () => {
     const [logoSrc, setLogoSrc] = useState<string>("/logo-white.webp");
     const {theme, forcedTheme} = useTheme();
 
-    const headerClasses = classNames("flex absolute px-4 z-[100] inset-0 items-center justify-between md:px-12 w-full", {
+    const headerClasses = classNames("flex absolute px-4 z-[100] inset-0 items-center justify-between md:px-12 w-full h-16 flex-0-auto", {
         'bg-transparent': router.route !== '/',
         'bg-inherit': router.route === '/',
     })
@@ -28,7 +27,7 @@ const MainHeader: FC = () => {
     }, [theme, forcedTheme]);
 
     return (
-        <Header
+        <header
             className={headerClasses}>
             <div className="flex cursor-pointer items-center gap-4 md:gap-10">
                 <Link href="/" passHref>
@@ -48,7 +47,7 @@ const MainHeader: FC = () => {
             <div className="flex items-center">
                 <SwitchButton />
             </div>
-        </Header>
+        </header>
     );
 };
 

@@ -10,6 +10,7 @@ import {
 import {wrapper} from "../../store";
 import {skipToken} from "@reduxjs/toolkit/query";
 import ImageList from "@/components/ActorPage/ImageList";
+import {NextSeo} from "next-seo";
 
 const ActorMovies = dynamic(() => import('@/components/ActorPage/ActorMovies'))
 
@@ -24,8 +25,14 @@ const ActorPage: NextPage = () => {
     );
     const {data} = result;
 
+    const seoOptions = {
+        title: data?.name,
+        description: data?.biography,
+    }
+
     return (
         <div>
+            <NextSeo {...seoOptions}/>
             <Details person={data}/>
             <ActorMovies movies={data?.combined_credits.cast}/>
             <ImageList images={data?.images.profiles} />

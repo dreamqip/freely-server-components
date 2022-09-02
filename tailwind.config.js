@@ -1,5 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
         './src/pages/**/*.{js,ts,jsx,tsx}',
@@ -10,9 +11,6 @@ module.exports = {
         extend: {
             fontFamily: {
                 rubik: 'Rubik, sans-serif'
-            },
-            animation: {
-                'spin-slow': 'spin 3s linear infinite',
             },
             colors: {
                 'dark-theme': '#121212',
@@ -25,6 +23,10 @@ module.exports = {
         screens: {
             'xs': '390px',
             ...defaultTheme.screens,
+        },
+        flex: {
+            '0-auto': '0 0 auto',
+            ...defaultTheme.flex,
         }
     },
     important: true,

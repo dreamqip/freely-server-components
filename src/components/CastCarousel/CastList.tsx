@@ -1,12 +1,13 @@
-import type {FC} from 'react';
+import type {IMovieCast} from "@/types/cast";
+import type {ICredits} from "@/types/credits";
+import {FC, Suspense} from 'react';
 import CastCard from "./CastCard";
-import {ICredits} from "@/types/credits";
-import {IMovieCast} from "@/types/cast";
-import {swiperOptions} from "@/utilities/swiperConfig";
-import {Swiper, SwiperSlide} from 'swiper/react';
+import {SwiperSlide} from 'swiper/react';
+import dynamic from "next/dynamic";
 
-import 'swiper/css/navigation';
-import "swiper/css/free-mode";
+const Swiper = dynamic(() => import('../ShowCarousel/SwiperLazy'), {
+    suspense: true
+});
 
 interface MoviesListProps {
     credits: ICredits;
@@ -14,22 +15,20 @@ interface MoviesListProps {
 }
 
 const CastList: FC<MoviesListProps> = ({credits, title}) => {
-
     return (
         <div className="py-10">
             <h2 className="text-center dark:text-white font-bold text-6xl">{title}</h2>
-            <Swiper
-                className="p-4"
-                {...swiperOptions}
-            >
-                {credits && credits.cast.map((person: IMovieCast) => {
-                    return (
-                        <SwiperSlide key={person.id}>
-                            <CastCard person={person}/>
-                        </SwiperSlide>
-                    )
-                })}
-            </Swiper>
+            <Suspense fallback={<div className="flex items-center justify-center text-4xl">Loading...</div>}>
+                <Swiper>
+                    {credits && credits.cast.map((person: IMovieCast) => {
+                        return (
+                            <SwiperSlide key={person.id}>
+                                <CastCard person={person}/>
+                            </SwiperSlide>
+                        )
+                    })}
+                </Swiper>
+            </Suspense>
         </div>
     );
 };
