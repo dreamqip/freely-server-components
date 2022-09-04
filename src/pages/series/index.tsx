@@ -44,7 +44,7 @@ const Series: NextPage = () => {
     }
 
     return (
-        <div className="h-screen">
+        <div>
             <h1 className="dark:text-white text-6xl text-center m-0">Series</h1>
             <SeriesList/>
             {visible && <div className="h-10" ref={lastElement}></div>}
