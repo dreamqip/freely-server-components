@@ -260,13 +260,13 @@
 .link:hover a p::before, .link:focus a p::before, .link:hover a span::before, .link:focus a span::before, .link a.active p::before, .link:focus a p::before, .link:hover a span::before, .link:focus a span::before, .link a.active span::before {
     background-color: rgb(75, 78, 90);
     transform: scaleX(1);
-    @apply visible opacity-100;
+    @apply opacity-100;
 }
 
 .dark .link:hover a p::before, .dark .link:focus a p::before, .dark .link:hover a span::before, .dark .link:focus a span::before, .dark .link a.active p::before, .dark .link:focus a p::before, .dark .link:hover a span::before, .dark .link:focus a span::before, .dark .link a.active span::before {
     background-color: rgb(249, 249, 249);
     transform: scaleX(1);
-    @apply visible opacity-100;
+    @apply opacity-100;
 }
 
 .link a p::before,
@@ -283,12 +283,11 @@
     transform-origin: left center;
     transform: scaleX(0);
     transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
-    visibility: hidden;
     width: auto;
 }
 
 .link a span::before {
-    opacity: 0;
+    visibility: hidden;
 }
 
 .theme-toggle {
