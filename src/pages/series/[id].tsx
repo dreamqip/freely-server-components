@@ -1,4 +1,4 @@
-import {InferGetServerSidePropsType, NextPage} from "next";
+import type {InferGetServerSidePropsType, NextPage} from "next";
 import {wrapper} from "../../store";
 import {getRunningOperationPromises, getTvShowById, useGetTvShowByIdQuery} from "@/services/themoviedb";
 import Hero from "@/components/SeriesPage/Hero";

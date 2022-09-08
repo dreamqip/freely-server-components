@@ -4,7 +4,7 @@ import Image from "next/image";
 import {useAppSelector} from "@/hooks/redux";
 import {LazyMotion, m, useMotionValue, useScroll} from "framer-motion";
 import {animationVariants} from "@/utilities/animationVariants";
-import {PlayIcon} from "@heroicons/react/solid";
+import {PlayIcon} from "@heroicons/react/24/solid";
 import Link from "next/link";
 
 const loadFeatures = () => import('../Animated/DomAnimation').then(res => res.default);

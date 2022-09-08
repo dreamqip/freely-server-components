@@ -15,7 +15,7 @@ class MyDocument extends Document {
                     <Script
                         id="google-analytics"
                         src="https://www.googletagmanager.com/gtag/js?id=G-3FTM4H2WDP"
-                        strategy="afterInteractive"
+                        strategy="lazyOnload"
                         dangerouslySetInnerHTML={{
                             __html: `
                             window.dataLayer = window.dataLayer || [];

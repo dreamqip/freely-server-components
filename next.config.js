@@ -1,9 +1,14 @@
-
-
-const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
-const withBundleAnalyzer = require('@next/bundle-analyzer');
-const withPlugins = require('next-compose-plugins');
+
+const withPWA = require('next-pwa')({
+    dest: 'public',
+    disable: process.env.NODE_ENV === 'development',
+    register: true,
+    runtimeCaching
+});
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+    enabled: process.env.ANALYZE === 'true'
+})
 
 /**
  * @type {import('next').NextConfig}
@@ -20,12 +25,8 @@ const nextConfig = {
     }
 };
 
-module.exports = withPlugins([[withBundleAnalyzer, {
-    enabled: process.env.ANALYZE === 'true'
-}],[withPWA, {
-    pwa: {
-        dest: 'public',
-        runtimeCaching,
-        disable: process.env.NODE_ENV === 'development'
-    }
-}]], nextConfig);
+module.exports = () => {
+    const plugins = [withPWA, withBundleAnalyzer];
+
+    return plugins.reduce((config, plugin) => plugin(config), nextConfig);
+}

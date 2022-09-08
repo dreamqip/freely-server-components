@@ -4,30 +4,19 @@ import dynamic from "next/dynamic";
 import {Suspense} from "react";
 import Spinner from "@/components/Spinner";
 import Hero from "@/components/IndexPage/Hero";
-import {Device} from "@/components/Device";
+import Explore from "@/components/IndexPage/Explore";
+import Watch from "@/components/IndexPage/Watch";
 
-const DiscoverSection = dynamic(() => import("@/components/IndexPage/Explore"), {
-    suspense: true
-});
-const WatchSection = dynamic(() => import("@/components/IndexPage/Watch"), {
-    suspense: true
-});
 const ShowCarousel = dynamic(() => import('@/components/ShowCarousel/ShowCarousel'), {
-    suspense: true
+    suspense: true,
 });
 
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({popular, topRated, upcoming, now_playing}) => {
     return (
         <>
             <Hero/>
-            <Device desktop>
-                <Suspense fallback={<div className="flex items-center justify-center text-4xl">Loading...</div>}>
-                    <DiscoverSection/>
-                </Suspense>
-            </Device>
-            <Suspense fallback={<div className="flex items-center justify-center text-4xl">Loading...</div>}>
-                <WatchSection/>
-            </Suspense>
+            <Explore/>
+            <Watch/>
             <Suspense fallback={<Spinner/>}>
                 <ShowCarousel title="Now In Theaters" series={now_playing}/>
                 <ShowCarousel title="Upcoming movies" series={upcoming}/>

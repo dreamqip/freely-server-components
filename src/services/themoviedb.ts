@@ -89,7 +89,7 @@ export const movieApi = createApi({
             })
         }),
         getPopularTvShows: builder.query({
-            query: (page: number = 1) => ({
+            query: (page = 1) => ({
                 url: 'tv/popular',
                 params: {
                     api_key: process.env.NEXT_PUBLIC_API_KEY,
@@ -98,7 +98,7 @@ export const movieApi = createApi({
             })
         }),
         getPopularMovies: builder.query({
-            query: (page: number = 1) => ({
+            query: (page = 1) => ({
                 url: 'movie/popular',
                 params: {
                     api_key: process.env.NEXT_PUBLIC_API_KEY,

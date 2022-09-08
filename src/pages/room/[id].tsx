@@ -1,5 +1,5 @@
-import {InferGetServerSidePropsType, NextPage} from "next";
-import {ArrowLeftIcon} from "@heroicons/react/solid";
+import type {InferGetServerSidePropsType, NextPage} from "next";
+import {ArrowLeftIcon} from "@heroicons/react/24/solid";
 import {useAppDispatch, useAppSelector} from "@/hooks/redux";
 import Select from 'react-select';
 import {useEffect, useMemo, useState} from "react";

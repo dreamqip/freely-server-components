@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import Link from "next/link";
-import {FilmIcon, HomeIcon, SearchIcon, VideoCameraIcon} from "@heroicons/react/solid";
+import {FilmIcon, HomeIcon, MagnifyingGlassIcon, VideoCameraIcon} from "@heroicons/react/24/solid";
 import {useRouter} from "next/router";
 import classNames from "classnames";
 
@@ -29,7 +29,7 @@ const HeaderMenu: FC = () => {
                 <Link href="/search">
                     <a className="no-underline text-black dark:text-white items-center flex p-2 md:p-5">
                         <span className="flex relative">
-                            <SearchIcon className="w-6 h-6 md:mr-2"/>
+                            <MagnifyingGlassIcon className="w-6 h-6 md:mr-2"/>
                         </span>
                         <p className="text-sm link-name relative">Search</p>
                     </a>
