@@ -1,5 +1,5 @@
-import {FC} from 'react';
-import Image from "next/image";
+import type {FC} from 'react';
+import Image from "next/future/image";
 import devices from '../../../public/devices.png';
 
 const Watch: FC = () => {
@@ -12,8 +12,9 @@ const Watch: FC = () => {
                     src={devices}
                     alt="devices"
                     width={600}
-                    height={600}
+                    height={400}
                     placeholder="blur"
+                    className="object-cover"
                 />
             </div>
         </section>

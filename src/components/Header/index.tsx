@@ -1,6 +1,6 @@
 import type {FC} from 'react';
 import {memo, useEffect, useState} from "react";
-import Image from "next/image";
+import Image from "next/future/image";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import classNames from "classnames";
@@ -13,7 +13,7 @@ const MainHeader: FC = () => {
     const [logoSrc, setLogoSrc] = useState<string>("/logo-white.webp");
     const {theme, forcedTheme} = useTheme();
 
-    const headerClasses = classNames("flex absolute px-4 z-[100] inset-0 items-center justify-between md:px-12 w-full h-16 flex-0-auto", {
+    const headerClasses = classNames("flex absolute max-w-7xl mx-auto px-4 z-[100] inset-0 items-center justify-between md:px-12 w-full h-16 flex-0-auto", {
         'bg-transparent': router.route !== '/',
         'bg-inherit': router.route === '/',
     })

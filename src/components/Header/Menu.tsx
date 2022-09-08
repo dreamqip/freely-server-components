@@ -1,59 +1,50 @@
-import {FC} from 'react';
-import Link from "next/link";
+import type {FC} from 'react';
 import {FilmIcon, HomeIcon, MagnifyingGlassIcon, VideoCameraIcon} from "@heroicons/react/24/solid";
-import {useRouter} from "next/router";
-import classNames from "classnames";
+import ActiveLink from "@/components/ActiveLink";
 
 const HeaderMenu: FC = () => {
-    const router = useRouter();
-
-    const activeLink = (path: string) => {
-        return classNames('link', {
-            'active': router.route === path
-        })
-    }
 
     return (
         <nav className="flex items-center justify-between flex-wrap">
-            <span className={activeLink('/')}>
-                <Link href="/">
+            <span className="link">
+                <ActiveLink href="/" activeClassName="active" passHref>
                     <a className="no-underline text-black dark:text-white items-center flex p-2 md:p-5">
                         <span className="flex relative">
                             <HomeIcon className="w-6 h-6 md:mr-2"/>
                         </span>
                         <p className="text-sm link-name relative">Home</p>
                     </a>
-                </Link>
+                </ActiveLink>
             </span>
-            <span className={activeLink('/search')}>
-                <Link href="/search">
+            <span className="link">
+                <ActiveLink href="/search" activeClassName="active" passHref>
                     <a className="no-underline text-black dark:text-white items-center flex p-2 md:p-5">
                         <span className="flex relative">
                             <MagnifyingGlassIcon className="w-6 h-6 md:mr-2"/>
                         </span>
                         <p className="text-sm link-name relative">Search</p>
                     </a>
-                </Link>
+                </ActiveLink>
             </span>
-            <span className={activeLink('/movie')}>
-                <Link href="/movie">
+            <span className="link">
+                <ActiveLink href="/movie" activeClassName="active" passHref>
                     <a className="no-underline text-black dark:text-white flex items-center p-2 md:p-5">
                         <span className="flex relative">
                             <FilmIcon className="w-6 h-6 md:mr-2"/>
                         </span>
                         <p className="text-sm link-name relative">Movies</p>
                     </a>
-                </Link>
+                </ActiveLink>
             </span>
-            <span className={activeLink('/series')}>
-                <Link href="/series">
+            <span className="link">
+                <ActiveLink href="/series" activeClassName="active" passHref>
                     <a className="no-underline text-black dark:text-white flex items-center p-2 md:p-5">
                         <span className="flex relative">
                             <VideoCameraIcon className="w-6 h-6 md:mr-2"/>
                         </span>
                         <p className="text-sm link-name relative">Series</p>
                     </a>
-                </Link>
+                </ActiveLink>
             </span>
         </nav>
     );
