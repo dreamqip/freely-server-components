@@ -55,7 +55,7 @@ const Series: NextPage = () => {
 export default Series;
 
 export const getStaticProps = wrapper.getStaticProps(store => async () => {
-    store.dispatch(getPopularTvShows.initiate(store.getState().popularSeries.page));
+    await store.dispatch(getPopularTvShows.initiate(store.getState().popularSeries.page));
 
     await Promise.all(getRunningOperationPromises());
 

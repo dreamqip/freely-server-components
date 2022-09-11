@@ -1,5 +1,4 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {HYDRATE} from "next-redux-wrapper";
 import {IMovie} from "@/types/movie";
 
 interface InitialState {
@@ -31,13 +30,6 @@ export const popularSlice = createSlice({
             state.movies = [];
             state.page = 1;
             state.totalPages = 100;
-        }
-    },
-    extraReducers: {
-        [HYDRATE]: (state, action) => {
-            state.movies = action.payload.popularMovies.series;
-            state.page = action.payload.popularMovies.page;
-            state.totalPages = action.payload.popularMovies.totalPages;
         }
     }
 });

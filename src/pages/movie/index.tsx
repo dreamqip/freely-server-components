@@ -50,7 +50,7 @@ const Movies: NextPage = () => {
 export default Movies;
 
 export const getStaticProps = wrapper.getStaticProps(store => async () => {
-    store.dispatch(getPopularMovies.initiate(store.getState().popularMovies.page));
+    await store.dispatch(getPopularMovies.initiate(store.getState().popularMovies.page));
 
     await Promise.all(getRunningOperationPromises());
 

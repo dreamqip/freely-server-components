@@ -1,6 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ITvShow} from "@/types/series";
-import {HYDRATE} from "next-redux-wrapper";
 
 interface InitialState {
     series: ITvShow[];
@@ -31,13 +30,6 @@ export const popularSlice = createSlice({
             state.series = [];
             state.page = 1;
             state.totalPages = 100;
-        }
-    },
-    extraReducers: {
-        [HYDRATE]: (state, action) => {
-            state.series = action.payload.popularSeries.series;
-            state.page = action.payload.popularSeries.page;
-            state.totalPages = action.payload.popularSeries.totalPages;
         }
     }
 });
