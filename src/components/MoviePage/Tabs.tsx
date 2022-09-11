@@ -4,21 +4,15 @@ import Overview from "./Overview";
 import Images from "./Images";
 import Videos from "./Videos";
 
-const {TabPane} = Tabs;
+const items = [
+    {label: 'Overview', key: "1" ,children: <Overview/>},
+    {label: 'Images', key: "2" ,children: <Images/>},
+    {label: 'Videos', key: "3" ,children: <Videos/>},
+]
 
 const MovieTabs: FC = () => {
     return (
-        <Tabs className="w-full pt-10" defaultActiveKey="1" size="large" centered>
-            <TabPane tab="Overview" key="1">
-                <Overview />
-            </TabPane>
-            <TabPane tab="Images" key="2">
-                <Images />
-            </TabPane>
-            <TabPane tab="Videos" key="3">
-                <Videos />
-            </TabPane>
-        </Tabs>
+        <Tabs className="w-full pt-10" defaultActiveKey="1" size="large" centered items={items}/>
     );
 };
 

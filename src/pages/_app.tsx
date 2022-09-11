@@ -2,7 +2,6 @@ import 'antd/dist/antd.css';
 import '@/styles/globals.css';
 
 import type {AppProps as NextAppProps} from "next/app";
-import {ThemeProvider} from "next-themes";
 import {wrapper} from "../store";
 import dynamic from "next/dynamic";
 import {DefaultSeo} from "next-seo";
@@ -13,20 +12,21 @@ const Progress = dynamic(() => import('@/components/ProgressBar'));
 
 type AppProps<P = any> = {
     Component: NextAppProps<P>['Component'] & { theme?: string };
+    rest: any;
 } & P;
 
-function MyApp({Component, pageProps}: AppProps) {
+function MyApp({Component, ...rest}: AppProps) {
+    const {store, props} = wrapper.useWrappedStore(rest);
+
     return (
         <>
             <DefaultSeo {...SEO}/>
             <Progress/>
-            <ThemeProvider enableSystem={true} attribute="class" forcedTheme={pageProps.theme || null}>
-                <MainLayout>
-                    <Component {...pageProps} />
-                </MainLayout>
-            </ThemeProvider>
+            <MainLayout store={store} theme={Component.theme}>
+                <Component {...props.pageProps} />
+            </MainLayout>
         </>
     )
 }
 
-export default wrapper.withRedux(MyApp);
+export default MyApp;

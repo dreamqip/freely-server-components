@@ -2,7 +2,7 @@ import type {InferGetServerSidePropsType, NextPage} from "next";
 import {wrapper} from "../../store";
 import {getRunningOperationPromises, getTvShowById, useGetTvShowByIdQuery} from "@/services/themoviedb";
 import Hero from "@/components/SeriesPage/Hero";
-import {useEffect} from "react";
+import {Suspense, useEffect} from "react";
 import {useAppDispatch} from "@/hooks/redux";
 import {
     setSeries,
@@ -16,8 +16,9 @@ import {
 } from "@/features/series/seriesSlice";
 import dynamic from "next/dynamic";
 import {NextSeo} from "next-seo";
+import Spinner from "@/components/Spinner";
 
-const Tabs = dynamic(() => import("@/components/SeriesPage/Tabs"), {ssr: false});
+const Tabs = dynamic(() => import("@/components/SeriesPage/Tabs"), {ssr: false, suspense: true});
 
 const TvShow: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({id}) => {
     const {data: series, isLoading, isError} = useGetTvShowByIdQuery(id);
@@ -53,7 +54,9 @@ const TvShow: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> =
         <article>
             <NextSeo {...seoOptions}/>
             <Hero/>
-            <Tabs/>
+            <Suspense fallback={<Spinner/>}>
+                <Tabs/>
+            </Suspense>
         </article>
     );
 };
@@ -68,7 +71,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
     const parsedId = parseInt(id as string, 10);
 
     if (parsedId) {
-        store.dispatch(getTvShowById.initiate(parsedId));
+        await store.dispatch(getTvShowById.initiate(parsedId));
     }
 
     await Promise.all(getRunningOperationPromises());

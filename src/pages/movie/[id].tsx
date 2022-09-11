@@ -12,9 +12,9 @@ const MovieTabs = dynamic(() => import('@/components/MoviePage/Tabs'), {ssr: fal
 
 const MoviePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({id}) => {
     const dispatch = useAppDispatch();
-    const result = useGetMovieByIdQuery(id);
-    const {data: movie, isLoading, isError} = result;
-    const keywords: string[] = movie?.keywords.keywords.map((keyword: any) => keyword.name);
+
+    const {data: movie, isLoading, isError} = useGetMovieByIdQuery(id);
+    const keywords: string[] = movie && movie.keywords.keywords.map((keyword: any) => keyword.name);
 
     const seoOptions = {
         title: movie?.title,
@@ -22,7 +22,7 @@ const MoviePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
         additionalMetaTags: [
             {
                 property: 'keywords',
-                content: keywords.join(', ')
+                content: keywords && keywords.join(', ')
             }
         ]
     }
@@ -39,8 +39,12 @@ const MoviePage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
     return (
         <article className="flex flex-col">
             <NextSeo {...seoOptions}/>
-            <Hero/>
-            <MovieTabs/>
+            {movie && (
+                <>
+                    <Hero/>
+                    <MovieTabs/>
+                </>
+            )}
         </article>
     );
 };
@@ -55,7 +59,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
     const parsedId = parseInt(id as string, 10);
 
     if (parsedId) {
-        store.dispatch(getMovieById.initiate(parsedId));
+        await store.dispatch(getMovieById.initiate(parsedId));
     }
 
     await Promise.all(getRunningOperationPromises());
