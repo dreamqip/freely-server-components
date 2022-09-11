@@ -1,6 +1,7 @@
 import {IMovieCast} from "./cast";
 import {Images} from "./images";
 import {IVideos} from "./videos";
+import {IReviews} from "@/types/reviews";
 
 interface IGenres {
     id: number;
@@ -32,4 +33,8 @@ export interface IMovie extends IMovieCast {
     media_type: string;
     images?: Images;
     videos?: IVideos;
+    reviews: IReviews;
+    similar: any;
+    recommendations: any;
+    credits: any;
 }

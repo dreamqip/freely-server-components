@@ -1,13 +1,9 @@
 import {FC} from 'react';
-import {Comment, List, Skeleton} from "antd";
-import {useGetMovieReviewsQuery} from "@/services/themoviedb";
+import {Comment, List} from "antd";
 import {useAppSelector} from "@/hooks/redux";
 
 const Reviews: FC = () => {
-    const {id} = useAppSelector(state => state.movie)
-    const {data: reviews, isLoading} = useGetMovieReviewsQuery(id)
-
-    if (isLoading) return <Skeleton active/>
+    const {reviews} = useAppSelector(state => state.movie)
 
     return (
         <div className="relative">

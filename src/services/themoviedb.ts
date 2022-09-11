@@ -19,43 +19,8 @@ export const movieApi = createApi({
                 url: `movie/${id}`,
                 params: {
                     api_key: process.env.NEXT_PUBLIC_API_KEY,
-                    append_to_response: 'keywords,videos,images',
+                    append_to_response: 'keywords,videos,images,recommendations,similar,reviews,credits',
                     include_image_language: 'en,null'
-                }
-            })
-        }),
-        getMovieReviews: builder.query({
-            query: (id: any) => ({
-                url: `movie/${id}/reviews`,
-                params: {
-                    api_key: process.env.NEXT_PUBLIC_API_KEY,
-                    page: 1
-                }
-            })
-        }),
-        getMovieCredits: builder.query({
-            query: (id: any) => ({
-                url: `movie/${id}/credits`,
-                params: {
-                    api_key: process.env.NEXT_PUBLIC_API_KEY
-                }
-            })
-        }),
-        getSimilarMovies: builder.query({
-            query: (id: any) => ({
-                url: `movie/${id}/similar`,
-                params: {
-                    api_key: process.env.NEXT_PUBLIC_API_KEY,
-                    page: 1
-                }
-            })
-        }),
-        getRecommendedMovies: builder.query({
-            query: (id: any) => ({
-                url: `movie/${id}/recommendations`,
-                params: {
-                    api_key: process.env.NEXT_PUBLIC_API_KEY,
-                    page: 1
                 }
             })
         }),
@@ -111,10 +76,6 @@ export const movieApi = createApi({
 
 export const {
     useGetMovieByIdQuery,
-    useGetMovieReviewsQuery,
-    useGetMovieCreditsQuery,
-    useGetSimilarMoviesQuery,
-    useGetRecommendedMoviesQuery,
     useSearchMoviesQuery,
     useGetActorByIdQuery,
     useGetTvShowByIdQuery,
