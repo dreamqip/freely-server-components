@@ -41,12 +41,8 @@ const ShowImage: FC<Props> = ({ show }) => {
                     layout={"fill"}
                     quality={100}
                     alt={("title" in show && show.title) || show.name}
-                    onError={() => {
-                        setSrc("/fallback.jpeg")
-                    }}
-                    onLoadingComplete={() => {
-                        setLoaded(true)
-                    }}
+                    onError={() => setSrc("/fallback.jpeg")}
+                    onLoadingComplete={() => setLoaded(true)}
                 />
             </m.div>
         </LazyMotion>
