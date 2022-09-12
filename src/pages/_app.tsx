@@ -6,6 +6,7 @@ import {wrapper} from "../store";
 import dynamic from "next/dynamic";
 import {DefaultSeo} from "next-seo";
 import SEO from "../../next-seo.config";
+import {Provider} from "react-redux";
 
 const MainLayout = dynamic(() => import('@/layouts/MainLayout'));
 const Progress = dynamic(() => import('@/components/ProgressBar'));
@@ -22,9 +23,11 @@ function MyApp({Component, ...rest}: AppProps) {
         <>
             <DefaultSeo {...SEO}/>
             <Progress/>
-            <MainLayout store={store} theme={Component.theme}>
-                <Component {...props.pageProps} />
-            </MainLayout>
+            <Provider store={store}>
+                <MainLayout theme={Component.theme}>
+                    <Component {...props.pageProps} />
+                </MainLayout>
+            </Provider>
         </>
     )
 }
