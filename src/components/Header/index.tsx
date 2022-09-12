@@ -1,37 +1,39 @@
-import type {FC} from 'react';
-import {memo, useEffect, useState} from "react";
-import Image from "next/future/image";
-import Link from "next/link";
-import {useRouter} from "next/router";
-import classNames from "classnames";
-import HeaderMenu from "@/components/Header/Menu";
-import SwitchButton from "@/components/Header/SwitchButton";
-import {useTheme} from "next-themes";
+import type { FC } from "react"
+import { memo, useEffect, useState } from "react"
+import Image from "next/future/image"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import classNames from "classnames"
+import HeaderMenu from "@/components/Header/Menu"
+import SwitchButton from "@/components/Header/SwitchButton"
+import { useTheme } from "next-themes"
 
 const MainHeader: FC = () => {
-    const router = useRouter();
-    const [logoSrc, setLogoSrc] = useState<string>("/logo-white.webp");
-    const {theme, forcedTheme} = useTheme();
+    const router = useRouter()
+    const [logoSrc, setLogoSrc] = useState<string>("/logo-white.webp")
+    const { theme, forcedTheme } = useTheme()
 
-    const headerClasses = classNames("flex absolute max-w-7xl mx-auto px-4 z-[100] inset-0 items-center justify-between md:px-12 w-full h-16 flex-0-auto", {
-        'bg-transparent': router.route !== '/',
-        'bg-inherit': router.route === '/',
-    })
+    const headerClasses = classNames(
+        "flex absolute max-w-7xl mx-auto px-4 z-[100] inset-0 items-center justify-between md:px-12 w-full h-16 flex-0-auto",
+        {
+            "bg-transparent": router.route !== "/",
+            "bg-inherit": router.route === "/",
+        }
+    )
 
     useEffect(() => {
-        if (theme || forcedTheme === 'dark') {
-            setLogoSrc("/logo-dark.webp");
+        if (theme || forcedTheme === "dark") {
+            setLogoSrc("/logo-dark.webp")
         } else {
-            setLogoSrc("/logo-white.webp");
+            setLogoSrc("/logo-white.webp")
         }
-    }, [theme, forcedTheme]);
+    }, [theme, forcedTheme])
 
     return (
-        <header
-            className={headerClasses}>
+        <header className={headerClasses}>
             <div className="flex cursor-pointer items-center gap-4 md:gap-10">
                 <Link href="/" passHref>
-                    <a className="items-center flex">
+                    <a className="flex items-center">
                         <Image
                             src={logoSrc}
                             priority={true}
@@ -42,13 +44,13 @@ const MainHeader: FC = () => {
                         />
                     </a>
                 </Link>
-                <HeaderMenu/>
+                <HeaderMenu />
             </div>
             <div className="flex items-center">
                 <SwitchButton />
             </div>
         </header>
-    );
-};
+    )
+}
 
-export default memo(MainHeader);
+export default memo(MainHeader)

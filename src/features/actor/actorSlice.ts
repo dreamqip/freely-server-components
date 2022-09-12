@@ -1,17 +1,16 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {IActorCast} from "@/types/cast";
-import {IProfile} from "@/types/images";
+import { createSlice } from "@reduxjs/toolkit"
+import { IActorCast } from "@/types/cast"
+import { IProfile } from "@/types/images"
 
 interface ActorState {
-    cast: IActorCast[];
-    images: IProfile[];
+    cast: IActorCast[]
+    images: IProfile[]
 }
 
 const initialState: ActorState = {
     cast: [] as IActorCast[],
-    images: [] as IProfile[]
+    images: [] as IProfile[],
 }
-
 
 /*export const actorSlice = createSlice({
     name: 'actor',

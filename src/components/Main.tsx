@@ -1,11 +1,7 @@
-import type {FC, PropsWithChildren} from 'react';
+import type { FC, PropsWithChildren } from "react"
 
-const Main: FC<PropsWithChildren> = ({children}) => {
-    return (
-        <main className="min-h-0 flex-auto">
-            {children}
-        </main>
-    );
-};
+const Main: FC<PropsWithChildren> = ({ children }) => {
+    return <main className="min-h-0 flex-auto">{children}</main>
+}
 
-export default Main;
+export default Main

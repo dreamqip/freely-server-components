@@ -1,35 +1,49 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {NextPage} from "next";
-import {wrapper} from "../../store";
-import {getPopularTvShows, getRunningOperationPromises, useGetPopularTvShowsQuery} from "@/services/themoviedb";
-import Spinner from "@/components/Spinner";
-import {useAppDispatch, useAppSelector} from "@/hooks/redux";
-import {reset, setPage, setPopularSeries, setTotalPages} from "@/features/series/popularSlice";
-import {useRouter} from "next/router";
-import {useObserver} from "@/hooks/useObserver";
-import SeriesList from "@/components/SeriesPage/SeriesList";
+import React, { useEffect, useRef, useState } from "react"
+import { NextPage } from "next"
+import { wrapper } from "../../store"
+import {
+    getPopularTvShows,
+    getRunningOperationPromises,
+    useGetPopularTvShowsQuery,
+} from "@/services/themoviedb"
+import Spinner from "@/components/Spinner"
+import { useAppDispatch, useAppSelector } from "@/hooks/redux"
+import {
+    reset,
+    setPage,
+    setPopularSeries,
+    setTotalPages,
+} from "@/features/series/popularSlice"
+import { useRouter } from "next/router"
+import { useObserver } from "@/hooks/useObserver"
+import SeriesList from "@/components/SeriesPage/SeriesList"
 
 const Series: NextPage = () => {
-    const router = useRouter();
-    const {page, totalPages} = useAppSelector(state => state.popularSeries)
-    const dispatch = useAppDispatch();
-    const lastElement = useRef<HTMLDivElement | null>(null);
-    const [visible, setVisible] = useState<boolean>(true);
+    const router = useRouter()
+    const { page, totalPages } = useAppSelector((state) => state.popularSeries)
+    const dispatch = useAppDispatch()
+    const lastElement = useRef<HTMLDivElement | null>(null)
+    const [visible, setVisible] = useState<boolean>(true)
 
-    const {data: popular, isLoading, isError, isFetching} = useGetPopularTvShowsQuery(page);
+    const {
+        data: popular,
+        isLoading,
+        isError,
+        isFetching,
+    } = useGetPopularTvShowsQuery(page)
 
     useObserver(lastElement, page < totalPages, isFetching, isLoading, () => {
-        dispatch(setPage(page + 1));
-    });
+        dispatch(setPage(page + 1))
+    })
 
     useEffect(() => {
-        router.events.on('routeChangeStart', () => {
-            setVisible(false);
+        router.events.on("routeChangeStart", () => {
+            setVisible(false)
         })
     }, [router])
 
     useEffect(() => {
-        dispatch(reset());
+        dispatch(reset())
     }, [dispatch])
 
     useEffect(() => {
@@ -40,26 +54,28 @@ const Series: NextPage = () => {
     }, [dispatch, isError, isLoading, popular])
 
     if (isLoading) {
-        return <Spinner/>;
+        return <Spinner />
     }
 
     return (
         <div>
-            <h1 className="dark:text-white text-6xl text-center m-0">Series</h1>
-            <SeriesList/>
+            <h1 className="m-0 text-center text-6xl dark:text-white">Series</h1>
+            <SeriesList />
             {visible && <div className="h-10" ref={lastElement}></div>}
         </div>
-    );
-};
+    )
+}
 
-export default Series;
+export default Series
 
-export const getStaticProps = wrapper.getStaticProps(store => async () => {
-    await store.dispatch(getPopularTvShows.initiate(store.getState().popularSeries.page));
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+    await store.dispatch(
+        getPopularTvShows.initiate(store.getState().popularSeries.page)
+    )
 
-    await Promise.all(getRunningOperationPromises());
+    await Promise.all(getRunningOperationPromises())
 
     return {
-        props: {}
+        props: {},
     }
 })

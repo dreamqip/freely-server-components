@@ -1,18 +1,18 @@
-import {IMovie} from "@/types/movie";
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {Images} from "@/types/images";
-import {IVideos} from "@/types/videos";
-import {IReviews} from "@/types/reviews";
+import { IMovie } from "@/types/movie"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { Images } from "@/types/images"
+import { IVideos } from "@/types/videos"
+import { IReviews } from "@/types/reviews"
 
 interface MovieState {
-    id: number | null;
-    movie: IMovie;
-    images: Images;
-    videos: IVideos;
-    reviews: IReviews | null;
-    recommendations: any | null;
-    similar: any | null;
-    cast: any | null;
+    id: number | null
+    movie: IMovie
+    images: Images
+    videos: IVideos
+    reviews: IReviews | null
+    recommendations: any | null
+    similar: any | null
+    cast: any | null
 }
 
 const initialState: MovieState = {
@@ -23,11 +23,11 @@ const initialState: MovieState = {
     reviews: null,
     recommendations: null,
     similar: null,
-    cast: null
+    cast: null,
 }
 
 export const movieSlice = createSlice({
-    name: 'movie',
+    name: "movie",
     initialState,
     reducers: {
         setId: (state, action: PayloadAction<number>) => {
@@ -53,10 +53,19 @@ export const movieSlice = createSlice({
         },
         setCast: (state, action: PayloadAction<any>) => {
             state.cast = action.payload
-        }
-    }
+        },
+    },
 })
 
-export const {setId, setMovieDetails, setImages, setVideos, setCast, setRecommendations, setSimilar, setReviews} = movieSlice.actions
+export const {
+    setId,
+    setMovieDetails,
+    setImages,
+    setVideos,
+    setCast,
+    setRecommendations,
+    setSimilar,
+    setReviews,
+} = movieSlice.actions
 
 export default movieSlice.reducer

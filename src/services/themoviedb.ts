@@ -1,16 +1,16 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
-import {IMovie} from "@/types/movie";
-import {HYDRATE} from "next-redux-wrapper";
-import {ITvShow} from "@/types/series";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react"
+import { IMovie } from "@/types/movie"
+import { HYDRATE } from "next-redux-wrapper"
+import { ITvShow } from "@/types/series"
 
 export const movieApi = createApi({
-    reducerPath: 'movieApi',
+    reducerPath: "movieApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://api.themoviedb.org/3/'
+        baseUrl: "https://api.themoviedb.org/3/",
     }),
-    extractRehydrationInfo: (action, {reducerPath}) => {
+    extractRehydrationInfo: (action, { reducerPath }) => {
         if (action.type === HYDRATE) {
-            return action.payload[reducerPath];
+            return action.payload[reducerPath]
         }
     },
     endpoints: (builder) => ({
@@ -19,59 +19,61 @@ export const movieApi = createApi({
                 url: `movie/${id}`,
                 params: {
                     api_key: process.env.NEXT_PUBLIC_API_KEY,
-                    append_to_response: 'keywords,videos,images,recommendations,similar,reviews,credits',
-                    include_image_language: 'en,null'
-                }
-            })
+                    append_to_response:
+                        "keywords,videos,images,recommendations,similar,reviews,credits",
+                    include_image_language: "en,null",
+                },
+            }),
         }),
         searchMovies: builder.query({
             query: (searchQuery: string) => ({
-                url: 'search/multi',
+                url: "search/multi",
                 params: {
                     api_key: process.env.NEXT_PUBLIC_API_KEY,
                     query: searchQuery,
                     page: 1,
-                }
-            })
+                },
+            }),
         }),
         getActorById: builder.query({
             query: (id: any) => ({
                 url: `person/${id}`,
                 params: {
                     api_key: process.env.NEXT_PUBLIC_API_KEY,
-                    append_to_response: 'combined_credits,images'
-                }
-            })
+                    append_to_response: "combined_credits,images",
+                },
+            }),
         }),
         getTvShowById: builder.query<ITvShow, number>({
             query: (id: number) => ({
                 url: `tv/${id}`,
                 params: {
                     api_key: process.env.NEXT_PUBLIC_API_KEY,
-                    append_to_response: 'keywords,videos,images,recommendations,similar,reviews,credits',
-                    include_image_language: 'en,null'
-                }
-            })
+                    append_to_response:
+                        "keywords,videos,images,recommendations,similar,reviews,credits",
+                    include_image_language: "en,null",
+                },
+            }),
         }),
         getPopularTvShows: builder.query({
             query: (page = 1) => ({
-                url: 'tv/popular',
+                url: "tv/popular",
                 params: {
                     api_key: process.env.NEXT_PUBLIC_API_KEY,
-                    page
-                }
-            })
+                    page,
+                },
+            }),
         }),
         getPopularMovies: builder.query({
             query: (page = 1) => ({
-                url: 'movie/popular',
+                url: "movie/popular",
                 params: {
                     api_key: process.env.NEXT_PUBLIC_API_KEY,
-                    page
-                }
-            })
-        })
-    })
+                    page,
+                },
+            }),
+        }),
+    }),
 })
 
 export const {
@@ -81,8 +83,8 @@ export const {
     useGetTvShowByIdQuery,
     useGetPopularTvShowsQuery,
     useGetPopularMoviesQuery,
-    util: {getRunningOperationPromises}
-} = movieApi;
+    util: { getRunningOperationPromises },
+} = movieApi
 
 export const {
     getMovieById,
@@ -90,5 +92,5 @@ export const {
     getActorById,
     getTvShowById,
     getPopularTvShows,
-    getPopularMovies
-} = movieApi.endpoints;
+    getPopularMovies,
+} = movieApi.endpoints

@@ -1,42 +1,43 @@
-import {IMovie} from "@/types/movie";
-import {minutesToHoursAndMinutes} from "./minutesToHoursAndMinutes";
-import {getNumberWithCommas} from "./getNumberWithCommas";
-import {getLanguageFullName} from "./getLanguageFullName";
-
+import { IMovie } from "@/types/movie"
+import { minutesToHoursAndMinutes } from "./minutesToHoursAndMinutes"
+import { getNumberWithCommas } from "./getNumberWithCommas"
+import { getLanguageFullName } from "./getLanguageFullName"
 
 export const parseMovieDetails = (movie: IMovie) => {
     return [
         {
-            detailName: 'Released',
+            detailName: "Released",
             detailValue: new Date(movie.release_date).toDateString(),
         },
         {
-            detailName: 'Runtime',
+            detailName: "Runtime",
             detailValue: minutesToHoursAndMinutes(movie.runtime),
         },
         {
-            detailName: 'Budget',
+            detailName: "Budget",
             detailValue: `$${getNumberWithCommas(movie.budget)}`,
         },
         {
-            detailName: 'Revenue',
+            detailName: "Revenue",
             detailValue: `$${getNumberWithCommas(movie.revenue)}`,
         },
         {
-            detailName: 'Genres',
-            detailValue: movie.genres.map((genre) => genre.name).join(', '),
+            detailName: "Genres",
+            detailValue: movie.genres.map((genre) => genre.name).join(", "),
         },
         {
-            detailName: 'Status',
+            detailName: "Status",
             detailValue: movie.status,
         },
         {
-            detailName: 'Language',
+            detailName: "Language",
             detailValue: getLanguageFullName(movie.original_language),
         },
         {
-            detailName: 'Production',
-            detailValue: movie.production_companies.map((company: any) => company.name).join(', '),
+            detailName: "Production",
+            detailValue: movie.production_companies
+                .map((company: any) => company.name)
+                .join(", "),
         },
-    ];
-};
+    ]
+}

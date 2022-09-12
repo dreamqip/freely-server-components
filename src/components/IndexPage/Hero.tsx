@@ -1,13 +1,13 @@
-import type {FC} from 'react';
-import Image from "next/image";
-import wanda from "../../../public/wanda.jpeg";
-import {Device} from "../Device";
+import type { FC } from "react"
+import Image from "next/image"
+import wanda from "../../../public/wanda.jpeg"
+import { Device } from "../Device"
 
 const Hero: FC = () => {
     return (
-        <div className="flex items-center md:flex-row flex-col justify-between">
+        <div className="flex flex-col items-center justify-between md:flex-row">
             <h1 className="hero__image">
-                Movie <br/> change <br/> the world
+                Movie <br /> change <br /> the world
             </h1>
             <Device desktop>
                 <Image
@@ -21,7 +21,7 @@ const Hero: FC = () => {
                 />
             </Device>
         </div>
-    );
-};
+    )
+}
 
-export default Hero;
+export default Hero

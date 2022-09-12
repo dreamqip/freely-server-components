@@ -1,13 +1,13 @@
-const runtimeCaching = require('next-pwa/cache');
+const runtimeCaching = require("next-pwa/cache")
 
-const withPWA = require('next-pwa')({
-    dest: 'public',
-    disable: process.env.NODE_ENV === 'development',
+const withPWA = require("next-pwa")({
+    dest: "public",
+    disable: process.env.NODE_ENV === "development",
     register: true,
-    runtimeCaching
-});
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-    enabled: process.env.ANALYZE === 'true'
+    runtimeCaching,
+})
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+    enabled: process.env.ANALYZE === "true",
 })
 
 /**
@@ -17,17 +17,17 @@ const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
     images: {
-        domains: ['image.tmdb.org']
+        domains: ["image.tmdb.org"],
     },
     experimental: {
         legacyBrowsers: false,
         browsersListForSwc: true,
-        urlImports: 'https://unpkg.com/',
-    }
-};
+        urlImports: "https://unpkg.com/",
+    },
+}
 
 module.exports = () => {
-    const plugins = [withPWA, withBundleAnalyzer];
+    const plugins = [withPWA, withBundleAnalyzer]
 
-    return plugins.reduce((config, plugin) => plugin(config), nextConfig);
+    return plugins.reduce((config, plugin) => plugin(config), nextConfig)
 }

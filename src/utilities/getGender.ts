@@ -1,10 +1,10 @@
 export const getGender = (genderId: number): string => {
     switch (genderId) {
         case 1:
-            return 'female';
+            return "female"
         case 2:
-            return 'male';
+            return "male"
         default:
-            return 'unknown';
+            return "unknown"
     }
-};
+}

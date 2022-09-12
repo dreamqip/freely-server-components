@@ -1,36 +1,45 @@
-import type {IMovieCast} from "@/types/cast";
-import type {ICredits} from "@/types/credits";
-import {FC, Suspense} from 'react';
-import CastCard from "./CastCard";
-import {SwiperSlide} from 'swiper/react';
-import dynamic from "next/dynamic";
+import type { IMovieCast } from "@/types/cast"
+import type { ICredits } from "@/types/credits"
+import { FC, Suspense } from "react"
+import CastCard from "./CastCard"
+import { SwiperSlide } from "swiper/react"
+import dynamic from "next/dynamic"
 
-const Swiper = dynamic(() => import('../ShowCarousel/SwiperLazy'), {
-    suspense: true
-});
+const Swiper = dynamic(() => import("../ShowCarousel/SwiperLazy"), {
+    suspense: true,
+})
 
 interface MoviesListProps {
-    credits: ICredits;
-    title: string;
+    credits: ICredits
+    title: string
 }
 
-const CastList: FC<MoviesListProps> = ({credits, title}) => {
+const CastList: FC<MoviesListProps> = ({ credits, title }) => {
     return (
         <div className="py-10">
-            <h2 className="text-center dark:text-white font-bold text-6xl">{title}</h2>
-            <Suspense fallback={<div className="flex items-center justify-center text-4xl">Loading...</div>}>
+            <h2 className="text-center text-6xl font-bold dark:text-white">
+                {title}
+            </h2>
+            <Suspense
+                fallback={
+                    <div className="flex items-center justify-center text-4xl">
+                        Loading...
+                    </div>
+                }
+            >
                 <Swiper>
-                    {credits && credits.cast.map((person: IMovieCast) => {
-                        return (
-                            <SwiperSlide key={person.id}>
-                                <CastCard person={person}/>
-                            </SwiperSlide>
-                        )
-                    })}
+                    {credits &&
+                        credits.cast.map((person: IMovieCast) => {
+                            return (
+                                <SwiperSlide key={person.id}>
+                                    <CastCard person={person} />
+                                </SwiperSlide>
+                            )
+                        })}
                 </Swiper>
             </Suspense>
         </div>
-    );
-};
+    )
+}
 
-export default CastList;
+export default CastList

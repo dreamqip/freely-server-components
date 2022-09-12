@@ -1,85 +1,106 @@
-import type {InferGetServerSidePropsType, NextPage} from "next";
-import {ArrowLeftIcon} from "@heroicons/react/24/solid";
-import {useAppDispatch, useAppSelector} from "@/hooks/redux";
-import Select from 'react-select';
-import {useEffect, useMemo, useState} from "react";
-import Link from "next/link";
-import {wrapper} from "../../store";
+import type { InferGetServerSidePropsType, NextPage } from "next"
+import { ArrowLeftIcon } from "@heroicons/react/24/solid"
+import { useAppDispatch, useAppSelector } from "@/hooks/redux"
+import Select from "react-select"
+import { useEffect, useMemo, useState } from "react"
+import Link from "next/link"
+import { wrapper } from "../../store"
 import {
     getMovieById,
     getRunningOperationPromises,
     getTvShowById,
     useGetMovieByIdQuery,
-    useGetTvShowByIdQuery
-} from "@/services/themoviedb";
-import {setShow} from "@/features/room/roomSlice";
-import {IMovie} from "@/types/movie";
-import {ITvShow} from "@/types/series";
+    useGetTvShowByIdQuery,
+} from "@/services/themoviedb"
+import { setShow } from "@/features/room/roomSlice"
+import { IMovie } from "@/types/movie"
+import { ITvShow } from "@/types/series"
 
-const Room: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({id, type}) => {
-    const dispatch = useAppDispatch();
-    const {show} = useAppSelector(state => state.room);
-    const [selectedSeason, setSelectedSeason] = useState<any>('');
-    const [selectedEpisode, setSelectedEpisode] = useState<any>('');
+const Room: NextPage<
+    InferGetServerSidePropsType<typeof getServerSideProps>
+> = ({ id, type }) => {
+    const dispatch = useAppDispatch()
+    const { show } = useAppSelector((state) => state.room)
+    const [selectedSeason, setSelectedSeason] = useState<any>("")
+    const [selectedEpisode, setSelectedEpisode] = useState<any>("")
 
     const resultMovie = useGetMovieByIdQuery(id, {
-        skip: type === 'series'
-    });
+        skip: type === "series",
+    })
     const resultTvShow = useGetTvShowByIdQuery(id, {
-        skip: type === 'movie'
-    });
+        skip: type === "movie",
+    })
 
     useEffect(() => {
-        if (!resultMovie.isLoading && resultMovie.data && !resultMovie.isError) {
-            dispatch(setShow(resultMovie.data as IMovie));
+        if (
+            !resultMovie.isLoading &&
+            resultMovie.data &&
+            !resultMovie.isError
+        ) {
+            dispatch(setShow(resultMovie.data as IMovie))
         }
 
-        if (!resultTvShow.isLoading && resultTvShow.data && !resultTvShow.isError) {
-            dispatch(setShow(resultTvShow.data as ITvShow));
+        if (
+            !resultTvShow.isLoading &&
+            resultTvShow.data &&
+            !resultTvShow.isError
+        ) {
+            dispatch(setShow(resultTvShow.data as ITvShow))
         }
-    }, [dispatch, resultMovie.data, resultMovie.isError, resultMovie.isLoading, resultTvShow.data, resultTvShow.isError, resultTvShow.isLoading]);
+    }, [
+        dispatch,
+        resultMovie.data,
+        resultMovie.isError,
+        resultMovie.isLoading,
+        resultTvShow.data,
+        resultTvShow.isError,
+        resultTvShow.isLoading,
+    ])
 
     const createEpisodesCount = useMemo(() => {
         if (selectedSeason) {
-            const episodes = Array.from({length: selectedSeason.episodes}, (_, i) => i + 1);
+            const episodes = Array.from(
+                { length: selectedSeason.episodes },
+                (_, i) => i + 1
+            )
 
             return episodes.map((episode: number) => ({
                 value: episode,
-                label: `Episode ${episode}`
-            }));
+                label: `Episode ${episode}`,
+            }))
         }
-        return {} as any;
-    }, [selectedSeason]);
+        return {} as any
+    }, [selectedSeason])
 
     const optionsSeason = useMemo(() => {
         if (resultTvShow.data) {
-            const seasons = resultTvShow.data.seasons;
+            const seasons = resultTvShow.data.seasons
 
             return seasons.map((season: any) => ({
                 value: season.season_number,
                 label: `Season ${season.season_number}`,
-                episodes: season.episode_count
-            }));
+                episodes: season.episode_count,
+            }))
         }
-        return {} as any;
-    }, [resultTvShow.data]);
+        return {} as any
+    }, [resultTvShow.data])
 
-    const backHref = type === 'series' ? `/series/${id}` : `/movie/${id}`;
+    const backHref = type === "series" ? `/series/${id}` : `/movie/${id}`
 
     const onChangeSeason = (selected: any) => {
-        setSelectedSeason(selected);
-        setSelectedEpisode({value: 1, label: `Episode 1`});
+        setSelectedSeason(selected)
+        setSelectedEpisode({ value: 1, label: `Episode 1` })
     }
 
     return (
         <>
             <Link href={backHref} passHref>
                 <a title="back" className="flex items-center">
-                    <ArrowLeftIcon className="w-8 h-8 dark:text-white cursor-pointer mb-6"/>
+                    <ArrowLeftIcon className="mb-6 h-8 w-8 cursor-pointer dark:text-white" />
                 </a>
             </Link>
 
-            {show && type === 'series' && (
+            {show && type === "series" && (
                 <>
                     <Select
                         options={optionsSeason}
@@ -99,42 +120,44 @@ const Room: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
                     <iframe
                         allowFullScreen
                         src={`https://2embed.org/embed/series?tmdb=${id}&sea=${selectedSeason.value}&epi=${selectedEpisode.value}`}
-                        className="w-full h-screen"
+                        className="h-screen w-full"
                     />
                 </>
             )}
 
-            {show && type === 'movie' && (
+            {show && type === "movie" && (
                 <iframe
                     allowFullScreen
                     src={`https://2embed.org/embed/movie?tmdb=${id}`}
-                    className="w-full h-screen"
+                    className="h-screen w-full"
                 />
             )}
         </>
-    );
+    )
 }
-export default Room;
+export default Room
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx) => {
-    const {id} = ctx.query;
-    const {type} = ctx.query;
-    const parsedId = parseInt(id as string, 10);
+export const getServerSideProps = wrapper.getServerSideProps(
+    (store) => async (ctx) => {
+        const { id } = ctx.query
+        const { type } = ctx.query
+        const parsedId = parseInt(id as string, 10)
 
-    if (parsedId && type === 'movie') {
-        store.dispatch(getMovieById.initiate(parsedId));
-    }
+        if (parsedId && type === "movie") {
+            store.dispatch(getMovieById.initiate(parsedId))
+        }
 
-    if (parsedId && type === 'series') {
-        store.dispatch(getTvShowById.initiate(parsedId));
-    }
+        if (parsedId && type === "series") {
+            store.dispatch(getTvShowById.initiate(parsedId))
+        }
 
-    await Promise.all(getRunningOperationPromises());
+        await Promise.all(getRunningOperationPromises())
 
-    return {
-        props: {
-            id: parsedId,
-            type
+        return {
+            props: {
+                id: parsedId,
+                type,
+            },
         }
     }
-})
+)

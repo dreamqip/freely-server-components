@@ -1,24 +1,24 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {MixedShow} from "@/types/search";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { MixedShow } from "@/types/search"
 
 interface RoomState {
-    show: MixedShow | null;
+    show: MixedShow | null
 }
 
 const initialState: RoomState = {
-    show: null
+    show: null,
 }
 
 export const roomSlice = createSlice({
-    name: 'room',
+    name: "room",
     initialState,
     reducers: {
         setShow: (state, action: PayloadAction<MixedShow | null>) => {
-            state.show = action.payload;
-        }
-    }
+            state.show = action.payload
+        },
+    },
 })
 
-export const {setShow} = roomSlice.actions;
+export const { setShow } = roomSlice.actions
 
-export default roomSlice.reducer;
+export default roomSlice.reducer

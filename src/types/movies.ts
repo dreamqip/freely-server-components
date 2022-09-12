@@ -1,9 +1,9 @@
-import {IMovie} from "./movie";
+import { IMovie } from "./movie"
 
 export interface IMovies {
-    page: number;
-    results: IMovie[];
-    total_results: number;
-    total_pages: number;
-    dates?: any;
+    page: number
+    results: IMovie[]
+    total_results: number
+    total_pages: number
+    dates?: any
 }

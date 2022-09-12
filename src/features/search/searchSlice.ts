@@ -1,18 +1,18 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ISearch} from "@/types/search";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { ISearch } from "@/types/search"
 
 interface SearchState {
-    query: string;
-    results: ISearch | null;
+    query: string
+    results: ISearch | null
 }
 
 const initialState: SearchState = {
-    query: 'a',
-    results: null
+    query: "a",
+    results: null,
 }
 
 export const searchSlice = createSlice({
-    name: 'search',
+    name: "search",
     initialState,
     reducers: {
         setSearchQuery: (state, action: PayloadAction<string>) => {
@@ -20,10 +20,10 @@ export const searchSlice = createSlice({
         },
         setSearchResults: (state, action: PayloadAction<ISearch>) => {
             state.results = action.payload
-        }
-    }
+        },
+    },
 })
 
-export const {setSearchQuery, setSearchResults} = searchSlice.actions
+export const { setSearchQuery, setSearchResults } = searchSlice.actions
 
 export default searchSlice.reducer

@@ -1,5 +1,5 @@
-import {FC} from 'react';
-import NextNProgress from "nextjs-progressbar";
+import { FC } from "react"
+import NextNProgress from "nextjs-progressbar"
 
 const ProgressBar: FC = () => {
     return (
@@ -14,7 +14,7 @@ const ProgressBar: FC = () => {
                 showSpinner: false,
             }}
         />
-    );
-};
+    )
+}
 
-export default ProgressBar;
+export default ProgressBar

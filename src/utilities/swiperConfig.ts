@@ -1,16 +1,16 @@
-import {FreeMode, Mousewheel, Navigation, SwiperOptions} from "swiper";
+import { FreeMode, Mousewheel, Navigation, SwiperOptions } from "swiper"
 
 export const swiperOptions: SwiperOptions = {
     modules: [Navigation, Mousewheel, FreeMode],
     spaceBetween: 10,
     mousewheel: {
-        forceToAxis: true
+        forceToAxis: true,
     },
     freeMode: {
-        enabled: true
+        enabled: true,
     },
     navigation: {
-        enabled: false
+        enabled: false,
     },
     slidesPerView: 2.3,
     slidesPerGroup: 1,
@@ -18,7 +18,7 @@ export const swiperOptions: SwiperOptions = {
         768: {
             slidesPerView: 3.3,
             slidesPerGroup: 2,
-            spaceBetween: 15
+            spaceBetween: 15,
         },
         1024: {
             slidesPerView: 5,
@@ -26,12 +26,12 @@ export const swiperOptions: SwiperOptions = {
             spaceBetween: 20,
             navigation: {
                 enabled: true,
-                hideOnClick: true
+                hideOnClick: true,
             },
             freeMode: {
-                enabled: false
-            }
-        }
+                enabled: false,
+            },
+        },
     },
     preloadImages: false,
     speed: 700,

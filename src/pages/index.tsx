@@ -1,33 +1,41 @@
-import type {GetStaticProps, InferGetStaticPropsType, NextPage} from 'next';
-import axios from "axios";
-import dynamic from "next/dynamic";
-import {Suspense} from "react";
-import Spinner from "@/components/Spinner";
-import Hero from "@/components/IndexPage/Hero";
-import Explore from "@/components/IndexPage/Explore";
-import Watch from "@/components/IndexPage/Watch";
+import type { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
+import axios from "axios"
+import dynamic from "next/dynamic"
+import { Suspense } from "react"
+import Spinner from "@/components/Spinner"
+import Hero from "@/components/IndexPage/Hero"
+import Explore from "@/components/IndexPage/Explore"
+import Watch from "@/components/IndexPage/Watch"
 
-const ShowCarousel = dynamic(() => import('@/components/ShowCarousel/ShowCarousel'), {
-    suspense: true,
-});
+const ShowCarousel = dynamic(
+    () => import("@/components/ShowCarousel/ShowCarousel"),
+    {
+        suspense: true,
+    }
+)
 
-const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({popular, topRated, upcoming, now_playing}) => {
+const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
+    popular,
+    topRated,
+    upcoming,
+    now_playing,
+}) => {
     return (
         <>
-            <Hero/>
-            <Explore/>
-            <Watch/>
-            <Suspense fallback={<Spinner/>}>
-                <ShowCarousel title="Now In Theaters" series={now_playing}/>
-                <ShowCarousel title="Upcoming movies" series={upcoming}/>
-                <ShowCarousel title="Popular now" series={popular}/>
-                <ShowCarousel title="Top Rated" series={topRated}/>
+            <Hero />
+            <Explore />
+            <Watch />
+            <Suspense fallback={<Spinner />}>
+                <ShowCarousel title="Now In Theaters" series={now_playing} />
+                <ShowCarousel title="Upcoming movies" series={upcoming} />
+                <ShowCarousel title="Popular now" series={popular} />
+                <ShowCarousel title="Top Rated" series={topRated} />
             </Suspense>
         </>
     )
 }
 
-export default Home;
+export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
     const popularMovies = await axios.get(
@@ -49,6 +57,6 @@ export const getStaticProps: GetStaticProps = async () => {
             popular: popularMovies.data,
             upcoming: upcoming.data,
             now_playing: playing.data,
-        }
+        },
     }
 }

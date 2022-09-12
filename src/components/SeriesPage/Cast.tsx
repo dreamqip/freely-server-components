@@ -1,15 +1,15 @@
-import {FC} from 'react';
-import CastList from "../CastCarousel/CastList";
-import {useAppSelector} from "@/hooks/redux";
+import { FC } from "react"
+import CastList from "../CastCarousel/CastList"
+import { useAppSelector } from "@/hooks/redux"
 
 const Cast: FC = () => {
-    const {cast} = useAppSelector(state => state.series)
+    const { cast } = useAppSelector((state) => state.series)
 
     return (
         <div>
-            <CastList credits={cast} title={'Cast'}/>
+            <CastList credits={cast} title={"Cast"} />
         </div>
-    );
-};
+    )
+}
 
-export default Cast;
+export default Cast

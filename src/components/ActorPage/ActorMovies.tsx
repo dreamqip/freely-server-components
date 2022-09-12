@@ -1,16 +1,16 @@
-import {FC} from 'react';
-import ActorMoviesList from "./ActorMoviesList";
+import { FC } from "react"
+import ActorMoviesList from "./ActorMoviesList"
 
 interface Props {
-    movies: any;
+    movies: any
 }
 
-const ActorMovies: FC<Props> = ({movies}) => {
+const ActorMovies: FC<Props> = ({ movies }) => {
     return (
         <div>
             <ActorMoviesList movies={movies} title="Known for" />
         </div>
-    );
-};
+    )
+}
 
-export default ActorMovies;
+export default ActorMovies
