@@ -6,7 +6,7 @@ import {
     getRunningOperationPromises,
     useGetMovieByIdQuery,
 } from "@/services/themoviedb"
-import { useEffect } from "react"
+import { useEffect, Suspense } from "react"
 import { useAppDispatch } from "@/hooks/redux"
 import {
     setCast,
@@ -20,9 +20,11 @@ import {
 } from "@/features/movie/movieSlice"
 import { wrapper } from "../../store"
 import { NextSeo } from "next-seo"
+import {IKeyword} from "@/types/movie";
+import Spinner from "@/components/Spinner";
 
 const Tabs = dynamic(() => import("@/components/MoviePage/Tabs"), {
-    ssr: false,
+    suspense: true,
 })
 
 const MoviePage: NextPage<
@@ -31,16 +33,17 @@ const MoviePage: NextPage<
     const dispatch = useAppDispatch()
 
     const { data: movie, isLoading, isError } = useGetMovieByIdQuery(id)
-    const keywords: string[] =
-        movie && movie.keywords.keywords.map((keyword: any) => keyword.name)
 
-    const seoOptions = {
+    const keywords =
+        movie && movie.keywords.keywords.map((keyword: IKeyword) => keyword.name)
+
+    const seoOptions: any = {
         title: movie?.title,
         description: movie?.overview,
         additionalMetaTags: [
             {
                 property: "keywords",
-                content: keywords && keywords.join(", "),
+                content: keywords?.join(", "),
             },
         ],
     }
@@ -62,7 +65,9 @@ const MoviePage: NextPage<
         <article className="flex flex-col">
             <NextSeo {...seoOptions} />
             <Hero />
-            <Tabs />
+            <Suspense fallback={<Spinner/>}>
+                <Tabs />
+            </Suspense>
         </article>
     )
 }

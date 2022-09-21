@@ -1,4 +1,4 @@
-import { FC } from "react"
+import type { FC } from "react"
 import { LoadingOutlined } from "@ant-design/icons"
 import { Spin } from "antd"
 

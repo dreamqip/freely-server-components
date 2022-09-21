@@ -1,6 +1,8 @@
 import { Images } from "./images"
 import { IVideos } from "./videos"
 import { IReviews } from "@/types/reviews"
+import {ITvShowCast} from "@/types/cast";
+import {IKeyword} from "@/types/movie";
 
 export interface ITvShows {
     page: number
@@ -42,11 +44,13 @@ export interface ITvShow {
     vote_count: number
     videos: IVideos
     images: Images
-    keywords: any
+    keywords: {
+        keywords: IKeyword[]
+    }
     reviews: IReviews
-    similar: any
-    recommendations: any
-    credits: any
+    similar: Similar
+    recommendations: Recommendations
+    credits: ITvShowCast
 }
 
 interface CreatedBy {
@@ -102,4 +106,23 @@ interface Season {
     overview: string
     poster_path: string | null
     season_number: number
+}
+
+interface Keyword {
+    id: number
+    name: string
+}
+
+interface Similar {
+    page: number
+    results: ITvShow[]
+    total_results: number
+    total_pages: number
+}
+
+interface Recommendations {
+    page: number
+    results: ITvShow[]
+    total_results: number
+    total_pages: number
 }

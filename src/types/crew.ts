@@ -12,6 +12,19 @@ export interface IMovieCrew {
     job: string
 }
 
+export interface ITvShowCrew {
+    adult: boolean
+    gender: number | null
+    id: number
+    known_for_department: string
+    name: string
+    original_name: string
+    popularity: number
+    credit_id: string
+    department: string
+    job: string
+}
+
 export interface IActorCrew {
     id: number
     department: string

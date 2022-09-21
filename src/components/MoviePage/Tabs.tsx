@@ -1,8 +1,12 @@
 import { FC } from "react"
 import { Tabs } from "antd"
-import Overview from "./Overview"
 import Images from "./Images"
 import Videos from "./Videos"
+import dynamic from "next/dynamic";
+
+const Overview = dynamic(() => import("./Overview"), {
+    ssr: false,
+})
 
 const items = [
     { label: "Overview", key: "1", children: <Overview /> },

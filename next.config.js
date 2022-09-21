@@ -4,22 +4,22 @@ const withPWA = require("next-pwa")({
     dest: "public",
     disable: process.env.NODE_ENV === "development",
     register: true,
-    runtimeCaching
+    runtimeCaching,
 })
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
-    enabled: process.env.ANALYZE === "true"
+    enabled: process.env.ANALYZE === "true",
 })
 
 const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
     images: {
-        domains: ["image.tmdb.org"]
+        domains: ["image.tmdb.org"],
     },
     experimental: {
         legacyBrowsers: false,
-        browsersListForSwc: true
-    }
+        browsersListForSwc: true,
+    },
 }
 
 module.exports = () => {

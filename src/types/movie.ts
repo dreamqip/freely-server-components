@@ -2,6 +2,7 @@ import { IMovieCast } from "./cast"
 import { Images } from "./images"
 import { IVideos } from "./videos"
 import { IReviews } from "@/types/reviews"
+import {IMovieCredits} from "@/types/credits";
 
 interface IGenres {
     id: number
@@ -28,13 +29,47 @@ export interface IMovie extends IMovieCast {
     revenue: number
     runtime: number
     status: string
-    production_companies: any
-    keywords?: any
+    production_companies: IProductionCompanies[]
+    production_countries: IProductionCountries[]
+    keywords: {
+        keywords: IKeyword[]
+    }
     media_type: string
-    images?: Images
-    videos?: IVideos
+    images: Images
+    videos: IVideos
     reviews: IReviews
-    similar: any
-    recommendations: any
-    credits: any
+    similar: ISimilarMovies
+    recommendations: IRecommendedMovies
+    credits: IMovieCredits
+}
+
+interface IProductionCompanies {
+    id: number
+    logo_path: string | null
+    name: string
+    origin_country: string
+}
+
+interface IProductionCountries {
+    iso_3166_1: string
+    name: string
+}
+
+export interface IKeyword {
+    id: number
+    name: string
+}
+
+export interface ISimilarMovies {
+    page: number
+    results: IMovie[]
+    total_pages: number
+    total_results: number
+}
+
+export interface IRecommendedMovies {
+    page: number
+    results: IMovie[]
+    total_pages: number
+    total_results: number
 }

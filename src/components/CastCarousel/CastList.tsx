@@ -1,5 +1,5 @@
 import type { IMovieCast } from "@/types/cast"
-import type { ICredits } from "@/types/credits"
+import type { IMovieCredits } from "@/types/credits"
 import { FC, Suspense } from "react"
 import CastCard from "./CastCard"
 import { SwiperSlide } from "swiper/react"
@@ -10,7 +10,7 @@ const Swiper = dynamic(() => import("../ShowCarousel/SwiperLazy"), {
 })
 
 interface MoviesListProps {
-    credits: ICredits
+    credits: IMovieCredits
     title: string
 }
 

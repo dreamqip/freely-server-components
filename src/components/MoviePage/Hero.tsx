@@ -1,6 +1,6 @@
 import type { FC } from "react"
 import { useEffect, useState } from "react"
-import Image from "next/image"
+import Image from "next/future/image"
 import { useAppSelector } from "@/hooks/redux"
 import { LazyMotion, m, useMotionValue, useScroll } from "framer-motion"
 import { animationVariants } from "@/utilities/animationVariants"
@@ -49,8 +49,10 @@ const Hero: FC = () => {
                     <Image
                         src={imgSrc}
                         alt={movie?.title}
-                        layout={"fill"}
-                        objectFit={"cover"}
+                        fill={true}
+                        className="object-cover"
+                        sizes="100vw"
+                        priority={true}
                         onError={() => setImgSrc("/fallback.jpeg")}
                         onLoadingComplete={() => setLoaded(true)}
                     />
@@ -74,13 +76,13 @@ const Hero: FC = () => {
                                 >
                                     <Image
                                         alt={movie?.title}
-                                        layout={"fill"}
-                                        objectFit={"contain"}
-                                        objectPosition={"center"}
+                                        priority={true}
+                                        fill={true}
+                                        className="object-contain object-center"
+                                        sizes="100vw"
                                         src={`https://image.tmdb.org/t/p/original${movie?.images?.logos[0].file_path}`}
-                                        onLoadingComplete={() =>
-                                            setLoadedLogo(true)
-                                        }
+                                        onLoadingComplete={() => setLoadedLogo(true)}
+                                        onError={() => setImgSrc("/fallback.jpeg")}
                                     />
                                 </m.div>
                             </LazyMotion>

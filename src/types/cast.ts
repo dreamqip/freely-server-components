@@ -13,6 +13,20 @@ export interface IMovieCast {
     order: number
 }
 
+export interface ITvShowCast {
+    adult: boolean
+    gender: number | null
+    id: number
+    known_for_department: string
+    name: string
+    original_name: string
+    popularity: number
+    profile_path: string | null
+    character: string
+    credit_id: string
+    order: number
+}
+
 export interface IActorCast {
     id: number
     original_language: string
