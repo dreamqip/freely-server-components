@@ -20,8 +20,8 @@ import {
     setSeriesVideos,
 } from "@/features/series/seriesSlice"
 import { NextSeo } from "next-seo"
-import {IKeyword} from "@/types/movie";
-import Spinner from "@/components/Spinner";
+import { IKeyword } from "@/types/movie"
+import Spinner from "@/components/Spinner"
 
 const Tabs = dynamic(() => import("@/components/SeriesPage/Tabs"), {
     suspense: true,

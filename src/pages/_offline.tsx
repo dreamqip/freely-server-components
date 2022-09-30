@@ -3,8 +3,8 @@ import { SignalSlashIcon } from "@heroicons/react/24/solid"
 
 const Offline: NextPage = () => {
     return (
-        <div className="flex flex-col items-center justify-center">
-            <SignalSlashIcon className="mb-4 h-40 w-40" />
+        <div className="flex flex-col items-center justify-center h-full">
+            <SignalSlashIcon className="mb-4 h-40 w-40 text-gray-700 dark:text-gray-400" />
             <div className="mb-6 text-center text-[120px] font-black leading-none text-gray-700 dark:text-gray-400 md:text-[220px]">
                 Offline
             </div>

@@ -1,8 +1,8 @@
 import { Images } from "./images"
 import { IVideos } from "./videos"
 import { IReviews } from "@/types/reviews"
-import {ITvShowCast} from "@/types/cast";
-import {IKeyword} from "@/types/movie";
+import { ITvShowCast } from "@/types/cast"
+import { IKeyword } from "@/types/movie"
 
 export interface ITvShows {
     page: number

@@ -1,5 +1,5 @@
-import {IMovieCast, ITvShowCast} from "./cast"
-import {IMovieCrew, ITvShowCrew} from "./crew"
+import { IMovieCast, ITvShowCast } from "./cast"
+import { IMovieCrew, ITvShowCrew } from "./crew"
 
 export interface IMovieCredits {
     id: number

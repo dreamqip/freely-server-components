@@ -20,8 +20,8 @@ import {
 } from "@/features/movie/movieSlice"
 import { wrapper } from "../../store"
 import { NextSeo } from "next-seo"
-import {IKeyword} from "@/types/movie";
-import Spinner from "@/components/Spinner";
+import { IKeyword } from "@/types/movie"
+import Spinner from "@/components/Spinner"
 
 const Tabs = dynamic(() => import("@/components/MoviePage/Tabs"), {
     suspense: true,
@@ -35,7 +35,8 @@ const MoviePage: NextPage<
     const { data: movie, isLoading, isError } = useGetMovieByIdQuery(id)
 
     const keywords =
-        movie && movie.keywords.keywords.map((keyword: IKeyword) => keyword.name)
+        movie &&
+        movie.keywords.keywords.map((keyword: IKeyword) => keyword.name)
 
     const seoOptions: any = {
         title: movie?.title,
@@ -65,7 +66,7 @@ const MoviePage: NextPage<
         <article className="flex flex-col">
             <NextSeo {...seoOptions} />
             <Hero />
-            <Suspense fallback={<Spinner/>}>
+            <Suspense fallback={<Spinner />}>
                 <Tabs />
             </Suspense>
         </article>

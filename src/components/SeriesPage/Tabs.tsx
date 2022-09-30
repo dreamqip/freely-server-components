@@ -2,7 +2,7 @@ import type { FC } from "react"
 import { Tabs } from "antd"
 import Images from "./Images"
 import Videos from "./Videos"
-import dynamic from "next/dynamic";
+import dynamic from "next/dynamic"
 
 const Overview = dynamic(() => import("./Overview"), {
     ssr: false,

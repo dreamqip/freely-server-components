@@ -81,8 +81,12 @@ const Hero: FC = () => {
                                         className="object-contain object-center"
                                         sizes="100vw"
                                         src={`https://image.tmdb.org/t/p/original${movie?.images?.logos[0].file_path}`}
-                                        onLoadingComplete={() => setLoadedLogo(true)}
-                                        onError={() => setImgSrc("/fallback.jpeg")}
+                                        onLoadingComplete={() =>
+                                            setLoadedLogo(true)
+                                        }
+                                        onError={() =>
+                                            setImgSrc("/fallback.jpeg")
+                                        }
                                     />
                                 </m.div>
                             </LazyMotion>

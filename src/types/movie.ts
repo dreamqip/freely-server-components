@@ -2,7 +2,7 @@ import { IMovieCast } from "./cast"
 import { Images } from "./images"
 import { IVideos } from "./videos"
 import { IReviews } from "@/types/reviews"
-import {IMovieCredits} from "@/types/credits";
+import { IMovieCredits } from "@/types/credits"
 
 interface IGenres {
     id: number
