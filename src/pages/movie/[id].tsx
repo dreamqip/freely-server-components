@@ -25,6 +25,7 @@ import Spinner from "@/components/Spinner"
 
 const Tabs = dynamic(() => import("@/components/MoviePage/Tabs"), {
     suspense: true,
+    ssr: false,
 })
 
 const MoviePage: NextPage<
