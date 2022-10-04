@@ -45,7 +45,7 @@ export interface ITvShow {
     videos: IVideos
     images: Images
     keywords: {
-        keywords: IKeyword[]
+        results: IKeyword[]
     }
     reviews: IReviews
     similar: Similar

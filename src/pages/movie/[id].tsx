@@ -6,7 +6,7 @@ import {
     getRunningOperationPromises,
     useGetMovieByIdQuery,
 } from "@/services/themoviedb"
-import { useEffect, Suspense } from "react"
+import {useEffect, Suspense, useState} from "react"
 import { useAppDispatch } from "@/hooks/redux"
 import {
     setCast,
@@ -32,12 +32,8 @@ const MoviePage: NextPage<
     InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ id }) => {
     const dispatch = useAppDispatch()
-
     const { data: movie, isLoading, isError } = useGetMovieByIdQuery(id)
-
-    const keywords =
-        movie &&
-        movie.keywords.keywords.map((keyword: IKeyword) => keyword.name)
+    const [keywords, setKeywords] = useState<string[]>([])
 
     const seoOptions: any = {
         title: movie?.title,
@@ -60,6 +56,7 @@ const MoviePage: NextPage<
             dispatch(setRecommendations(movie.recommendations))
             dispatch(setReviews(movie.reviews))
             dispatch(setCast(movie.credits))
+            setKeywords(movie.keywords.results.map((keyword: IKeyword) => keyword.name))
         }
     }, [isLoading, dispatch, movie, isError, id])
 
