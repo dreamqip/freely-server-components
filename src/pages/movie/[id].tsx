@@ -6,7 +6,7 @@ import {
     getRunningOperationPromises,
     useGetMovieByIdQuery,
 } from "@/services/themoviedb"
-import {useEffect, Suspense, useState} from "react"
+import { useEffect, Suspense, useState } from "react"
 import { useAppDispatch } from "@/hooks/redux"
 import {
     setCast,
@@ -56,7 +56,9 @@ const MoviePage: NextPage<
             dispatch(setRecommendations(movie.recommendations))
             dispatch(setReviews(movie.reviews))
             dispatch(setCast(movie.credits))
-            setKeywords(movie.keywords.results.map((keyword: IKeyword) => keyword.name))
+            setKeywords(
+                movie.keywords.keywords.map((keyword: IKeyword) => keyword.name)
+            )
         }
     }, [isLoading, dispatch, movie, isError, id])
 

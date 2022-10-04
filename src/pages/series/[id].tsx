@@ -7,7 +7,7 @@ import {
 } from "@/services/themoviedb"
 import Hero from "@/components/SeriesPage/Hero"
 import dynamic from "next/dynamic"
-import {useEffect, Suspense, useState} from "react"
+import { useEffect, Suspense, useState } from "react"
 import { useAppDispatch } from "@/hooks/redux"
 import {
     setSeries,
@@ -56,7 +56,9 @@ const TvShow: NextPage<
             dispatch(setSeriesRecommendations(series.recommendations))
             dispatch(setSeriesReviews(series.reviews))
             dispatch(setSeriesCast(series.credits))
-            setKeywords(series.keywords.results.map((keyword: IKeyword) => keyword.name))
+            setKeywords(
+                series.keywords.results.map((keyword: IKeyword) => keyword.name)
+            )
         }
     }, [isLoading, dispatch, series, id, isError])
 

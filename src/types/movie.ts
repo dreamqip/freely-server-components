@@ -32,7 +32,7 @@ export interface IMovie extends IMovieCast {
     production_companies: IProductionCompanies[]
     production_countries: IProductionCountries[]
     keywords: {
-        results: IKeyword[]
+        keywords: IKeyword[]
     }
     media_type: string
     images: Images

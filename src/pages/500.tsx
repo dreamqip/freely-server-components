@@ -1,19 +1,23 @@
+import type { NextPage } from "next"
 import Link from "next/link"
 import { Button } from "antd"
-import { NextPage } from "next"
 
-const Error: NextPage = () => {
+const Error500: NextPage = () => {
+    const refreshPage = () => {
+        window.location.reload()
+    }
+
     return (
-        <div className="flex h-full flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
             <div className="mb-6 text-center text-[120px] font-black leading-none text-gray-700 dark:text-gray-400 md:text-[220px]">
-                404
+                500
             </div>
             <h1 className="text-center text-4xl font-black dark:text-white">
-                You have found a secret place.
+                Something bad just happened...
             </h1>
             <div className="mx-auto max-w-[500px] text-center text-xl dark:text-white">
-                Unfortunately, this is only a 404 page. You may have mistyped
-                the address, or the page has been moved to another URL.
+                Our servers could not handle your request. Don't worry, our
+                development team was already notified. Try refreshing the page.
             </div>
             <Link href="/" passHref>
                 <Button
@@ -21,12 +25,13 @@ const Error: NextPage = () => {
                     type={"primary"}
                     shape={"round"}
                     size={"large"}
+                    onClick={refreshPage}
                 >
-                    Take me back to home page
+                    Refresh the page
                 </Button>
             </Link>
         </div>
     )
 }
 
-export default Error
+export default Error500
