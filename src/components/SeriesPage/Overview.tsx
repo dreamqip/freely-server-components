@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react"
-import Image from "next/future/image"
+import Image from "next/image"
 import { useAppSelector } from "@/hooks/redux"
 import { parseSeriesDetails } from "@/utilities/parseSeriesDetails"
 import Cast from "@/components/SeriesPage/Cast"

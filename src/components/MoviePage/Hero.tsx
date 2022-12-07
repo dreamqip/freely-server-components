@@ -1,6 +1,6 @@
 import type { FC } from "react"
 import { useEffect, useState } from "react"
-import Image from "next/future/image"
+import Image from "next/image"
 import { useAppSelector } from "@/hooks/redux"
 import { LazyMotion, m, useMotionValue, useScroll } from "framer-motion"
 import { animationVariants } from "@/utilities/animationVariants"

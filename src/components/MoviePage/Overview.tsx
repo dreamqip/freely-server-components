@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react"
-import Image from "next/future/image"
+import Image from "next/image"
 import Cast from "./Cast"
 import Reviews from "./Reviews"
 import Similar from "./Similar"
