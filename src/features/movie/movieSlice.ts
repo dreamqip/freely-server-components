@@ -1,71 +1,72 @@
-import { IMovie } from "@/types/movie"
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Images } from "@/types/images"
-import { IVideos } from "@/types/videos"
-import { IReviews } from "@/types/reviews"
+import type { IMovie, IRecommendedMovies, ISimilarMovies } from '@/types/movie';
+import type { Images } from '@/types/images';
+import type { IVideos } from '@/types/videos';
+import type { IReviews } from '@/types/reviews';
+import type { IMovieCredits } from '@/types/credits';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface MovieState {
-    id: number | null
-    movie: IMovie
-    images: Images
-    videos: IVideos
-    reviews: IReviews | null
-    recommendations: any | null
-    similar: any | null
-    cast: any | null
+  id: number | null;
+  movie: IMovie | null;
+  images: Images | null;
+  videos: IVideos | null;
+  reviews: IReviews | null;
+  recommendations: IRecommendedMovies | null;
+  similar: ISimilarMovies | null;
+  credits: IMovieCredits | null;
 }
 
 const initialState: MovieState = {
-    movie: {} as IMovie,
-    id: null,
-    images: {} as Images,
-    videos: {} as IVideos,
-    reviews: null,
-    recommendations: null,
-    similar: null,
-    cast: null,
-}
+  id: null,
+  movie: null,
+  images: null,
+  videos: null,
+  reviews: null,
+  recommendations: null,
+  similar: null,
+  credits: null,
+};
 
 export const movieSlice = createSlice({
-    name: "movie",
-    initialState,
-    reducers: {
-        setId: (state, action: PayloadAction<number>) => {
-            state.id = action.payload
-        },
-        setMovieDetails: (state, action: PayloadAction<IMovie | any>) => {
-            state.movie = action.payload
-        },
-        setImages: (state, action: PayloadAction<Images | any>) => {
-            state.images = action.payload
-        },
-        setVideos: (state, action: PayloadAction<IVideos | any>) => {
-            state.videos = action.payload
-        },
-        setReviews: (state, action: PayloadAction<IReviews | any>) => {
-            state.reviews = action.payload
-        },
-        setRecommendations: (state, action: PayloadAction<any>) => {
-            state.recommendations = action.payload
-        },
-        setSimilar: (state, action: PayloadAction<any>) => {
-            state.similar = action.payload
-        },
-        setCast: (state, action: PayloadAction<any>) => {
-            state.cast = action.payload
-        },
+  name: 'movie',
+  initialState,
+  reducers: {
+    setId: (state, action: PayloadAction<number>) => {
+      state.id = action.payload;
     },
-})
+    setMovieDetails: (state, action: PayloadAction<IMovie>) => {
+      state.movie = action.payload;
+    },
+    setImages: (state, action: PayloadAction<Images>) => {
+      state.images = action.payload;
+    },
+    setVideos: (state, action: PayloadAction<IVideos>) => {
+      state.videos = action.payload;
+    },
+    setReviews: (state, action: PayloadAction<IReviews>) => {
+      state.reviews = action.payload;
+    },
+    setRecommendations: (state, action: PayloadAction<IRecommendedMovies>) => {
+      state.recommendations = action.payload;
+    },
+    setSimilar: (state, action: PayloadAction<ISimilarMovies>) => {
+      state.similar = action.payload;
+    },
+    setCredits: (state, action: PayloadAction<IMovieCredits>) => {
+      state.credits = action.payload;
+    },
+  },
+});
 
 export const {
-    setId,
-    setMovieDetails,
-    setImages,
-    setVideos,
-    setCast,
-    setRecommendations,
-    setSimilar,
-    setReviews,
-} = movieSlice.actions
+  setId,
+  setMovieDetails,
+  setImages,
+  setVideos,
+  setCredits,
+  setRecommendations,
+  setSimilar,
+  setReviews,
+} = movieSlice.actions;
 
-export default movieSlice.reducer
+export default movieSlice.reducer;
