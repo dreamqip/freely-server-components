@@ -20,6 +20,10 @@ export default {
       content:
         'minimum-scale=1, initial-scale=1, width=device-width, height=device-height, shrink-to-fit=no, viewport-fit=cover, maximum-scale=5',
     },
+    {
+      name: 'apple-mobile-web-app-capable',
+      content: 'yes',
+    },
   ],
   additionalLinkTags: [
     {
@@ -33,10 +37,6 @@ export default {
     {
       rel: 'apple-touch-icon',
       href: '/icons/apple-icon-180.png',
-    },
-    {
-      rel: 'apple-mobile-web-app-capable',
-      content: 'yes',
     },
   ],
 };
