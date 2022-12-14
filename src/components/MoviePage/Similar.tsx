@@ -1,15 +1,15 @@
-import { FC } from "react"
-import { useAppSelector } from "@/hooks/redux"
-import ShowCarousel from "../ShowCarousel/ShowCarousel"
+import type { FC } from 'react';
+import { useAppSelector } from '@/hooks/redux';
+import ShowCarousel from '../ShowCarousel/ShowCarousel';
 
 const Similar: FC = () => {
-    const { similar } = useAppSelector((state) => state.movie)
+  const { similar } = useAppSelector((state) => state.movie);
 
-    return (
-        <div>
-            <ShowCarousel series={similar} title={"Similar"} />
-        </div>
-    )
-}
+  return (
+    <div>
+      {similar ? <ShowCarousel series={similar} title={'Similar'} /> : null}
+    </div>
+  );
+};
 
-export default Similar
+export default Similar;

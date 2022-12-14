@@ -1,15 +1,17 @@
-import { FC } from "react"
-import { useAppSelector } from "@/hooks/redux"
-import ShowCarousel from "../ShowCarousel/ShowCarousel"
+import type { FC } from 'react';
+import { useAppSelector } from '@/hooks/redux';
+import ShowCarousel from '../ShowCarousel/ShowCarousel';
 
 const Recommended: FC = () => {
-    const { recommendations } = useAppSelector((state) => state.series)
+  const { recommendations } = useAppSelector((state) => state.series);
 
-    return (
-        <div>
-            <ShowCarousel series={recommendations} title={"Recommended"} />
-        </div>
-    )
-}
+  return (
+    <div>
+      {recommendations ? (
+        <ShowCarousel series={recommendations} title={'Recommended'} />
+      ) : null}
+    </div>
+  );
+};
 
-export default Recommended
+export default Recommended;
