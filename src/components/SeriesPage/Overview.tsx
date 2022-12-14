@@ -1,73 +1,70 @@
-import { FC, useEffect, useState } from "react"
-import Image from "next/image"
-import { useAppSelector } from "@/hooks/redux"
-import { parseSeriesDetails } from "@/utilities/parseSeriesDetails"
-import Cast from "@/components/SeriesPage/Cast"
-import Similar from "@/components/SeriesPage/Similar"
-import Recommended from "@/components/SeriesPage/Recommended"
-import Reviews from "@/components/SeriesPage/Reviews"
-import Spinner from "@/components/Spinner"
+import { FC, useEffect, useState } from 'react';
+import Image from 'next/image';
+import { useAppSelector } from '@/hooks/redux';
+import { parseSeriesDetails } from '@/utilities/parseSeriesDetails';
+import Cast from '@/components/SeriesPage/Cast';
+import Similar from '@/components/SeriesPage/Similar';
+import Recommended from '@/components/SeriesPage/Recommended';
+import Reviews from '@/components/SeriesPage/Reviews';
+import Spinner from '@/components/Spinner';
+import { imageBaseUrlW400 } from '@/services/themoviedb';
 
 const Overview: FC = () => {
-    const { series } = useAppSelector((state) => state.series)
-    const [imgSrc, setImgSrc] = useState(
-        `https://image.tmdb.org/t/p/w400${series?.poster_path}`
-    )
-    const parsedDetails = series && parseSeriesDetails(series)
+  const { series } = useAppSelector((state) => state.series);
+  const [parsedDetails, setParsedDetails] = useState<null | ReturnType<
+    typeof parseSeriesDetails
+  >>(null);
 
-    useEffect(() => {
-        setImgSrc(`https://image.tmdb.org/t/p/w400${series?.poster_path}`)
-    }, [series])
+  useEffect(() => {
+    if (series) setParsedDetails(parseSeriesDetails(series));
+  }, [series]);
 
-    return (
+  return (
+    <>
+      {series && parsedDetails ? (
         <>
-            {series && parsedDetails ? (
-                <>
-                    <div className="grid grid-cols-1 gap-8 md:grid-cols-[250px_minmax(0,_1fr)]">
-                        <Image
-                            src={imgSrc}
-                            alt={series.name}
-                            className="mx-auto rounded-xl object-contain sm:mx-0"
-                            width={250}
-                            height={400}
-                            onError={() => setImgSrc("/fallback.jpeg")}
-                        />
-                        <div className="relative">
-                            <h2 className="text-3xl dark:text-white">
-                                Storyline
-                            </h2>
-                            <p className="text-lg dark:text-primary-dark">
-                                {series.overview}
-                            </p>
-                            <table className="border-spacing-2">
-                                <tbody>
-                                    {parsedDetails.map((detail: any) => {
-                                        return (
-                                            <tr key={detail.detailName}>
-                                                <td className="pr-10 dark:text-white">
-                                                    {detail.detailName}
-                                                </td>
-                                                <td className="dark:text-white">
-                                                    {detail.detailValue ||
-                                                        "Unknown"}
-                                                </td>
-                                            </tr>
-                                        )
-                                    })}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <Cast />
-                    <Similar />
-                    <Recommended />
-                    <Reviews />
-                </>
-            ) : (
-                <Spinner />
-            )}
+          <div className='grid grid-cols-1 gap-8 md:grid-cols-[250px_minmax(0,_1fr)]'>
+            <Image
+              src={`${imageBaseUrlW400}${series.poster_path}`}
+              alt={series.name}
+              className='mx-auto rounded-xl object-contain sm:mx-0'
+              width={250}
+              height={400}
+            />
+            <div className='relative'>
+              <h2 className='text-3xl dark:text-white'>Storyline</h2>
+              <p className='mt-2 text-lg dark:text-primary-dark'>
+                {series.overview}
+              </p>
+              <table className='mt-2 w-full border-spacing-2 sm:w-auto'>
+                <tbody>
+                  {parsedDetails.map((detail) => {
+                    return (
+                      <tr
+                        key={detail.detailName}
+                        className='flex items-start justify-between gap-x-4'
+                      >
+                        <td className='dark:text-white'>{detail.detailName}</td>
+                        <td className='dark:text-white'>
+                          {detail.detailValue || 'Unknown'}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <Cast />
+          <Similar />
+          <Recommended />
+          <Reviews />
         </>
-    )
-}
+      ) : (
+        <Spinner />
+      )}
+    </>
+  );
+};
 
-export default Overview
+export default Overview;

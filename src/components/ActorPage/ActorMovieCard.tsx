@@ -1,72 +1,89 @@
-import type { FC } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { shimmer, toBase64 } from "@/utilities/shimmer"
-import { useState } from "react"
-import { IActorCast } from "@/types/cast"
+import type { FC } from 'react';
+import { useState } from 'react';
+import type { IActorCast } from '@/types/cast';
+import Link from 'next/link';
+import ImageWithFallback from '@/components/Image';
+import { imageBaseUrlW400 } from '@/services/themoviedb';
+import { LazyMotion, m } from 'framer-motion';
+import { loadFeatures } from '@/utilities/loadAnimationFeatures';
+import { animationVariants } from '@/utilities/animationVariants';
 
 interface Props {
-    show: IActorCast
+  show: IActorCast;
 }
 
 const ActorMovieCard: FC<Props> = ({ show }) => {
-    const [imgSrc, setImgSrc] = useState(
-        `https://image.tmdb.org/t/p/w400${show.poster_path}`
-    )
+  const [loaded, setLoaded] = useState(false);
 
-    if (show.media_type === "tv") {
-        return (
-            <Link
-                href={`/series/${show.id}`}
-                className="flex cursor-pointer flex-col justify-center transition-all duration-300 ease-in-out hover:scale-105"
-            >
-                <span className="mb-6">
-                    <Image
-                        src={imgSrc}
-                        width={250}
-                        placeholder="blur"
-                        blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                            shimmer(250, 400)
-                        )}`}
-                        height={400}
-                        onError={() => setImgSrc("/fallback.jpeg")}
-                        className="sm:rounded-lg"
-                        alt={show.name}
-                    />
-                </span>
-                <div className="hidden text-xl font-medium text-black dark:text-white sm:block">
-                    {show.name}
-                </div>
-                <div className="text-md text-gray-500">{show.character}</div>
-            </Link>
-        )
-    }
-
+  if (show.media_type === 'tv') {
     return (
-        <Link
-            href={`/movie/${show.id}`}
-            className="flex cursor-pointer flex-col justify-center transition-all duration-300 ease-in-out hover:scale-105"
-        >
-            <span className="mb-6">
-                <Image
-                    src={imgSrc}
-                    width={250}
-                    placeholder="blur"
-                    blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                        shimmer(250, 400)
-                    )}`}
-                    height={400}
-                    onError={() => setImgSrc("/fallback.jpeg")}
-                    className="sm:rounded-lg"
-                    alt={"title" in show ? show.title : ""}
+      <Link
+        href={`/series/${show.id}`}
+        className='flex cursor-pointer flex-col justify-center transition-all duration-300 ease-in-out hover:scale-105'
+      >
+        <>
+          <span className='mb-6'>
+            <LazyMotion strict features={loadFeatures}>
+              <m.div
+                className='overflow-hidden rounded-md'
+                initial='hidden'
+                animate={loaded ? 'visible' : 'hidden'}
+                variants={animationVariants}
+                transition={{ ease: 'easeOut', duration: 1.25 }}
+              >
+                <ImageWithFallback
+                  src={`${imageBaseUrlW400}${show.poster_path}`}
+                  width={400}
+                  height={600}
+                  className='aspect-[2/3] object-cover sm:rounded-lg'
+                  alt={show.name}
+                  onLoadingComplete={() => setLoaded(true)}
                 />
-            </span>
-            <div className="hidden text-xl font-medium text-black dark:text-white sm:block">
-                {show.title}
-            </div>
-            <div className="text-md text-gray-500">{show.character}</div>
-        </Link>
-    )
-}
+              </m.div>
+            </LazyMotion>
+          </span>
+          <div className='hidden text-xl font-medium text-black dark:text-white sm:block'>
+            {show.name}
+          </div>
+          <div className='text-md truncate text-gray-500'>{show.character}</div>
+        </>
+      </Link>
+    );
+  }
 
-export default ActorMovieCard
+  return (
+    <Link
+      href={`/movie/${show.id}`}
+      className='flex cursor-pointer flex-col justify-center transition-all duration-300 ease-in-out hover:scale-105'
+    >
+      <>
+        <span className='mb-6'>
+          <LazyMotion strict features={loadFeatures}>
+            <m.div
+              className='overflow-hidden rounded-md'
+              initial='hidden'
+              animate={loaded ? 'visible' : 'hidden'}
+              variants={animationVariants}
+              transition={{ ease: 'easeOut', duration: 1.25 }}
+            >
+              <ImageWithFallback
+                src={`${imageBaseUrlW400}${show.poster_path}`}
+                width={400}
+                height={600}
+                className='aspect-[2/3] object-cover sm:rounded-lg'
+                alt={'title' in show ? show.title : ''}
+                onLoadingComplete={() => setLoaded(true)}
+              />
+            </m.div>
+          </LazyMotion>
+        </span>
+        <div className='hidden text-xl font-medium text-black dark:text-white sm:block'>
+          {show.title}
+        </div>
+        <div className='text-md truncate text-gray-500'>{show.character}</div>
+      </>
+    </Link>
+  );
+};
+
+export default ActorMovieCard;

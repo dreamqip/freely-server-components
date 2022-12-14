@@ -1,27 +1,21 @@
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { useAppSelector } from '@/hooks/redux';
 import { LazyMotion, m, useMotionValue, useScroll } from 'framer-motion';
 import { animationVariants } from '@/utilities/animationVariants';
 import { PlayIcon } from '@heroicons/react/24/solid';
-import Link from 'next/link';
-
-const loadFeatures = () =>
-  import('../Animated/DomAnimation').then((res) => res.default);
+import { loadFeatures } from '@/utilities/loadAnimationFeatures';
+import ImageWithFallback from '@/components/Image';
+import { imageBaseUrlOriginal } from '@/services/themoviedb';
 
 const Hero: FC = () => {
   const { series } = useAppSelector((state) => state.series);
-  const [imgSrc, setImgSrc] = useState(
-    `https://image.tmdb.org/t/p/original${series?.backdrop_path}`
-  );
   const [loaded, setLoaded] = useState(false);
   const [loadedLogo, setLoadedLogo] = useState(false);
   const { scrollYProgress } = useScroll();
   const scrollProgress = useMotionValue(1);
 
   useEffect(() => {
-    setImgSrc(`https://image.tmdb.org/t/p/original${series?.backdrop_path}`);
     setLoaded(false);
     setLoadedLogo(false);
   }, [series]);
@@ -37,29 +31,29 @@ const Hero: FC = () => {
 
   return (
     <>
-      <LazyMotion features={loadFeatures}>
-        <m.div
-          initial='hidden'
-          animate={loaded ? 'visible' : 'hidden'}
-          variants={animationVariants}
-          transition={{ ease: 'easeOut', duration: 1.25 }}
-          className='absolute inset-0 z-0 max-h-[300px] w-full select-none sm:fixed sm:max-h-full'
-          style={{ opacity: scrollProgress }}
-        >
-          {series && (
-            <Image
-              src={imgSrc}
-              alt={series.name}
+      {series && (
+        <LazyMotion features={loadFeatures}>
+          <m.div
+            initial='hidden'
+            animate={loaded ? 'visible' : 'hidden'}
+            variants={animationVariants}
+            transition={{ ease: 'easeInOut', duration: 0.75 }}
+            className='pointer-events-none fixed inset-0 z-0 h-screen select-none overflow-hidden'
+            style={{ opacity: scrollProgress }}
+          >
+            <ImageWithFallback
+              src={`${imageBaseUrlOriginal}${series.backdrop_path}`}
+              alt={series?.name}
               fill
-              className='object-cover'
-              onError={() => setImgSrc('/fallback.jpeg')}
-              onLoad={() => setLoaded(false)}
+              priority
+              sizes='(max-width: 640px) 640px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, (max-width: 1280px) 1280px, (max-width: 1536px) 1536px, 1920px'
+              className='aspect-video object-cover object-top'
               onLoadingComplete={() => setLoaded(true)}
             />
-          )}
-          <div className='radial-gradient absolute inset-0 z-0 h-full'></div>
-        </m.div>
-      </LazyMotion>
+            <div className='absolute inset-0 z-0 h-full w-full bg-radial-gradient'></div>
+          </m.div>
+        </LazyMotion>
+      )}
 
       <div className='relative'>
         <div className='max-w-xl'>
@@ -76,12 +70,13 @@ const Hero: FC = () => {
                   }}
                   className='relative min-h-[100px] max-w-[180px] md:min-h-[170px] md:max-w-[341px]'
                 >
-                  <Image
+                  <ImageWithFallback
                     alt={series?.name}
                     fill
+                    priority
+                    sizes='(max-width: 640px) 180px, (max-width: 768px) 341px, 341px'
                     className='object-contain object-center'
-                    src={`https://image.tmdb.org/t/p/original${series?.images?.logos[0].file_path}`}
-                    onLoad={() => setLoaded(false)}
+                    src={`${imageBaseUrlOriginal}${series?.images?.logos[0].file_path}`}
                     onLoadingComplete={() => setLoadedLogo(true)}
                   />
                 </m.div>
@@ -102,17 +97,17 @@ const Hero: FC = () => {
           <div className='my-4 leading-6 tracking-widest text-white'>
             {series?.genres?.map((genre) => genre.name).join(', ')}
           </div>
-          <Link
-            href={{
-              pathname: '/room/[id]',
-              query: { type: 'series', id: series?.id },
-            }}
-          >
-            <button className='play-btn'>
-              <PlayIcon className='h-10 w-10 fill-current' />
-              <span className='ml-2'>play</span>
-            </button>
-          </Link>
+          {/*<Link*/}
+          {/*  href={{*/}
+          {/*    pathname: '/room/[id]',*/}
+          {/*    query: { type: 'series', id: series?.id },*/}
+          {/*  }}*/}
+          {/*>*/}
+          <button className='play-btn cursor-not-allowed' disabled>
+            <PlayIcon className='h-10 w-10 fill-current' />
+            <span className='ml-2'>play</span>
+          </button>
+          {/*</Link>*/}
         </div>
       </div>
     </>

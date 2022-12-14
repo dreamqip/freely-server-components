@@ -1,52 +1,39 @@
-import { FC, memo, useEffect, useState } from "react"
-import { LazyMotion, m, useAnimation } from "framer-motion"
-import Image from "next/image"
-import { animationVariants } from "@/utilities/animationVariants"
-import { MixedShow } from "@/types/search"
+import type { FC } from 'react';
+import type { MixedShow } from '@/types/search';
+import { memo, useState } from 'react';
+import { LazyMotion, m } from 'framer-motion';
+import { animationVariants } from '@/utilities/animationVariants';
+import { loadFeatures } from '@/utilities/loadAnimationFeatures';
+import ImageWithFallback from '@/components/Image';
+import { imageBaseUrlW400 } from '@/services/themoviedb';
 
 interface Props {
-    show: MixedShow
+  show: MixedShow;
 }
-
-const loadFeatures = () =>
-    import("../Animated/DomAnimation").then((res) => res.default)
 
 const ShowImage: FC<Props> = ({ show }) => {
-    const [src, setSrc] = useState(
-        `https://image.tmdb.org/t/p/w400${show.poster_path}`
-    )
-    const [loaded, setLoaded] = useState(false)
-    const animationControls = useAnimation()
+  const [loaded, setLoaded] = useState(false);
 
-    useEffect(() => {
-        if (loaded) {
-            animationControls.start("visible")
-        }
-    }, [loaded, animationControls])
+  return (
+    <LazyMotion strict features={loadFeatures}>
+      <m.div
+        className='overflow-hidden rounded-md'
+        initial='hidden'
+        animate={loaded ? 'visible' : 'hidden'}
+        variants={animationVariants}
+        transition={{ ease: 'easeOut', duration: 1.25 }}
+      >
+        <ImageWithFallback
+          className='aspect-[2/3] object-cover'
+          src={`${imageBaseUrlW400}${show.poster_path}`}
+          width={400}
+          height={600}
+          alt={('title' in show && show.title) || show.name}
+          onLoadingComplete={() => setLoaded(true)}
+        />
+      </m.div>
+    </LazyMotion>
+  );
+};
 
-    return (
-        <LazyMotion strict features={loadFeatures}>
-            <m.div
-                className="relative block w-full overflow-hidden rounded-md"
-                initial="hidden"
-                style={{ paddingTop: 100 / (400 / 650) + "%" }}
-                animate={animationControls}
-                variants={animationVariants}
-                transition={{ ease: "easeOut", duration: 1.25 }}
-            >
-                <Image
-                    className="rounded-md"
-                    src={src}
-                    objectFit={"cover"}
-                    layout={"fill"}
-                    quality={100}
-                    alt={("title" in show && show.title) || show.name}
-                    onError={() => setSrc("/fallback.jpeg")}
-                    onLoadingComplete={() => setLoaded(true)}
-                />
-            </m.div>
-        </LazyMotion>
-    )
-}
-
-export default memo(ShowImage)
+export default memo(ShowImage);
