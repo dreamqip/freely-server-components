@@ -1,5 +1,5 @@
-import { NextPage } from 'next';
-import { wrapper } from '../../store';
+import type { NextPage } from 'next';
+import { wrapper } from '@/store';
 import {
   getPopularMovies,
   getRunningQueriesThunk,
@@ -7,7 +7,7 @@ import {
 } from '@/services/themoviedb';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useObserver } from '@/hooks/useObserver';
 import {
   reset,
@@ -29,7 +29,7 @@ const Movies: NextPage = () => {
     isLoading,
     isError,
     isFetching,
-  } = useGetPopularMoviesQuery(page);
+  } = useGetPopularMoviesQuery(page, { skip: router.isFallback });
 
   useObserver(lastElement, page < totalPages, isFetching, isLoading, () => {
     dispatch(setPage(page + 1));
@@ -63,14 +63,15 @@ const Movies: NextPage = () => {
 
 export default Movies;
 
-export const getStaticProps = wrapper.getStaticProps((store) => async () => {
-  await store.dispatch(
-    getPopularMovies.initiate(store.getState().popularMovies.page)
-  );
+export const getStaticProps = wrapper.getStaticProps(
+  ({ dispatch, getState }) =>
+    async () => {
+      dispatch(getPopularMovies.initiate(getState().popularMovies.page));
 
-  await Promise.all(dispatch(getRunningQueriesThunk()));
+      await Promise.all(dispatch(getRunningQueriesThunk()));
 
-  return {
-    props: {},
-  };
-});
+      return {
+        props: {},
+      };
+    }
+);

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { NextPage } from 'next';
-import { wrapper } from '../../store';
+import type { NextPage } from 'next';
+import { wrapper } from '@/store';
 import {
   getPopularTvShows,
   getRunningQueriesThunk,
@@ -68,14 +68,15 @@ const Series: NextPage = () => {
 
 export default Series;
 
-export const getStaticProps = wrapper.getStaticProps((store) => async () => {
-  await store.dispatch(
-    getPopularTvShows.initiate(store.getState().popularSeries.page)
-  );
+export const getStaticProps = wrapper.getStaticProps(
+  ({ dispatch, getState }) =>
+    async () => {
+      dispatch(getPopularTvShows.initiate(getState().popularSeries.page));
 
-  await Promise.all(dispatch(getRunningQueriesThunk()));
+      await Promise.all(dispatch(getRunningQueriesThunk()));
 
-  return {
-    props: {},
-  };
-});
+      return {
+        props: {},
+      };
+    }
+);

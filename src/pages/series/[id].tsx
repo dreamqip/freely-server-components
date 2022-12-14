@@ -1,5 +1,6 @@
 import type { InferGetServerSidePropsType, NextPage } from 'next';
-import { wrapper } from '../../store';
+import type { IKeyword } from '@/types/movie';
+import { wrapper } from '@/store';
 import {
   getRunningQueriesThunk,
   getTvShowById,
@@ -7,11 +8,11 @@ import {
 } from '@/services/themoviedb';
 import Hero from '@/components/SeriesPage/Hero';
 import dynamic from 'next/dynamic';
-import { useEffect, Suspense, useState } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useAppDispatch } from '@/hooks/redux';
 import {
   setSeries,
-  setSeriesCast,
+  setSeriesCredits,
   setSeriesId,
   setSeriesImages,
   setSeriesRecommendations,
@@ -19,29 +20,37 @@ import {
   setSeriesSimilar,
   setSeriesVideos,
 } from '@/features/series/seriesSlice';
-import { NextSeo } from 'next-seo';
-import { IKeyword } from '@/types/movie';
+import { NextSeo, NextSeoProps } from 'next-seo';
 import Spinner from '@/components/Spinner';
+import { useRouter } from 'next/router';
 
 const Tabs = dynamic(() => import('@/components/SeriesPage/Tabs'), {
   suspense: true,
-  ssr: false,
 });
 
 const TvShow: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ id }) => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
-  const { data: series, isLoading, isError } = useGetTvShowByIdQuery(id);
-  const [keywords, setKeywords] = useState<string[]>([]);
+  const {
+    data: series,
+    isLoading,
+    isError,
+  } = useGetTvShowByIdQuery(id, {
+    skip: router.isFallback,
+  });
 
-  const seoOptions: any = {
+  const seoOptions: NextSeoProps = {
     title: series?.name,
     description: series?.overview,
     additionalMetaTags: [
       {
         property: 'keywords',
-        content: keywords?.join(', '),
+        content:
+          series?.keywords.results
+            .map((keyword: IKeyword) => keyword.name)
+            .join(', ') || '',
       },
     ],
   };
@@ -55,10 +64,7 @@ const TvShow: NextPage<
       dispatch(setSeriesSimilar(series.similar));
       dispatch(setSeriesRecommendations(series.recommendations));
       dispatch(setSeriesReviews(series.reviews));
-      dispatch(setSeriesCast(series.credits));
-      setKeywords(
-        series.keywords.results.map((keyword: IKeyword) => keyword.name)
-      );
+      dispatch(setSeriesCredits(series.credits));
     }
   }, [isLoading, dispatch, series, id, isError]);
 
@@ -79,20 +85,19 @@ TvShow.theme = 'dark';
 export default TvShow;
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async (ctx) => {
-    const { id } = ctx.query;
-    const parsedId = parseInt(id as string, 10);
+  ({ dispatch }) =>
+    async (ctx) => {
+      const { id } = ctx.query;
+      const parsedId = parseInt(id as string, 10);
 
-    if (parsedId) {
-      await store.dispatch(getTvShowById.initiate(parsedId));
+      dispatch(getTvShowById.initiate(parsedId));
+
+      await Promise.all(dispatch(getRunningQueriesThunk()));
+
+      return {
+        props: {
+          id: parsedId,
+        },
+      };
     }
-
-    await Promise.all(dispatch(getRunningQueriesThunk()));
-
-    return {
-      props: {
-        id: parsedId,
-      },
-    };
-  }
 );

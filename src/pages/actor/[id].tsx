@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+import type { InferGetServerSidePropsType, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Details from '@/components/ActorPage/Details';
 import dynamic from 'next/dynamic';
@@ -7,23 +7,24 @@ import {
   getRunningQueriesThunk,
   useGetActorByIdQuery,
 } from '@/services/themoviedb';
-import { wrapper } from '../../store';
-import { skipToken } from '@reduxjs/toolkit/query';
+import { wrapper } from '@/store';
 import ImageList from '@/components/ActorPage/ImageList';
 import { NextSeo } from 'next-seo';
+import { Suspense } from 'react';
+import Spinner from '@/components/Spinner';
 
-const ActorMovies = dynamic(() => import('@/components/ActorPage/ActorMovies'));
+const ActorMovies = dynamic(
+  () => import('@/components/ActorPage/ActorMovies'),
+  { suspense: true }
+);
 
-const ActorPage: NextPage = () => {
+const ActorPage: NextPage<
+  InferGetServerSidePropsType<typeof getServerSideProps>
+> = ({ id }) => {
   const router = useRouter();
-  const { id } = router.query;
-  const result = useGetActorByIdQuery(
-    typeof id === 'string' ? parseInt(id) : skipToken,
-    {
-      skip: router.isFallback,
-    }
-  );
-  const { data } = result;
+  const { data } = useGetActorByIdQuery(id, {
+    skip: router.isFallback,
+  });
 
   const seoOptions = {
     title: data?.name,
@@ -33,9 +34,15 @@ const ActorPage: NextPage = () => {
   return (
     <div>
       <NextSeo {...seoOptions} />
-      <Details person={data} />
-      <ActorMovies movies={data?.combined_credits.cast} />
-      <ImageList images={data?.images.profiles} />
+      {data ? (
+        <>
+          <Details person={data} />
+          <Suspense fallback={<Spinner />}>
+            <ActorMovies movies={data.combined_credits.cast} />
+          </Suspense>
+          <ImageList images={data.images.profiles} />
+        </>
+      ) : null}
     </div>
   );
 };
@@ -43,17 +50,19 @@ const ActorPage: NextPage = () => {
 export default ActorPage;
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async (context) => {
-    const id = context.params?.id;
+  ({ dispatch }) =>
+    async (context) => {
+      const { id } = context.query;
+      const parsedId = parseInt(id as string, 10);
 
-    if (typeof id === 'string') {
-      store.dispatch(getActorById.initiate(parseInt(id)));
+      dispatch(getActorById.initiate(parsedId));
+
+      await Promise.all(dispatch(getRunningQueriesThunk()));
+
+      return {
+        props: {
+          id: parsedId,
+        },
+      };
     }
-
-    await Promise.all(dispatch(getRunningQueriesThunk()));
-
-    return {
-      props: {},
-    };
-  }
 );
