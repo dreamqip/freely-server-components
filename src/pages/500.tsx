@@ -16,8 +16,8 @@ const Error500: NextPage = () => {
         Something bad just happened...
       </h1>
       <div className='mx-auto max-w-[500px] text-center text-xl dark:text-white'>
-        Our servers could not handle your request. Don't worry, our development
-        team was already notified. Try refreshing the page.
+        Our servers could not handle your request. Don&apos;t worry, our
+        development team was already notified. Try refreshing the page.
       </div>
       <Link href='/'>
         <Button

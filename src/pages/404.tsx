@@ -1,6 +1,6 @@
+import type { NextPage } from 'next';
 import Link from 'next/link';
 import { Button } from 'antd';
-import { NextPage } from 'next';
 
 const Error: NextPage = () => {
   return (
