@@ -1,4 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+const { screens, flex, fontFamily } = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
           'radial-gradient(farthest-side at 73% 21%, transparent, rgb(12, 12, 12))',
       },
       fontFamily: {
-        rubik: 'Rubik, sans-serif',
+        montserrat: ['var(--font-montserrat)', ...fontFamily.sans],
       },
       colors: {
         'dark-theme': '#121212',
@@ -26,11 +26,11 @@ module.exports = {
     },
     screens: {
       xs: '390px',
-      ...defaultTheme.screens,
+      ...screens,
     },
     flex: {
       '0-auto': '0 0 auto',
-      ...defaultTheme.flex,
+      ...flex,
     },
   },
   important: true,
