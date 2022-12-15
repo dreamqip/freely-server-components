@@ -35,7 +35,7 @@ export const movieApi = createApi({
       query: (searchQuery) => ({
         url: 'search/multi',
         params: {
-          api_key: process.env.NEXT_PUBLIC_NEXT_PUBLIC_API_KEY,
+          api_key: process.env.NEXT_PUBLIC_API_KEY,
           query: searchQuery,
           page: 1,
         },
