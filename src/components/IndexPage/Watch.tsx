@@ -4,10 +4,15 @@ import devices from '../../../public/devices.png';
 
 const Watch: FC = () => {
   return (
-    <section className='flex min-h-[400px] flex-col items-center justify-center pt-16 md:flex-row-reverse'>
-      <h2 className='m-0 text-center text-5xl dark:text-white sm:text-6xl lg:text-left lg:text-7xl xl:text-8xl'>
-        Watch everywhere.
-      </h2>
+    <section className='flex flex-col items-center justify-center pt-16 md:min-h-[400px] md:flex-row-reverse'>
+      <div className='max-w-xl'>
+        <h2 className='m-0 text-center text-4xl dark:text-white sm:text-5xl lg:text-left lg:text-6xl xl:text-7xl'>
+          Watch everywhere.
+        </h2>
+        <h3 className='m-0 mt-6 text-center text-xl tracking-tight dark:text-white md:text-left md:text-3xl'>
+          Stream unlimited movies and TV shows on your phone, tablet, or laptop.
+        </h3>
+      </div>
       <Image
         src={devices}
         alt='watch everywhere and from any device you want to'
