@@ -11,7 +11,7 @@ This is study project to improve my knowledge of React & Next.js
 
 ## Demo
 
-https://freely-dreamqip.vercel.app/
+https://freelym.vercel.app/
 
 ## Tech Stack
 
