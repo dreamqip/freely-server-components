@@ -16,6 +16,7 @@ import {
   setTotalPages,
 } from '@/features/movie/popularSlice';
 import MoviesList from '@/components/MoviePage/MoviesList';
+import { FloatButton } from 'antd';
 
 const Movies: NextPage = () => {
   const router = useRouter();
@@ -57,6 +58,7 @@ const Movies: NextPage = () => {
       <h1 className='m-0 text-center text-6xl dark:text-white'>Movies</h1>
       <MoviesList />
       {visible && <div className='h-10' ref={lastElement}></div>}
+      <FloatButton.BackTop />
     </div>
   );
 };

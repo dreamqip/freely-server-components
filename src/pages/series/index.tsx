@@ -17,6 +17,7 @@ import {
 import { useRouter } from 'next/router';
 import { useObserver } from '@/hooks/useObserver';
 import SeriesList from '@/components/SeriesPage/SeriesList';
+import { FloatButton } from 'antd';
 
 const Series: NextPage = () => {
   const router = useRouter();
@@ -62,6 +63,7 @@ const Series: NextPage = () => {
       <h1 className='m-0 text-center text-6xl dark:text-white'>Series</h1>
       <SeriesList />
       {visible && <div className='h-10' ref={lastElement}></div>}
+      <FloatButton.BackTop />
     </div>
   );
 };
