@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import Link from 'next/link';
 import { Button } from 'antd';
 
 const Error500: NextPage = () => {
@@ -15,21 +14,19 @@ const Error500: NextPage = () => {
       <h1 className='text-center text-4xl font-black dark:text-white'>
         Something bad just happened...
       </h1>
-      <div className='mx-auto max-w-[500px] text-center text-xl dark:text-white'>
+      <div className='mx-auto mt-4 max-w-[500px] text-center text-xl dark:text-white'>
         Our servers could not handle your request. Don&apos;t worry, our
         development team was already notified. Try refreshing the page.
       </div>
-      <Link href='/'>
-        <Button
-          className='mt-10 bg-primary-500 hover:scale-105 dark:bg-primary-dark'
-          type={'primary'}
-          shape={'round'}
-          size={'large'}
-          onClick={refreshPage}
-        >
-          Refresh the page
-        </Button>
-      </Link>
+      <Button
+        className='mt-10 bg-primary-500 hover:scale-105 dark:bg-primary-dark'
+        type='primary'
+        shape='round'
+        size='large'
+        onClick={refreshPage}
+      >
+        Refresh the page
+      </Button>
     </div>
   );
 };

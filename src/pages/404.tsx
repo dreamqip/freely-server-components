@@ -11,16 +11,16 @@ const Error: NextPage = () => {
       <h1 className='text-center text-4xl font-black dark:text-white'>
         You have found a secret place.
       </h1>
-      <div className='mx-auto max-w-[500px] text-center text-xl dark:text-white'>
+      <div className='mx-auto mt-4 max-w-[500px] text-center text-xl dark:text-white'>
         Unfortunately, this is only a 404 page. You may have mistyped the
         address, or the page has been moved to another URL.
       </div>
-      <Link href='/'>
+      <Link href='/' className='mt-10'>
         <Button
-          className='mt-10 bg-primary-500 hover:scale-105 dark:bg-primary-dark'
-          type={'primary'}
-          shape={'round'}
-          size={'large'}
+          className='bg-primary-500 hover:scale-105 dark:bg-primary-dark'
+          type='primary'
+          shape='round'
+          size='large'
         >
           Take me back to home page
         </Button>
