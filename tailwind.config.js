@@ -12,6 +12,9 @@ module.exports = {
       backgroundImage: {
         'radial-gradient':
           'radial-gradient(farthest-side at 73% 21%, transparent, rgb(12, 12, 12))',
+        'text-gradient-1': 'linear-gradient(to left, #7928CA, #FF0080)',
+        'text-gradient-2': 'linear-gradient(to left, #FF4D4D, #F9CB28)',
+        'text-gradient-3': 'linear-gradient(to left, #007CF0, #00DFD8)',
       },
       fontFamily: {
         montserrat: ['var(--font-montserrat)', ...fontFamily.sans],
