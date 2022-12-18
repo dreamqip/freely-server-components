@@ -10,7 +10,7 @@ const MainFooter: FC = () => {
           href='https://www.themoviedb.org/'
           target='_blank'
           rel='noreferrer'
-          className='ml-1 text-blue-500'
+          className='ml-1 text-blue-700 dark:text-blue-600'
         >
           TMDB
         </a>

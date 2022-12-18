@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -62,4 +62,4 @@ const MainHeader: FC = () => {
   );
 };
 
-export default memo(MainHeader);
+export default MainHeader;

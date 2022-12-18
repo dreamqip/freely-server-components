@@ -26,6 +26,7 @@ const Path = (
 export const NavigationToggle: FC<Props> = ({ toggle }) => (
   <button
     onClick={toggle}
+    aria-label='Toggle Navigation'
     className='pointer-events-auto absolute top-[30px] left-[28px] z-50 flex cursor-pointer items-center justify-center rounded-[50%] bg-transparent'
   >
     <svg width='23' height='23' viewBox='0 0 23 23'>
