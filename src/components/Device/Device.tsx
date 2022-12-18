@@ -16,7 +16,7 @@ export const Device = ({
     minWidth: 768,
   });
   const isMobile = useMediaQuery({
-    maxWidth: 568,
+    maxWidth: 767,
   });
 
   return (isMobile && mobile) || (isDesktopOrTablet && desktop)

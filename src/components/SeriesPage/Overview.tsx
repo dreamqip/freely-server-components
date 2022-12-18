@@ -27,13 +27,16 @@ const Overview: FC = () => {
             <Image
               src={`${imageBaseUrlW400}${series.poster_path}`}
               alt={series.name}
-              className='mx-auto rounded-xl object-contain sm:mx-0'
+              priority
+              className='mx-auto aspect-[2/3] rounded-xl sm:mx-0'
               width={250}
               height={400}
             />
             <div className='relative'>
-              <h2 className='text-3xl dark:text-white'>Storyline</h2>
-              <p className='mt-2 text-lg dark:text-primary-dark'>
+              <h2 className='text-2xl dark:text-white md:text-3xl'>
+                Storyline
+              </h2>
+              <p className='text-md mt-2 dark:text-primary-dark md:text-lg'>
                 {series.overview}
               </p>
               <table className='mt-2 w-full border-spacing-2 sm:w-auto'>

@@ -11,19 +11,16 @@ export const swiperOptions: SwiperOptions = {
   navigation: {
     enabled: false,
   },
-  slidesPerView: 1.1,
+  slidesPerView: 3.1,
   slidesPerGroup: 1,
   breakpoints: {
-    568: {
-      slidesPerView: 2.1,
-    },
     768: {
-      slidesPerView: 3.3,
+      slidesPerView: 4.1,
       slidesPerGroup: 2,
       spaceBetween: 15,
     },
     1024: {
-      slidesPerView: 5,
+      slidesPerView: 6,
       slidesPerGroup: 3,
       spaceBetween: 20,
       navigation: {

@@ -27,14 +27,19 @@ const Overview: FC = () => {
             <ImageWithFallback
               src={`${imageBaseUrlOriginal}${movie.poster_path}`}
               alt={movie.title}
+              priority
               className='mx-auto rounded-xl object-contain sm:mx-0'
               width={250}
               height={400}
             />
             <div className='relative'>
-              <h2 className='text-3xl dark:text-white'>Storyline</h2>
-              <p className='text-lg dark:text-primary-dark'>{movie.overview}</p>
-              <table className='border-spacing-2'>
+              <h2 className='text-2xl dark:text-white md:text-3xl'>
+                Storyline
+              </h2>
+              <p className='text-md mt-2 dark:text-primary-dark md:text-lg'>
+                {movie.overview}
+              </p>
+              <table className='mt-2 w-full border-spacing-2 sm:w-auto'>
                 <tbody>
                   {parsedDetails.map((detail) => {
                     return (
