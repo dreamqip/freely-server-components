@@ -46,7 +46,7 @@ const Hero: FC = () => {
               alt={series?.name}
               fill
               priority
-              sizes='(max-width: 640px) 640px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, (max-width: 1280px) 1280px, (max-width: 1536px) 1536px, 1920px'
+              sizes='(max-width: 640px) 100vw, (max-width: 768px) 75vw, (max-width: 1440px) 50vw, 25vw'
               className='aspect-video object-cover object-top'
               onLoadingComplete={() => setLoaded(true)}
             />
