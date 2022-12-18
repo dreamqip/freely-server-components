@@ -1,18 +1,22 @@
 import type { FC } from 'react';
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import { useEffect, useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
 import HeaderMenu from '@/components/Header/Menu';
 import SwitchButton from '@/components/Header/SwitchButton';
 import { useTheme } from 'next-themes';
-import MobileNav from '@/components/Header/MobileNav';
 import { Device } from '@/components/Device';
+import dynamic from 'next/dynamic';
+import ImageWithFallback from '@/components/Image';
+
+const MobileNav = dynamic(() => import('@/components/Header/MobileNav'), {
+  suspense: true,
+});
 
 const MainHeader: FC = () => {
   const router = useRouter();
-  const [logoSrc, setLogoSrc] = useState<string>('/logo-white.webp');
+  const [logoSrc, setLogoSrc] = useState('/logo-white.webp');
   const { theme, forcedTheme } = useTheme();
 
   const isShowPage =
@@ -39,7 +43,7 @@ const MainHeader: FC = () => {
         <Device desktop>
           <>
             <Link href='/' className='flex items-center'>
-              <Image
+              <ImageWithFallback
                 src={logoSrc}
                 priority
                 alt='logo'
@@ -52,7 +56,9 @@ const MainHeader: FC = () => {
           </>
         </Device>
         <Device mobile>
-          <MobileNav />
+          <Suspense fallback={null}>
+            <MobileNav />
+          </Suspense>
         </Device>
       </div>
       <div className='flex items-center'>

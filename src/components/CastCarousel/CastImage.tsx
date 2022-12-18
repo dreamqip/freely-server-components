@@ -25,6 +25,7 @@ const CastImage: FC<Props> = ({ path }) => {
         src={`${imageBaseUrlW400}${path.profile_path}`}
         width={400}
         height={600}
+        sizes='(max-width: 400px) 33vw, (max-width: 768px) 25vw, 15vw'
         className='aspect-[2/3] object-cover'
         alt={path.name}
         onLoadingComplete={() => setLoaded(true)}

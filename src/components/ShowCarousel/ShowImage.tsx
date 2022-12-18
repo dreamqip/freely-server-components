@@ -28,6 +28,7 @@ const ShowImage: FC<Props> = ({ show }) => {
           src={`${imageBaseUrlW400}${show.poster_path}`}
           width={400}
           height={600}
+          sizes='(max-width: 400px) 33vw, (max-width: 768px) 25vw, 15vw'
           alt={('title' in show && show.title) || show.name}
           onLoadingComplete={() => setLoaded(true)}
         />
