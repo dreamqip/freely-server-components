@@ -13,6 +13,7 @@ const MainLayout = dynamic(() => import('@/layouts/MainLayout'));
 const Progress = dynamic(() => import('@/components/ProgressBar'));
 
 const montserrat = Montserrat({
+  weight: ['400', '500', '600', '700', '800'],
   subsets: ['latin'],
 });
 
@@ -44,8 +45,7 @@ function MyApp({ Component, ...rest }: AppProps) {
                 gtag('config', 'G-3FTM4H2WDP');
           `,
         }}
-      ></Script>
-
+      />
       <DefaultSeo {...SEO} />
       <Progress />
       <Provider store={store}>

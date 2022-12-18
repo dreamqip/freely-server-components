@@ -1,0 +1,152 @@
+@layer components {
+  .heading-line {
+    --padding: 0.05em;
+    @apply relative block uppercase;
+  }
+
+  .heading-line-gradient {
+    @apply relative z-10 block bg-clip-text text-transparent;
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+  }
+
+  .heading-line::before {
+    @apply pointer-events-none absolute block w-full leading-none text-black;
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+  }
+
+  .dark .heading-line::before {
+    @apply text-white;
+  }
+
+  .heading-line-first > .heading-line-gradient {
+    @apply bg-text-gradient-1;
+    animation: first_heading_gradient 8s infinite;
+  }
+
+  .heading-line-first::before {
+    content: 'Movie';
+    animation: first_heading_white_text 8s infinite;
+  }
+
+  .heading-line-second > .heading-line-gradient {
+    @apply bg-text-gradient-2;
+    animation: second_heading_gradient 8s infinite;
+  }
+
+  .heading-line-second::before {
+    content: 'Change';
+    animation: second_heading_white_text 8s infinite;
+  }
+
+  .heading-line-third > .heading-line-gradient {
+    @apply bg-text-gradient-3;
+    animation: third_heading_gradient 8s infinite;
+  }
+
+  .heading-line-third::before {
+    content: 'The world';
+    animation: third_heading_white_text 8s infinite;
+  }
+
+  @keyframes first_heading_gradient {
+    0%,
+    16.667% {
+      opacity: 1;
+    }
+
+    33.333%,
+    83.333% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* 1st heading white text */
+  @keyframes first_heading_white_text {
+    0%,
+    16.667% {
+      opacity: 0;
+    }
+
+    25%,
+    91.667% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes second_heading_gradient {
+    0%,
+    16.667% {
+      opacity: 0;
+    }
+
+    33.333%,
+    50% {
+      opacity: 1;
+    }
+
+    66.667%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes second_heading_white_text {
+    0%,
+    25% {
+      opacity: 1;
+    }
+
+    33.333%,
+    50% {
+      opacity: 0;
+    }
+
+    58.333%,
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes third_heading_gradient {
+    0%,
+    50% {
+      opacity: 0;
+    }
+
+    66.667%,
+    83.333% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes third_heading_white_text {
+    0%,
+    58.333% {
+      opacity: 1;
+    }
+
+    66.667%,
+    83.333% {
+      opacity: 0;
+    }
+
+    91.667%,
+    100% {
+      opacity: 1;
+    }
+  }
+}

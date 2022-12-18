@@ -155,7 +155,7 @@ export default function MyDocument() {
           media='(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)'
         />
       </Head>
-      <body className='pt-16 dark:bg-dark-theme'>
+      <body className='pt-20 dark:bg-dark-theme'>
         <Main />
         <NextScript />
       </body>
