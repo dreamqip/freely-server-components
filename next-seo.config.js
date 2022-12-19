@@ -5,14 +5,15 @@ export default {
   additionalMetaTags: [
     {
       property: 'keywords',
-      content: 'movie app, movie details, popular movies, upcoming movies',
+      content:
+        'movie app, movie details, popular movies, upcoming movies, reviews, trailers, movie trailers, movie reviews, search movies, series, tv shows, tv series, tv shows details, tv series details, tv shows trailers, tv series trailers, tv shows reviews, tv series reviews, search tv shows, search tv series',
     },
     {
       name: 'author',
       content: 'https://github.com/dreamqip',
     },
     {
-      name: 'theme_color',
+      name: 'theme-color',
       content: '#6200EE',
     },
     {
@@ -22,6 +23,18 @@ export default {
     },
     {
       name: 'apple-mobile-web-app-capable',
+      content: 'yes',
+    },
+    {
+      name: 'apple-mobile-web-app-status-bar-style',
+      content: 'black-translucent',
+    },
+    {
+      name: 'apple-mobile-web-app-title',
+      content: 'Freely',
+    },
+    {
+      name: 'mobile-web-app-capable',
       content: 'yes',
     },
   ],
