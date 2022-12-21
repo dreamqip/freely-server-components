@@ -1,14 +1,16 @@
 import type { FC } from 'react';
+import type { IReviews } from '@/types/reviews';
 import { Avatar, List } from 'antd';
-import { useAppSelector } from '@/hooks/redux';
 import Empty from '@/components/Empty';
 
-const Reviews: FC = () => {
-  const { reviews } = useAppSelector((state) => state.movie);
+interface Props {
+  reviews: IReviews;
+}
 
+const Reviews: FC<Props> = ({ reviews }) => {
   return (
-    <div className='relative'>
-      <h2 className='mt-4 text-center text-2xl font-bold dark:text-white md:text-5xl'>
+    <div className='py-4 md:py-10'>
+      <h2 className='mb-4 text-center text-3xl font-semibold dark:text-white md:text-4xl'>
         Reviews
       </h2>
       {reviews && reviews.results.length > 0 ? (
@@ -28,6 +30,7 @@ const Reviews: FC = () => {
                 }
                 avatar={
                   <Avatar
+                    alt={item.author}
                     src={`https://ui-avatars.com/api/?rounded=true&name=${item.author}&background=random`}
                   />
                 }

@@ -6,7 +6,6 @@ import type {
 } from '@/types/series';
 import type { Images } from '@/types/images';
 import type { IVideos } from '@/types/videos';
-import type { IReviews } from '@/types/reviews';
 import type { ITvShowCredits } from '@/types/credits';
 
 interface InitialState {
@@ -14,7 +13,6 @@ interface InitialState {
   series: ITvShow | null;
   images: Images | null;
   videos: IVideos | null;
-  reviews: IReviews | null;
   recommendations: ITvShowRecommendations | null;
   similar: ITvShowSimilar | null;
   credits: ITvShowCredits | null;
@@ -25,7 +23,6 @@ const initialState: InitialState = {
   series: null,
   images: null,
   videos: null,
-  reviews: null,
   recommendations: null,
   similar: null,
   credits: null,
@@ -46,9 +43,6 @@ const seriesSlice = createSlice({
     },
     setSeriesId: (state, action: PayloadAction<number>) => {
       state.id = action.payload;
-    },
-    setSeriesReviews: (state, action: PayloadAction<IReviews>) => {
-      state.reviews = action.payload;
     },
     setSeriesRecommendations: (
       state,
@@ -71,7 +65,6 @@ export const {
   setSeriesImages,
   setSeriesId,
   setSeriesRecommendations,
-  setSeriesReviews,
   setSeriesSimilar,
   setSeriesCredits,
 } = seriesSlice.actions;

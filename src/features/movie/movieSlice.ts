@@ -1,7 +1,6 @@
 import type { IMovie, IRecommendedMovies, ISimilarMovies } from '@/types/movie';
 import type { Images } from '@/types/images';
 import type { IVideos } from '@/types/videos';
-import type { IReviews } from '@/types/reviews';
 import type { IMovieCredits } from '@/types/credits';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
@@ -10,7 +9,6 @@ interface MovieState {
   movie: IMovie | null;
   images: Images | null;
   videos: IVideos | null;
-  reviews: IReviews | null;
   recommendations: IRecommendedMovies | null;
   similar: ISimilarMovies | null;
   credits: IMovieCredits | null;
@@ -21,7 +19,6 @@ const initialState: MovieState = {
   movie: null,
   images: null,
   videos: null,
-  reviews: null,
   recommendations: null,
   similar: null,
   credits: null,
@@ -43,9 +40,6 @@ export const movieSlice = createSlice({
     setVideos: (state, action: PayloadAction<IVideos>) => {
       state.videos = action.payload;
     },
-    setReviews: (state, action: PayloadAction<IReviews>) => {
-      state.reviews = action.payload;
-    },
     setRecommendations: (state, action: PayloadAction<IRecommendedMovies>) => {
       state.recommendations = action.payload;
     },
@@ -66,7 +60,6 @@ export const {
   setCredits,
   setRecommendations,
   setSimilar,
-  setReviews,
 } = movieSlice.actions;
 
 export default movieSlice.reducer;
