@@ -13,7 +13,7 @@ const MainLayout = dynamic(() => import('@/layouts/MainLayout'));
 const Progress = dynamic(() => import('@/components/ProgressBar'));
 
 const montserrat = Montserrat({
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   subsets: ['latin'],
 });
 
