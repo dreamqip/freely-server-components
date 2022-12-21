@@ -63,6 +63,7 @@ const Series: NextPage = () => {
       <h1 className='m-0 text-center text-6xl dark:text-white'>Series</h1>
       <SeriesList />
       {visible && <div className='h-10' ref={lastElement}></div>}
+      {isFetching && <Spinner />}
       <FloatButton.BackTop />
     </div>
   );
