@@ -10,6 +10,7 @@ import dynamic from 'next/dynamic';
 import Logo from '@/components/Logo';
 
 const MobileNav = dynamic(() => import('@/components/Header/MobileNav'), {
+  ssr: false,
   suspense: true,
 });
 
