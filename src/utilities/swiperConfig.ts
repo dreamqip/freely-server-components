@@ -14,7 +14,7 @@ export const swiperOptions: SwiperOptions = {
   slidesPerView: 3.1,
   slidesPerGroup: 1,
   breakpoints: {
-    768: {
+    568: {
       slidesPerView: 4.1,
       slidesPerGroup: 2,
       spaceBetween: 15,
@@ -31,9 +31,14 @@ export const swiperOptions: SwiperOptions = {
         enabled: false,
       },
     },
+    1440: {
+      slidesPerView: 8,
+      slidesPerGroup: 4,
+      spaceBetween: 10,
+    },
   },
   preloadImages: false,
   speed: 700,
-  preventInteractionOnTransition: true,
+  preventInteractionOnTransition: false,
   grabCursor: true,
 };

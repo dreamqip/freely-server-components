@@ -6,9 +6,7 @@ const Similar: FC = () => {
   const { similar } = useAppSelector((state) => state.movie);
 
   return (
-    <div>
-      {similar ? <ShowCarousel series={similar} title={'Similar'} /> : null}
-    </div>
+    <>{similar ? <ShowCarousel series={similar} title={'Similar'} /> : null}</>
   );
 };
 

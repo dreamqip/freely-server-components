@@ -6,11 +6,11 @@ const Recommended: FC = () => {
   const { recommendations } = useAppSelector((state) => state.series);
 
   return (
-    <div>
+    <>
       {recommendations ? (
         <ShowCarousel series={recommendations} title={'Recommended'} />
       ) : null}
-    </div>
+    </>
   );
 };
 

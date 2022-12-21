@@ -9,7 +9,7 @@ interface PageProps {
 
 const VideoCard: FC<PageProps> = ({ id, type, name }) => {
   return (
-    <div className='relative'>
+    <div>
       <LiteYouTubeEmbed id={id} title={name} />
       <div className='mt-4 text-lg dark:text-white'>{name}</div>
       <div className='text-md text-gray-500'>{type}</div>
