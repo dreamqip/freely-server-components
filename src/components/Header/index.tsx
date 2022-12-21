@@ -8,10 +8,11 @@ import SwitchButton from '@/components/Header/SwitchButton';
 import { Device } from '@/components/Device';
 import dynamic from 'next/dynamic';
 import Logo from '@/components/Logo';
+import { Bars3Icon } from '@heroicons/react/24/solid';
 
 const MobileNav = dynamic(() => import('@/components/Header/MobileNav'), {
   ssr: false,
-  suspense: true,
+  loading: () => <Bars3Icon className='h-6 w-6' />,
 });
 
 const MainHeader: FC = () => {
@@ -39,9 +40,7 @@ const MainHeader: FC = () => {
           </>
         </Device>
         <Device mobile>
-          <Suspense fallback={null}>
-            <MobileNav />
-          </Suspense>
+          <MobileNav />
         </Device>
       </div>
       <div className='flex items-center'>
