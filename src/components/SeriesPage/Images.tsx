@@ -15,7 +15,6 @@ const Images: FC = () => {
           images?.backdrops.map((image: Backdrop) => {
             return (
               <Image
-                rootClassName='rounded-md overflow-hidden'
                 className='aspect-video object-cover'
                 key={image.file_path}
                 placeholder

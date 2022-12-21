@@ -9,7 +9,7 @@ const Empty: FC<PropsWithChildren<EmptyProps>> = ({
   return (
     <AntdEmpty
       description={
-        <h2 className='text-center text-2xl font-medium dark:text-white'>
+        <h2 className='text-center text-xl font-medium dark:text-white'>
           {description}
         </h2>
       }

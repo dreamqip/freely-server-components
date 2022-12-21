@@ -15,10 +15,10 @@ const CastCard: FC<Props> = ({ person }) => {
     >
       <>
         <CastImage path={person} />
-        <div className='truncate text-lg text-black dark:text-white'>
-          {person.name}
+        <div className='text-lg text-black dark:text-white'>{person.name}</div>
+        <div className='text-md truncate text-primary-dark'>
+          {person.character}
         </div>
-        <div className='text-md truncate text-gray-500'>{person.character}</div>
       </>
     </Link>
   );

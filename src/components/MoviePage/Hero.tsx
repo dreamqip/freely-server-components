@@ -46,7 +46,7 @@ const Hero: FC = () => {
               alt={movie.title}
               fill
               priority
-              sizes='(max-width: 640px) 100vw, (max-width: 768px) 75vw, (max-width: 1440px) 50vw, 25vw'
+              sizes='(max-width: 640px) 100vw, (max-width: 768px) 75vw, (max-width: 1024px) 50vw, (max-width: 1440px) 33vw, (max-width: 1920px) 25vw, 20vw'
               className='aspect-video object-cover object-top'
               onLoadingComplete={() => setLoaded(true)}
             />
@@ -82,9 +82,6 @@ const Hero: FC = () => {
               {movie?.title}
             </h1>
           )}
-          <span className='hidden text-lg text-white md:block'>
-            {movie?.overview?.substring(0, 150) + '...'}
-          </span>
           <div className='my-4 leading-6 tracking-widest text-white'>
             {movie?.genres?.map((genre) => genre.name).join(', ')}
           </div>

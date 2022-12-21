@@ -46,7 +46,7 @@ const Hero: FC = () => {
               alt={series?.name}
               fill
               priority
-              sizes='(max-width: 640px) 100vw, (max-width: 768px) 75vw, (max-width: 1440px) 50vw, 25vw'
+              sizes='(max-width: 640px) 100vw, (max-width: 768px) 75vw, (max-width: 1024px) 50vw, (max-width: 1440px) 33vw, (max-width: 1920px) 25vw, 20vw'
               className='aspect-video object-cover object-top'
               onLoadingComplete={() => setLoaded(true)}
             />
@@ -87,10 +87,7 @@ const Hero: FC = () => {
               {series?.name}
             </h1>
           )}
-          <span className='hidden text-lg font-medium text-white md:block'>
-            {series?.overview?.substring(0, 150) + '...'}
-          </span>
-          <div className='my-4 font-light tracking-widest text-white'>
+          <div className='font-light tracking-widest text-white'>
             {series?.number_of_seasons}{' '}
             {series && series.number_of_seasons > 1 ? 'Seasons' : 'Season'}
           </div>
