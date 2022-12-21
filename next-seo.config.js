@@ -2,6 +2,12 @@ export default {
   defaultTitle: 'Freely',
   description:
     'Freely offers movie details and trailers. It also includes popular movies and reviews.',
+  openGraph: {
+    type: 'website',
+    locale: 'en_IE',
+    url: 'https://freelym.vercel.app/',
+    site_name: 'Freely',
+  },
   additionalMetaTags: [
     {
       property: 'keywords',

@@ -13,7 +13,6 @@ import {
   setImages,
   setMovieDetails,
   setRecommendations,
-  setReviews,
   setSimilar,
   setVideos,
 } from '@/features/movie/movieSlice';
@@ -44,6 +43,18 @@ const MoviePage: NextPage<
   const seoOptions: NextSeoProps = {
     title: movie?.title,
     description: movie?.overview,
+    openGraph: {
+      title: movie?.title,
+      description: movie?.overview,
+      images: [
+        {
+          url: `https://image.tmdb.org/t/p/original${movie?.backdrop_path}`,
+          width: 1280,
+          height: 720,
+          alt: movie?.title,
+        },
+      ],
+    },
     additionalMetaTags: [
       {
         property: 'keywords',
@@ -63,7 +74,6 @@ const MoviePage: NextPage<
       dispatch(setVideos(movie.videos));
       dispatch(setSimilar(movie.similar));
       dispatch(setRecommendations(movie.recommendations));
-      dispatch(setReviews(movie.reviews));
       dispatch(setCredits(movie.credits));
     }
   }, [dispatch, id, isError, isLoading, movie]);

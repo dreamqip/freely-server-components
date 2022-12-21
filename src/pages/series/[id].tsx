@@ -16,13 +16,12 @@ import {
   setSeriesId,
   setSeriesImages,
   setSeriesRecommendations,
-  setSeriesReviews,
   setSeriesSimilar,
   setSeriesVideos,
 } from '@/features/series/seriesSlice';
 import { NextSeo, NextSeoProps } from 'next-seo';
-import Spinner from '@/components/Spinner';
 import { useRouter } from 'next/router';
+import Spinner from '@/components/Spinner';
 
 const Tabs = dynamic(() => import('@/components/SeriesPage/Tabs'), {
   suspense: true,
@@ -44,6 +43,18 @@ const TvShow: NextPage<
   const seoOptions: NextSeoProps = {
     title: series?.name,
     description: series?.overview,
+    openGraph: {
+      title: series?.name,
+      description: series?.overview,
+      images: [
+        {
+          url: `https://image.tmdb.org/t/p/original${series?.backdrop_path}`,
+          width: 1280,
+          height: 720,
+          alt: series?.name,
+        },
+      ],
+    },
     additionalMetaTags: [
       {
         property: 'keywords',
@@ -63,7 +74,6 @@ const TvShow: NextPage<
       dispatch(setSeriesVideos(series.videos));
       dispatch(setSeriesSimilar(series.similar));
       dispatch(setSeriesRecommendations(series.recommendations));
-      dispatch(setSeriesReviews(series.reviews));
       dispatch(setSeriesCredits(series.credits));
     }
   }, [isLoading, dispatch, series, id, isError]);

@@ -8,13 +8,17 @@ import {
   useGetActorByIdQuery,
 } from '@/services/themoviedb';
 import { wrapper } from '@/store';
-import ImageList from '@/components/ActorPage/ImageList';
-import { NextSeo } from 'next-seo';
+import { NextSeo, NextSeoProps } from 'next-seo';
 import { Suspense } from 'react';
 import Spinner from '@/components/Spinner';
 
 const ActorMovies = dynamic(
   () => import('@/components/ActorPage/ActorMovies'),
+  { suspense: true }
+);
+
+const ProfileImageList = dynamic(
+  () => import('@/components/ActorPage/ProfileImageList'),
   { suspense: true }
 );
 
@@ -26,9 +30,21 @@ const ActorPage: NextPage<
     skip: router.isFallback,
   });
 
-  const seoOptions = {
+  const seoOptions: NextSeoProps = {
     title: data?.name,
     description: data?.biography,
+    openGraph: {
+      title: data?.name,
+      description: data?.biography,
+      images: [
+        {
+          url: `https://image.tmdb.org/t/p/original${data?.profile_path}`,
+          width: 1280,
+          height: 720,
+          alt: data?.name,
+        },
+      ],
+    },
   };
 
   return (
@@ -40,7 +56,9 @@ const ActorPage: NextPage<
           <Suspense fallback={<Spinner />}>
             <ActorMovies movies={data.combined_credits.cast} />
           </Suspense>
-          <ImageList images={data.images.profiles} />
+          <Suspense fallback={<Spinner />}>
+            <ProfileImageList images={data.images.profiles} />
+          </Suspense>
         </>
       ) : null}
     </div>
