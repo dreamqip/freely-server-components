@@ -8,9 +8,9 @@ interface Props {
 
 const ActorMovies: FC<Props> = ({ movies }) => {
   return (
-    <div>
+    <>
       <ActorMoviesList movies={movies} title='Known for' />
-    </div>
+    </>
   );
 };
 

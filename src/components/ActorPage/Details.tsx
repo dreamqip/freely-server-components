@@ -20,7 +20,7 @@ const Details: FC<Props> = ({ person }) => {
           priority
           width={400}
           height={600}
-          className='aspect-[2/3] rounded-md object-cover'
+          className='aspect-[2/3] w-3/4 rounded-md object-cover md:w-1/2 lg:w-full'
         />
       </div>
       <div className='mt-6 lg:col-span-2 lg:m-0'>

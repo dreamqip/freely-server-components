@@ -42,9 +42,6 @@ const ActorMovieCard: FC<Props> = ({ show }) => {
               </m.div>
             </LazyMotion>
           </span>
-          <div className='hidden text-xl font-medium text-black dark:text-white sm:block'>
-            {show.name}
-          </div>
           <div className='text-md truncate text-gray-500'>{show.character}</div>
         </>
       </Link>
@@ -77,9 +74,6 @@ const ActorMovieCard: FC<Props> = ({ show }) => {
             </m.div>
           </LazyMotion>
         </span>
-        <div className='hidden text-xl font-medium text-black dark:text-white sm:block'>
-          {show.title}
-        </div>
         <div className='text-md truncate text-gray-500'>{show.character}</div>
       </>
     </Link>

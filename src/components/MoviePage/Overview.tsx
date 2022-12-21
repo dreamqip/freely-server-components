@@ -1,13 +1,24 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, Suspense } from 'react';
 import Cast from './Cast';
-import Reviews from './Reviews';
-import Similar from './Similar';
-import Recommended from './Recommended';
 import { useAppSelector } from '@/hooks/redux';
 import { parseMovieDetails } from '@/utilities/parseMovieDetails';
 import Spinner from '@/components/Spinner';
 import { imageBaseUrlOriginal } from '@/services/themoviedb';
 import ImageWithFallback from '@/components/Image';
+import dynamic from 'next/dynamic';
+
+const Similar = dynamic(() => import('@/components/MoviePage/Similar'), {
+  suspense: true,
+});
+const Recommended = dynamic(
+  () => import('@/components/MoviePage/Recommended'),
+  {
+    suspense: true,
+  }
+);
+const Reviews = dynamic(() => import('@/components/Reviews'), {
+  suspense: true,
+});
 
 const Overview: FC = () => {
   const { movie } = useAppSelector((state) => state.movie);
@@ -58,13 +69,13 @@ const Overview: FC = () => {
             </div>
           </div>
           <Cast />
-          <Similar />
-          <Recommended />
-          <Reviews />
+          <Suspense fallback={<Spinner />}>
+            <Similar />
+            <Recommended />
+            <Reviews reviews={movie.reviews} />
+          </Suspense>
         </>
-      ) : (
-        <Spinner />
-      )}
+      ) : null}
     </>
   );
 };

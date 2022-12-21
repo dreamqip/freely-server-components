@@ -1,13 +1,24 @@
-import { FC, useEffect, useState } from 'react';
-import Image from 'next/image';
+import { FC, Suspense, useEffect, useState } from 'react';
 import { useAppSelector } from '@/hooks/redux';
 import { parseSeriesDetails } from '@/utilities/parseSeriesDetails';
 import Cast from '@/components/SeriesPage/Cast';
-import Similar from '@/components/SeriesPage/Similar';
-import Recommended from '@/components/SeriesPage/Recommended';
-import Reviews from '@/components/SeriesPage/Reviews';
 import Spinner from '@/components/Spinner';
 import { imageBaseUrlW400 } from '@/services/themoviedb';
+import dynamic from 'next/dynamic';
+import ImageWithFallback from '@/components/Image';
+
+const Similar = dynamic(() => import('@/components/SeriesPage/Similar'), {
+  suspense: true,
+});
+const Recommended = dynamic(
+  () => import('@/components/SeriesPage/Recommended'),
+  {
+    suspense: true,
+  }
+);
+const Reviews = dynamic(() => import('@/components/Reviews'), {
+  suspense: true,
+});
 
 const Overview: FC = () => {
   const { series } = useAppSelector((state) => state.series);
@@ -24,7 +35,7 @@ const Overview: FC = () => {
       {series && parsedDetails ? (
         <>
           <div className='grid grid-cols-1 gap-8 md:grid-cols-[250px_minmax(0,_1fr)]'>
-            <Image
+            <ImageWithFallback
               src={`${imageBaseUrlW400}${series.poster_path}`}
               alt={series.name}
               priority
@@ -36,9 +47,9 @@ const Overview: FC = () => {
               <h2 className='text-2xl dark:text-white md:text-3xl'>
                 Storyline
               </h2>
-              <p className='text-md mt-2 dark:text-primary-dark md:text-lg'>
+              <h3 className='text-md mt-2 dark:text-primary-dark md:text-lg'>
                 {series.overview}
-              </p>
+              </h3>
               <table className='mt-2 w-full border-spacing-2 sm:w-auto'>
                 <tbody>
                   {parsedDetails.map((detail) => {
@@ -59,13 +70,13 @@ const Overview: FC = () => {
             </div>
           </div>
           <Cast />
-          <Similar />
-          <Recommended />
-          <Reviews />
+          <Suspense fallback={<Spinner />}>
+            <Similar />
+            <Recommended />
+            <Reviews reviews={series.reviews} />
+          </Suspense>
         </>
-      ) : (
-        <Spinner />
-      )}
+      ) : null}
     </>
   );
 };

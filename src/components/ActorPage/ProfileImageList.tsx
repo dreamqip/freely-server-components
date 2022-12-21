@@ -8,13 +8,13 @@ interface ImageListProps {
   images: IProfile[];
 }
 
-const ImageList: FC<ImageListProps> = ({ images }) => {
+const ProfileImageList: FC<ImageListProps> = ({ images }) => {
   if (!images) {
     return <Empty description='No images found' />;
   }
 
   return (
-    <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+    <div className='grid grid-cols-3 gap-4 md:grid-cols-4 md:gap-8 lg:grid-cols-6'>
       <Image.PreviewGroup>
         {images &&
           images.map((image) => {
@@ -37,4 +37,4 @@ const ImageList: FC<ImageListProps> = ({ images }) => {
   );
 };
 
-export default ImageList;
+export default ProfileImageList;
