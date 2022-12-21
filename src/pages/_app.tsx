@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 import SEO from '../../next-seo.config';
 import dynamic from 'next/dynamic';
 import { Montserrat } from '@next/font/google';
-import Script from 'next/script';
 
 const MainLayout = dynamic(() => import('@/layouts/MainLayout'));
 const Progress = dynamic(() => import('@/components/ProgressBar'));
@@ -32,20 +31,6 @@ function MyApp({ Component, ...rest }: AppProps) {
           --font-montserrat: ${montserrat.style.fontFamily};
         }
       `}</style>
-      <Script
-        id='google-analytics'
-        src='https://www.googletagmanager.com/gtag/js?id=G-3FTM4H2WDP'
-        strategy='worker'
-        dangerouslySetInnerHTML={{
-          __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-
-                gtag('config', 'G-3FTM4H2WDP');
-          `,
-        }}
-      />
       <DefaultSeo {...SEO} />
       <Progress />
       <Provider store={store}>
