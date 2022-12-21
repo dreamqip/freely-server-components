@@ -35,10 +35,6 @@ const nextConfig = {
     removeConsole:
       process.env.NODE_ENV === 'production' ? removeConsoleConfig : false,
   },
-  experimental: {
-    legacyBrowsers: false,
-    nextScriptWorkers: true,
-  },
 };
 
 module.exports = plugins.reduce((config, plugin) => plugin(config), nextConfig);
