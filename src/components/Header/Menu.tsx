@@ -5,9 +5,7 @@ import {
   MagnifyingGlassIcon,
   VideoCameraIcon,
 } from '@heroicons/react/24/solid';
-import dynamic from 'next/dynamic';
-
-const ActiveLink = dynamic(() => import('@/components/ActiveLink'));
+import ActiveLink from '@/components/ActiveLink';
 
 const HeaderMenu: FC = () => {
   return (

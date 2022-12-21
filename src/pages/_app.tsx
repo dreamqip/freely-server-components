@@ -5,11 +5,9 @@ import { wrapper } from '@/store';
 import { DefaultSeo } from 'next-seo';
 import { Provider } from 'react-redux';
 import SEO from '../../next-seo.config';
-import dynamic from 'next/dynamic';
 import { Montserrat } from '@next/font/google';
-
-const MainLayout = dynamic(() => import('@/layouts/MainLayout'));
-const Progress = dynamic(() => import('@/components/ProgressBar'));
+import MainLayout from '@/layouts/MainLayout';
+import ProgressBar from '@/components/ProgressBar';
 
 const montserrat = Montserrat({
   weight: ['300', '400', '500', '600', '700', '800'],
@@ -32,7 +30,7 @@ function MyApp({ Component, ...rest }: AppProps) {
         }
       `}</style>
       <DefaultSeo {...SEO} />
-      <Progress />
+      <ProgressBar />
       <Provider store={store}>
         <MainLayout theme={Component.theme}>
           <Component {...props.pageProps} />
