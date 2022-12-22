@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import Image from 'next/image';
 import wanda from '../../../public/wanda.jpeg';
-import { Device } from '../Device';
 
 const Hero: FC = () => {
   return (
@@ -20,17 +19,16 @@ const Hero: FC = () => {
           <span className='heading-line-gradient'>The world</span>
         </span>
       </h1>
-      <Device desktop>
-        <Image
-          src={wanda}
-          alt='Wanda Maximoff from MCU'
-          width={400}
-          height={600}
-          placeholder='blur'
-          priority
-          className='rounded-tr-full rounded-bl-full'
-        />
-      </Device>
+      <Image
+        src={wanda}
+        alt='Wanda Maximoff from MCU'
+        sizes='(max-width: 768px) 1vw, 50vw'
+        width={400}
+        height={600}
+        placeholder='blur'
+        priority
+        className='hidden rounded-tr-full rounded-bl-full md:block'
+      />
     </div>
   );
 };

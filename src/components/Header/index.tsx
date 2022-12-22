@@ -4,13 +4,11 @@ import { useRouter } from 'next/router';
 import classNames from 'classnames';
 import HeaderMenu from '@/components/Header/Menu';
 import SwitchButton from '@/components/Header/SwitchButton';
-import { Device } from '@/components/Device';
 import dynamic from 'next/dynamic';
 import Logo from '@/components/Logo';
 import { Bars3Icon } from '@heroicons/react/24/solid';
 
 const MobileNav = dynamic(() => import('@/components/Header/MobileNav'), {
-  ssr: false,
   loading: () => <Bars3Icon className='h-6 w-6' />,
 });
 
@@ -29,18 +27,14 @@ const MainHeader: FC = () => {
 
   return (
     <header className={headerClasses}>
-      <div className='flex cursor-pointer items-center gap-4 md:gap-10'>
-        <Device desktop>
-          <>
-            <Link href='/' className='flex items-center'>
-              <Logo />
-            </Link>
-            <HeaderMenu />
-          </>
-        </Device>
-        <Device mobile>
-          <MobileNav />
-        </Device>
+      <div className='hidden cursor-pointer items-center gap-4 md:flex md:gap-10'>
+        <Link href='/' className='flex items-center'>
+          <Logo />
+        </Link>
+        <HeaderMenu />
+      </div>
+      <div className='block md:hidden'>
+        <MobileNav />
       </div>
       <div className='flex items-center'>
         {isShowPage ? null : <SwitchButton />}

@@ -1,4 +1,6 @@
-export default {
+import type { DefaultSeoProps } from 'next-seo';
+
+const config: DefaultSeoProps = {
   defaultTitle: 'Freely',
   description:
     'Freely offers movie details and trailers. It also includes popular movies and reviews.',
@@ -6,7 +8,7 @@ export default {
     type: 'website',
     locale: 'en_IE',
     url: 'https://freelym.vercel.app/',
-    site_name: 'Freely',
+    siteName: 'Freely',
   },
   additionalMetaTags: [
     {
@@ -43,6 +45,10 @@ export default {
       name: 'mobile-web-app-capable',
       content: 'yes',
     },
+    {
+      name: 'application-name',
+      content: 'Freely',
+    },
   ],
   additionalLinkTags: [
     {
@@ -59,3 +65,5 @@ export default {
     },
   ],
 };
+
+export default config;

@@ -6,7 +6,6 @@ import {
   getRunningQueriesThunk,
   useGetPopularTvShowsQuery,
 } from '@/services/themoviedb';
-import Spinner from '@/components/Spinner';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import {
   reset,
@@ -18,6 +17,7 @@ import { useRouter } from 'next/router';
 import { useObserver } from '@/hooks/useObserver';
 import SeriesList from '@/components/SeriesPage/SeriesList';
 import { FloatButton } from 'antd';
+import Spinner from '@/components/Spinner';
 
 const Series: NextPage = () => {
   const router = useRouter();
@@ -53,10 +53,6 @@ const Series: NextPage = () => {
       dispatch(setTotalPages(popular.total_pages));
     }
   }, [dispatch, isError, isLoading, popular]);
-
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   return (
     <div>

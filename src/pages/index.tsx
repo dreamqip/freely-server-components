@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
 import Hero from '@/components/IndexPage/Hero';
 import Explore from '@/components/IndexPage/Explore';
 import Watch from '@/components/IndexPage/Watch';
@@ -21,7 +20,7 @@ import Spinner from '@/components/Spinner';
 const ShowCarousel = dynamic(
   () => import('@/components/ShowCarousel/ShowCarousel'),
   {
-    suspense: true,
+    loading: () => <Spinner />,
   }
 );
 
@@ -37,12 +36,12 @@ const Home: NextPage = () => {
       <Explore />
       <Watch />
       {topRated && nowPlaying && popularSeries && topRatedSeries ? (
-        <Suspense fallback={<Spinner />}>
+        <>
           <ShowCarousel title='Latest Series' series={popularSeries} />
           <ShowCarousel title='Now In Theaters' series={nowPlaying} />
           <ShowCarousel title='Top Rated Series' series={topRatedSeries} />
           <ShowCarousel title='Top Rated' series={topRated} />
-        </Suspense>
+        </>
       ) : null}
     </>
   );

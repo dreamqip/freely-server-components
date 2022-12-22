@@ -35,3 +35,5 @@ export type RootState = ReturnType<AppStore['getState']>;
 export const wrapper = createWrapper<AppStore>(makeStore, {
   debug: process.env.NODE_ENV !== 'production',
 });
+
+export default wrapper.useWrappedStore;
