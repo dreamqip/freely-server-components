@@ -2,7 +2,6 @@
 @import './links-hover.css';
 @import './theme-toggle.css';
 @import './text-gradient.css';
-@import './back-top.css';
 
 @tailwind base;
 @tailwind components;

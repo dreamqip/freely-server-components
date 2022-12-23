@@ -16,8 +16,12 @@ import {
 import { useRouter } from 'next/router';
 import { useObserver } from '@/hooks/useObserver';
 import SeriesList from '@/components/SeriesPage/SeriesList';
-import { FloatButton } from 'antd';
 import Spinner from '@/components/Spinner';
+import dynamic from 'next/dynamic';
+
+const BackTop = dynamic(() => import('@/components/BackTop'), {
+  ssr: false,
+});
 
 const Series: NextPage = () => {
   const router = useRouter();
@@ -60,7 +64,7 @@ const Series: NextPage = () => {
       <SeriesList />
       {visible && <div className='h-10' ref={lastElement}></div>}
       {isFetching && <Spinner />}
-      <FloatButton.BackTop />
+      <BackTop />
     </div>
   );
 };

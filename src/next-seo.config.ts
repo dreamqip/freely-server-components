@@ -3,18 +3,26 @@ import type { DefaultSeoProps } from 'next-seo';
 const config: DefaultSeoProps = {
   defaultTitle: 'Freely',
   description:
-    'Freely offers movie details and trailers. It also includes popular movies and reviews.',
+    'Freely offers movies details and trailers. It also includes popular movies and reviews.',
   openGraph: {
     type: 'website',
     locale: 'en_IE',
     url: 'https://freelym.vercel.app/',
     siteName: 'Freely',
+    images: [
+      {
+        url: 'https://freelym.vercel.app/open-graph.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Freely',
+      },
+    ],
   },
   additionalMetaTags: [
     {
       property: 'keywords',
       content:
-        'movie app, movie details, popular movies, upcoming movies, reviews, trailers, movie trailers, movie reviews, search movies, series, tv shows, tv series, tv shows details, tv series details, tv shows trailers, tv series trailers, tv shows reviews, tv series reviews, search tv shows, search tv series',
+        'movies app, movies details, popular movies, upcoming movies, reviews, trailers, movies trailers, movies reviews, search movies, series, tv shows, tv series, tv shows details, tv series details, tv shows trailers, tv series trailers, tv shows reviews, tv series reviews, search tv shows, search tv series',
     },
     {
       name: 'author',

@@ -16,8 +16,12 @@ import {
   setTotalPages,
 } from '@/features/movie/popularSlice';
 import MoviesList from '@/components/MoviePage/MoviesList';
-import { FloatButton } from 'antd';
 import Spinner from '@/components/Spinner';
+import dynamic from 'next/dynamic';
+
+const BackTop = dynamic(() => import('@/components/BackTop'), {
+  ssr: false,
+});
 
 const Movies: NextPage = () => {
   const router = useRouter();
@@ -60,7 +64,7 @@ const Movies: NextPage = () => {
       <MoviesList />
       {visible && <div className='h-10' ref={lastElement}></div>}
       {isFetching && <Spinner />}
-      <FloatButton.BackTop />
+      <BackTop />
     </div>
   );
 };

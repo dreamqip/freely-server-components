@@ -7,7 +7,11 @@ import { Provider } from 'react-redux';
 import SEO from '@/next-seo.config';
 import { Montserrat } from '@next/font/google';
 import MainLayout from '@/layouts/MainLayout';
-import ProgressBar from '@/components/ProgressBar';
+import dynamic from 'next/dynamic';
+
+const ProgressBar = dynamic(() => import('@/components/ProgressBar'), {
+  ssr: false,
+});
 
 const montserrat = Montserrat({
   variable: '--font-montserrat',
