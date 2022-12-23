@@ -40,7 +40,7 @@ const HeaderMenu: FC = () => {
       </span>
       <span className='link'>
         <ActiveLink
-          href='/movie'
+          href='/movies'
           activeClassName='active'
           className='flex items-center p-2 text-black no-underline dark:text-white md:p-5'
         >

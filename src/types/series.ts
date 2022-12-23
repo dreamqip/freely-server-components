@@ -11,7 +11,6 @@ export interface ITvShows {
 }
 
 export interface ITvShow {
-  media_type: string;
   backdrop_path: string | null;
   created_by: CreatedBy[];
   episode_run_time: number[];

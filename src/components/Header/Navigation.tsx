@@ -61,7 +61,7 @@ const Navigation: FC<Props> = ({ isOpen }) => {
         <NavigationItem>
           <span className='link'>
             <ActiveLink
-              href='/movie'
+              href='/movies'
               activeClassName='active'
               className='flex items-center p-2 text-white no-underline dark:text-black md:p-5'
             >

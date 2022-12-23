@@ -1,12 +1,12 @@
-import type { IMovie, IRecommendedMovies, ISimilarMovies } from '@/types/movie';
+import type { IRecommendedMovies, ISimilarMovies } from '@/types/movie';
 import type { Images } from '@/types/images';
 import type { IVideos } from '@/types/videos';
 import type { IMovieCredits } from '@/types/credits';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { IReviews } from '@/types/reviews';
 
 interface MovieState {
-  id: number | null;
-  movie: IMovie | null;
+  reviews: IReviews | null;
   images: Images | null;
   videos: IVideos | null;
   recommendations: IRecommendedMovies | null;
@@ -15,8 +15,7 @@ interface MovieState {
 }
 
 const initialState: MovieState = {
-  id: null,
-  movie: null,
+  reviews: null,
   images: null,
   videos: null,
   recommendations: null,
@@ -28,11 +27,8 @@ export const movieSlice = createSlice({
   name: 'movie',
   initialState,
   reducers: {
-    setId: (state, action: PayloadAction<number>) => {
-      state.id = action.payload;
-    },
-    setMovieDetails: (state, action: PayloadAction<IMovie>) => {
-      state.movie = action.payload;
+    setReviews: (state, action: PayloadAction<IReviews>) => {
+      state.reviews = action.payload;
     },
     setImages: (state, action: PayloadAction<Images>) => {
       state.images = action.payload;
@@ -53,13 +49,12 @@ export const movieSlice = createSlice({
 });
 
 export const {
-  setId,
-  setMovieDetails,
   setImages,
   setVideos,
   setCredits,
   setRecommendations,
   setSimilar,
+  setReviews,
 } = movieSlice.actions;
 
 export default movieSlice.reducer;

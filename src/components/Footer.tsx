@@ -1,9 +1,9 @@
 import type { FC } from 'react';
-import { GithubFilled } from '@ant-design/icons';
+import GithubFilled from '@ant-design/icons/GithubFilled';
 
 const MainFooter: FC = () => {
   return (
-    <footer className='flex flex-0-auto flex-col items-center justify-between gap-4 bg-inherit py-6 px-12 text-lg sm:flex-row sm:gap-0'>
+    <footer className='relative flex flex-0-auto flex-col items-center justify-between gap-4 bg-inherit py-6 px-12 text-lg sm:flex-row sm:gap-0'>
       <div className='flex items-center'>
         powered by
         <a

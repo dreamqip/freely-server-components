@@ -20,7 +20,7 @@ const CastCarousel: FC<CastListProps> = ({ credits, title }) => {
         <SwiperLazy>
           {credits &&
             credits.cast.map((person) => {
-              // check if array have person who performed two roles in the movie
+              // check if array have person who performed two roles in the movies
               // and if there is, then we will not show him in the cast list
               // because it will be a duplicate
               const isDuplicate = credits.cast.some(

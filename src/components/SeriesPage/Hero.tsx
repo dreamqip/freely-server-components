@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '@/hooks/redux';
+import type { ITvShow } from '@/types/series';
 import { LazyMotion, m, useMotionValue, useScroll } from 'framer-motion';
 import { animationVariants } from '@/utilities/animationVariants';
 import { PlayIcon } from '@heroicons/react/24/solid';
@@ -8,8 +8,11 @@ import { loadFeatures } from '@/utilities/loadAnimationFeatures';
 import ImageWithFallback from '@/components/Image';
 import { imageBaseUrlOriginal } from '@/services/themoviedb';
 
-const Hero: FC = () => {
-  const { series } = useAppSelector((state) => state.series);
+export interface IHeroProps {
+  series: ITvShow;
+}
+
+const Hero: FC<IHeroProps> = ({ series }) => {
   const [loaded, setLoaded] = useState(false);
   const [loadedLogo, setLoadedLogo] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -21,8 +24,8 @@ const Hero: FC = () => {
   }, [series]);
 
   useEffect(() => {
-    scrollYProgress.onChange((progress) => {
-      const newProgress = Math.max(1 - 8 * progress, 0.2);
+    scrollYProgress.on('change', (latestValue) => {
+      const newProgress = Math.max(1 - 8 * latestValue, 0.2);
       scrollProgress.set(newProgress);
     });
 
@@ -31,29 +34,27 @@ const Hero: FC = () => {
 
   return (
     <>
-      {series && (
-        <LazyMotion features={loadFeatures}>
-          <m.div
-            initial='hidden'
-            animate={loaded ? 'visible' : 'hidden'}
-            variants={animationVariants}
-            transition={{ ease: 'easeInOut', duration: 0.75 }}
-            className='pointer-events-none fixed inset-0 z-0 h-screen select-none overflow-hidden'
-            style={{ opacity: scrollProgress }}
-          >
-            <ImageWithFallback
-              src={`${imageBaseUrlOriginal}${series.backdrop_path}`}
-              alt={series?.name}
-              fill
-              priority
-              sizes='(max-width: 640px) 100vw, (max-width: 768px) 75vw, (max-width: 1024px) 50vw, (max-width: 1440px) 33vw, (max-width: 1920px) 25vw, 20vw'
-              className='aspect-video object-cover object-top'
-              onLoadingComplete={() => setLoaded(true)}
-            />
-            <div className='absolute inset-0 z-0 h-full w-full bg-radial-gradient'></div>
-          </m.div>
-        </LazyMotion>
-      )}
+      <LazyMotion features={loadFeatures}>
+        <m.div
+          initial='hidden'
+          animate={loaded ? 'visible' : 'hidden'}
+          variants={animationVariants}
+          transition={{ ease: 'easeInOut', duration: 0.75 }}
+          className='pointer-events-none fixed inset-0 z-0 h-screen select-none overflow-hidden'
+          style={{ opacity: scrollProgress }}
+        >
+          <ImageWithFallback
+            src={`${imageBaseUrlOriginal}${series.backdrop_path}`}
+            alt={series?.name}
+            fill
+            priority
+            sizes='(max-width: 640px) 100vw, (max-width: 768px) 75vw, (max-width: 1024px) 50vw, (max-width: 1440px) 33vw, (max-width: 1920px) 25vw, 20vw'
+            className='aspect-video object-cover object-top'
+            onLoadingComplete={() => setLoaded(true)}
+          />
+          <div className='absolute inset-0 z-0 h-full w-full bg-radial-gradient'></div>
+        </m.div>
+      </LazyMotion>
 
       <div className='relative'>
         <div className='max-w-xl'>
@@ -65,7 +66,7 @@ const Hero: FC = () => {
                   animate={loadedLogo ? 'visible' : 'hidden'}
                   variants={animationVariants}
                   transition={{
-                    ease: 'easeOut',
+                    ease: 'easeIn',
                     duration: 1,
                   }}
                   className='relative min-h-[100px] max-w-[180px] md:min-h-[170px] md:max-w-[341px]'

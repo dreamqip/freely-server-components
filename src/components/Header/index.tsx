@@ -16,7 +16,7 @@ const MainHeader: FC = () => {
   const router = useRouter();
 
   const isShowPage =
-    router.pathname === '/movie/[id]' || router.pathname === '/series/[id]';
+    router.pathname === '/movies/[id]' || router.pathname === '/series/[id]';
 
   const headerClasses = classNames(
     'flex absolute max-w-7xl mx-auto px-4 z-[100] inset-0 items-center justify-between md:px-12 w-full h-20 flex-0-auto',

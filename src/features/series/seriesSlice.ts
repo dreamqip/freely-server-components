@@ -1,16 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type {
-  ITvShow,
-  ITvShowRecommendations,
-  ITvShowSimilar,
-} from '@/types/series';
+import type { ITvShowRecommendations, ITvShowSimilar } from '@/types/series';
 import type { Images } from '@/types/images';
 import type { IVideos } from '@/types/videos';
 import type { ITvShowCredits } from '@/types/credits';
+import type { IReviews } from '@/types/reviews';
 
 interface InitialState {
-  id: number | null;
-  series: ITvShow | null;
+  reviews: IReviews | null;
   images: Images | null;
   videos: IVideos | null;
   recommendations: ITvShowRecommendations | null;
@@ -19,8 +15,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  id: null,
-  series: null,
+  reviews: null,
   images: null,
   videos: null,
   recommendations: null,
@@ -32,17 +27,14 @@ const seriesSlice = createSlice({
   name: 'series',
   initialState,
   reducers: {
-    setSeries: (state, action: PayloadAction<ITvShow>) => {
-      state.series = action.payload;
+    setSeriesReviews(state, action: PayloadAction<IReviews>) {
+      state.reviews = action.payload;
     },
     setSeriesImages: (state, action: PayloadAction<Images>) => {
       state.images = action.payload;
     },
     setSeriesVideos: (state, action: PayloadAction<IVideos>) => {
       state.videos = action.payload;
-    },
-    setSeriesId: (state, action: PayloadAction<number>) => {
-      state.id = action.payload;
     },
     setSeriesRecommendations: (
       state,
@@ -60,10 +52,9 @@ const seriesSlice = createSlice({
 });
 
 export const {
-  setSeries,
+  setSeriesReviews,
   setSeriesVideos,
   setSeriesImages,
-  setSeriesId,
   setSeriesRecommendations,
   setSeriesSimilar,
   setSeriesCredits,

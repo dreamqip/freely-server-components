@@ -5,16 +5,15 @@ import {
   getRunningQueriesThunk,
   useGetMovieByIdQuery,
 } from '@/services/themoviedb';
-import { Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch } from '@/hooks/redux';
 import {
   setCredits,
-  setId,
   setImages,
-  setMovieDetails,
   setRecommendations,
   setSimilar,
   setVideos,
+  setReviews,
 } from '@/features/movie/movieSlice';
 import { wrapper } from '@/store';
 import { NextSeo, NextSeoProps } from 'next-seo';
@@ -22,9 +21,10 @@ import { useRouter } from 'next/router';
 import Spinner from '@/components/Spinner';
 import Hero from '@/components/MoviePage/Hero';
 import dynamic from 'next/dynamic';
+import Storyline from '@/components/Storyline';
 
 const Tabs = dynamic(() => import('@/components/MoviePage/Tabs'), {
-  suspense: true,
+  ssr: false,
 });
 
 const MoviePage: NextPage<
@@ -32,11 +32,7 @@ const MoviePage: NextPage<
 > = ({ id }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const {
-    data: movie,
-    isLoading,
-    isError,
-  } = useGetMovieByIdQuery(id, {
+  const { data: movie } = useGetMovieByIdQuery(id, {
     skip: router.isFallback,
   });
 
@@ -67,24 +63,28 @@ const MoviePage: NextPage<
   };
 
   useEffect(() => {
-    if (!isLoading && !isError && movie) {
-      dispatch(setId(id));
-      dispatch(setMovieDetails(movie));
+    if (movie && !router.isFallback) {
+      dispatch(setReviews(movie.reviews));
       dispatch(setImages(movie.images));
       dispatch(setVideos(movie.videos));
       dispatch(setSimilar(movie.similar));
       dispatch(setRecommendations(movie.recommendations));
       dispatch(setCredits(movie.credits));
     }
-  }, [dispatch, id, isError, isLoading, movie]);
+  }, [dispatch, id, movie, router.isFallback]);
 
   return (
     <article className='flex flex-col'>
       <NextSeo {...seoOptions} />
-      <Hero />
-      <Suspense fallback={<Spinner />}>
-        <Tabs />
-      </Suspense>
+      {movie ? (
+        <>
+          <Hero movie={movie} />
+          <Storyline series={movie} />
+          <Tabs />
+        </>
+      ) : (
+        <Spinner />
+      )}
     </article>
   );
 };

@@ -22,7 +22,7 @@ const Hero: FC = () => {
       <Image
         src={wanda}
         alt='Wanda Maximoff from MCU'
-        sizes='(max-width: 768px) 1vw, 50vw'
+        sizes='(max-width: 768px) 0vw, 50vw'
         width={400}
         height={600}
         placeholder='blur'

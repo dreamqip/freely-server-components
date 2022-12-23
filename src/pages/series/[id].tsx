@@ -8,23 +8,23 @@ import {
 } from '@/services/themoviedb';
 import Hero from '@/components/SeriesPage/Hero';
 import dynamic from 'next/dynamic';
-import { Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch } from '@/hooks/redux';
 import {
-  setSeries,
   setSeriesCredits,
-  setSeriesId,
   setSeriesImages,
   setSeriesRecommendations,
+  setSeriesReviews,
   setSeriesSimilar,
   setSeriesVideos,
 } from '@/features/series/seriesSlice';
 import { NextSeo, NextSeoProps } from 'next-seo';
 import { useRouter } from 'next/router';
 import Spinner from '@/components/Spinner';
+import Storyline from '@/components/Storyline';
 
 const Tabs = dynamic(() => import('@/components/SeriesPage/Tabs'), {
-  suspense: true,
+  ssr: false,
 });
 
 const TvShow: NextPage<
@@ -32,11 +32,7 @@ const TvShow: NextPage<
 > = ({ id }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const {
-    data: series,
-    isLoading,
-    isError,
-  } = useGetTvShowByIdQuery(id, {
+  const { data: series } = useGetTvShowByIdQuery(id, {
     skip: router.isFallback,
   });
 
@@ -48,7 +44,7 @@ const TvShow: NextPage<
       description: series?.overview,
       images: [
         {
-          url: `https://image.tmdb.org/t/p/original${series?.backdrop_path}`,
+          url: `https://image.tmdb.org/t/p/w1280${series?.backdrop_path}`,
           width: 1280,
           height: 720,
           alt: series?.name,
@@ -67,24 +63,28 @@ const TvShow: NextPage<
   };
 
   useEffect(() => {
-    if (!isLoading && !isError && series) {
-      dispatch(setSeries(series));
-      dispatch(setSeriesId(id));
+    if (series && !router.isFallback) {
+      dispatch(setSeriesReviews(series.reviews));
       dispatch(setSeriesImages(series.images));
       dispatch(setSeriesVideos(series.videos));
       dispatch(setSeriesSimilar(series.similar));
       dispatch(setSeriesRecommendations(series.recommendations));
       dispatch(setSeriesCredits(series.credits));
     }
-  }, [isLoading, dispatch, series, id, isError]);
+  }, [dispatch, id, router.isFallback, series]);
 
   return (
     <article>
       <NextSeo {...seoOptions} />
-      <Hero />
-      <Suspense fallback={<Spinner />}>
-        <Tabs />
-      </Suspense>
+      {series ? (
+        <>
+          <Hero series={series} />
+          <Storyline series={series} />
+          <Tabs />
+        </>
+      ) : (
+        <Spinner />
+      )}
     </article>
   );
 };

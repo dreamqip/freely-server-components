@@ -1,7 +1,7 @@
 import type { Variants } from 'framer-motion';
 
 export const animationVariants: Variants = {
-  visible: { opacity: 1, transition: { duration: 1.25, ease: 'easeInOut' } },
+  visible: { opacity: 1 },
   hidden: { opacity: 0 },
 };
 
@@ -75,6 +75,27 @@ export const whileInViewportVariants2: Variants = {
   onscreen: {
     opacity: 1,
     x: 0,
+    transition: {
+      type: 'spring',
+      bounce: 0.1,
+      duration: 0.8,
+    },
+  },
+};
+
+export const backToTopVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+    transition: {
+      type: 'spring',
+      bounce: 0.1,
+      duration: 0.8,
+    },
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
     transition: {
       type: 'spring',
       bounce: 0.1,
