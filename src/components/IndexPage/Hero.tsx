@@ -4,10 +4,10 @@ import wanda from '../../../public/wanda.jpeg';
 
 const Hero: FC = () => {
   return (
-    <div className='flex flex-col items-center justify-between pt-20 md:flex-row md:p-0'>
+    <div className='flex flex-col items-center justify-between md:flex-row'>
       <h1
         aria-label='Movie change the world'
-        className='flex flex-col text-center text-7xl font-extrabold leading-none tracking-tighter dark:text-white md:text-left md:text-8xl xl:text-9xl'
+        className='flex flex-col text-center pt-20 md:p-0 text-7xl font-extrabold leading-none tracking-tighter dark:text-white md:text-left md:text-8xl xl:text-9xl'
       >
         <span className='heading-line heading-line-first'>
           <span className='heading-line-gradient'>Movie</span>

@@ -29,7 +29,7 @@ const Watch: FC = () => {
           alt='watch everywhere and from any device you want to'
           width={600}
           height={400}
-          sizes='(min-width: 768px) 50vw, 100vw'
+          sizes='(max-width: 480px) 100vw, 50vw'
           className='aspect-[4/3]'
         />
       </m.section>
