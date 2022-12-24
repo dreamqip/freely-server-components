@@ -14,7 +14,7 @@ interface Props {
 
 const ShowCarousel: FC<Props> = ({ series, title }) => {
   return (
-    <div className='py-4 md:py-10'>
+    <div className='relative py-4 md:py-10'>
       <h2 className='mb-4 text-center text-3xl font-semibold dark:text-white md:text-4xl'>
         {title}
       </h2>

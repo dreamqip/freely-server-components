@@ -23,8 +23,18 @@ import Hero from '@/components/MoviePage/Hero';
 import dynamic from 'next/dynamic';
 import Storyline from '@/components/Storyline';
 
-const Tabs = dynamic(() => import('@/components/MoviePage/Tabs'), {
+const Tabs = dynamic(() => import('@/components/Tabs'), {
   ssr: false,
+});
+
+const OverviewTab = dynamic(() => import('@/components/MoviePage/Overview'), {
+  loading: () => <Spinner />,
+});
+const ImagesTab = dynamic(() => import('@/components/MoviePage/Images'), {
+  loading: () => <Spinner />,
+});
+const VideosTab = dynamic(() => import('@/components/MoviePage/Videos'), {
+  loading: () => <Spinner />,
 });
 
 const MoviePage: NextPage<
@@ -63,7 +73,7 @@ const MoviePage: NextPage<
     additionalLinkTags: [
       {
         rel: 'canonical',
-        href: `https://www.themoviedb.org/movie/${movie?.id}`,
+        href: `https://freely.vercel.app/movies/${id}`,
       },
     ],
   };
@@ -86,7 +96,11 @@ const MoviePage: NextPage<
         <>
           <Hero movie={movie} />
           <Storyline series={movie} />
-          <Tabs />
+          <Tabs
+            overview={<OverviewTab />}
+            images={<ImagesTab />}
+            videos={<VideosTab />}
+          />
         </>
       ) : (
         <Spinner />

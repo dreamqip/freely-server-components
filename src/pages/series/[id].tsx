@@ -23,8 +23,18 @@ import { useRouter } from 'next/router';
 import Spinner from '@/components/Spinner';
 import Storyline from '@/components/Storyline';
 
-const Tabs = dynamic(() => import('@/components/SeriesPage/Tabs'), {
+const Tabs = dynamic(() => import('@/components/Tabs'), {
   ssr: false,
+});
+
+const OverviewTab = dynamic(() => import('@/components/SeriesPage/Overview'), {
+  loading: () => <Spinner />,
+});
+const ImagesTab = dynamic(() => import('@/components/SeriesPage/Images'), {
+  loading: () => <Spinner />,
+});
+const VideosTab = dynamic(() => import('@/components/SeriesPage/Videos'), {
+  loading: () => <Spinner />,
 });
 
 const TvShow: NextPage<
@@ -63,7 +73,7 @@ const TvShow: NextPage<
     additionalLinkTags: [
       {
         rel: 'canonical',
-        href: `https://www.themoviedb.org/tv/${series?.id}`,
+        href: `https://freely.vercel.app/series/${id}`,
       },
     ],
   };
@@ -86,7 +96,11 @@ const TvShow: NextPage<
         <>
           <Hero series={series} />
           <Storyline series={series} />
-          <Tabs />
+          <Tabs
+            overview={<OverviewTab />}
+            images={<ImagesTab />}
+            videos={<VideosTab />}
+          />
         </>
       ) : (
         <Spinner />
