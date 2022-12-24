@@ -31,6 +31,14 @@
 }
 
 @layer components {
+  .expander {
+    --line-clamp: 3;
+    @apply overflow-hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: var(--line-clamp);
+    -webkit-box-orient: vertical;
+  }
+
   .select-container .select__control {
     @apply border-2 border-neutral-300 bg-white hover:border-neutral-400 dark:border-neutral-700 dark:bg-neutral-700 dark:hover:border-neutral-500;
   }

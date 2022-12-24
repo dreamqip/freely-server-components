@@ -4,19 +4,32 @@ const config: DefaultSeoProps = {
   defaultTitle: 'Freely',
   description:
     'Freely offers movies details and trailers. It also includes popular movies and reviews.',
+  robotsProps: {
+    noarchive: true,
+    maxSnippet: -1,
+    maxImagePreview: 'standard',
+    maxVideoPreview: -1,
+  },
   openGraph: {
     type: 'website',
-    locale: 'en_IE',
+    locale: 'en-US',
     url: 'https://freelym.vercel.app/',
     siteName: 'Freely',
     images: [
       {
         url: 'https://freelym.vercel.app/open-graph.jpg',
+        secureUrl: 'https://freelym.vercel.app/open-graph.jpg',
+        type: 'image/jpeg',
         width: 1200,
         height: 630,
         alt: 'Freely',
       },
     ],
+  },
+  twitter: {
+    handle: '@handle',
+    site: '@site',
+    cardType: 'summary_large_image',
   },
   additionalMetaTags: [
     {
@@ -70,6 +83,10 @@ const config: DefaultSeoProps = {
     {
       rel: 'apple-touch-icon',
       href: '/icons/apple-icon-180.png',
+    },
+    {
+      rel: 'canonical',
+      href: 'https://freelym.vercel.app/',
     },
   ],
 };
