@@ -27,6 +27,7 @@ const ActorPage: NextPage<
   const seoOptions: NextSeoProps = {
     title: data?.name,
     description: data?.biography,
+    canonical: `https://freely.vercel.app/person/${id}`,
     openGraph: {
       title: data?.name,
       description: data?.biography,
@@ -39,12 +40,6 @@ const ActorPage: NextPage<
         },
       ],
     },
-    additionalLinkTags: [
-      {
-        rel: 'canonical',
-        href: `https://www.themoviedb.org/person/${id}`,
-      },
-    ],
   };
 
   return (

@@ -49,6 +49,7 @@ const TvShow: NextPage<
   const seoOptions: NextSeoProps = {
     title: series?.name,
     description: series?.overview,
+    canonical: `https://freely.vercel.app/series/${id}`,
     openGraph: {
       title: series?.name,
       description: series?.overview,
@@ -68,12 +69,6 @@ const TvShow: NextPage<
           series?.keywords.results
             .map((keyword: IKeyword) => keyword.name)
             .join(', ') || '',
-      },
-    ],
-    additionalLinkTags: [
-      {
-        rel: 'canonical',
-        href: `https://freely.vercel.app/series/${id}`,
       },
     ],
   };

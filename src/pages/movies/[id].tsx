@@ -49,6 +49,7 @@ const MoviePage: NextPage<
   const seoOptions: NextSeoProps = {
     title: movie?.title,
     description: movie?.overview,
+    canonical: `https://freely.vercel.app/movies/${id}`,
     openGraph: {
       title: movie?.title,
       description: movie?.overview,
@@ -68,12 +69,6 @@ const MoviePage: NextPage<
           movie?.keywords.keywords
             .map((keyword: IKeyword) => keyword.name)
             .join(', ') || '',
-      },
-    ],
-    additionalLinkTags: [
-      {
-        rel: 'canonical',
-        href: `https://freely.vercel.app/movies/${id}`,
       },
     ],
   };
