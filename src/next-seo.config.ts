@@ -3,7 +3,7 @@ import type { DefaultSeoProps } from 'next-seo';
 const config: DefaultSeoProps = {
   defaultTitle: 'Freely',
   description:
-    'Freely offers movies details and trailers. It also includes popular movies and reviews.',
+    "Welcome to Freely, the ultimate destination for movie and series enthusiasts! Here, you can find detailed information about your favorite films and TV shows, including plot summaries, cast lists, and trailer links. You can also watch trailers and learn more about your favorite actors. So whether you're a casual viewer or a die-hard fan, our website has something for everyone. Come visit us and discover the magic of movies and series!",
   robotsProps: {
     noarchive: true,
     maxSnippet: -1,
@@ -35,7 +35,7 @@ const config: DefaultSeoProps = {
     {
       property: 'keywords',
       content:
-        'movies app, movies details, popular movies, upcoming movies, reviews, trailers, movies trailers, movies reviews, search movies, series, tv shows, tv series, tv shows details, tv series details, tv shows trailers, tv series trailers, tv shows reviews, tv series reviews, search tv shows, search tv series',
+        'movies app, movies details, movie details, popular movies, upcoming movies, reviews, trailers, movies trailers, movies reviews, search movies, series, tv shows, tv series, tv shows details, tv series details, tv shows trailers, tv series trailers, tv shows reviews, tv series reviews, search tv shows, search tv series, cast lists, trailer links, watch trailers, learn more about your favorite actors, casual viewer, die-hard fan, magic of movies and series',
     },
     {
       name: 'author',

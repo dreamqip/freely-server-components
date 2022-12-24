@@ -60,6 +60,12 @@ const TvShow: NextPage<
             .join(', ') || '',
       },
     ],
+    additionalLinkTags: [
+      {
+        rel: 'canonical',
+        href: `https://www.themoviedb.org/tv/${series?.id}`,
+      },
+    ],
   };
 
   useEffect(() => {

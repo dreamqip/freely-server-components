@@ -25,7 +25,11 @@ const BackTop = dynamic(() => import('@/components/BackTop'), {
 
 const Movies: NextPage = () => {
   const router = useRouter();
-  const { page, totalPages } = useAppSelector((state) => state.popularMovies);
+  const {
+    page,
+    totalPages,
+    movies: popularMovies,
+  } = useAppSelector((state) => state.popularMovies);
   const dispatch = useAppDispatch();
   const lastElement = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState<boolean>(true);
@@ -53,10 +57,14 @@ const Movies: NextPage = () => {
 
   useEffect(() => {
     if (!isLoading && movies && !isError) {
-      dispatch(setPopularMovies(movies.results));
+      // make sure that there are no duplicates going into the store
+      const newMovies = movies.results.filter(
+        (movie) => !popularMovies.find((m) => m.id === movie.id)
+      );
+      dispatch(setPopularMovies(newMovies));
       dispatch(setTotalPages(movies.total_pages));
     }
-  }, [dispatch, isError, isLoading, movies]);
+  }, [dispatch, isError, isLoading, movies, popularMovies]);
 
   return (
     <div>

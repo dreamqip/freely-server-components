@@ -27,6 +27,7 @@ const BackTop: FC = () => {
       {show && (
         <LazyMotion features={loadFeatures}>
           <m.button
+            aria-label='Back to top'
             key='back-top'
             variants={backToTopVariants}
             className='fixed bottom-4 right-4 z-50 rounded-full bg-gray-800 p-2 text-white transition-colors hover:bg-gray-700 dark:bg-gray-200 dark:text-black dark:hover:bg-gray-400'

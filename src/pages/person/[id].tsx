@@ -9,17 +9,11 @@ import {
 } from '@/services/themoviedb';
 import { wrapper } from '@/store';
 import { NextSeo, NextSeoProps } from 'next-seo';
-import { Suspense } from 'react';
-import Spinner from '@/components/Spinner';
 
-const ActorMovies = dynamic(
-  () => import('@/components/ActorPage/ActorMovies'),
-  { suspense: true }
-);
+const ActorMovies = dynamic(() => import('@/components/ActorPage/ActorMovies'));
 
 const ProfileImageList = dynamic(
-  () => import('@/components/ActorPage/ProfileImageList'),
-  { suspense: true }
+  () => import('@/components/ActorPage/ProfileImageList')
 );
 
 const ActorPage: NextPage<
@@ -45,6 +39,12 @@ const ActorPage: NextPage<
         },
       ],
     },
+    additionalLinkTags: [
+      {
+        rel: 'canonical',
+        href: `https://www.themoviedb.org/person/${id}`,
+      },
+    ],
   };
 
   return (
@@ -53,12 +53,8 @@ const ActorPage: NextPage<
       {data ? (
         <>
           <Details person={data} />
-          <Suspense fallback={<Spinner />}>
-            <ActorMovies movies={data.combined_credits.cast} />
-          </Suspense>
-          <Suspense fallback={<Spinner />}>
-            <ProfileImageList images={data.images.profiles} />
-          </Suspense>
+          <ActorMovies movies={data.combined_credits.cast} />
+          <ProfileImageList images={data.images.profiles} />
         </>
       ) : null}
     </div>

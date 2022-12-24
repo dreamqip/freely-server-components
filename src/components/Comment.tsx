@@ -47,17 +47,20 @@ const Comment: FC<Props> = ({ review }) => {
           />
         </div>
       </div>
-      <div>
+      <div className='flex flex-col gap-y-1'>
         <h3 className='md:text-md text-sm font-medium dark:text-primary-dark'>
           {review.author}
         </h3>
         <div>
-          <div ref={contentRef} className='text-md expander dark:text-white'>
+          <div
+            ref={contentRef}
+            className='expander text-sm leading-8 dark:text-white'
+          >
             {review.content}
           </div>
           {showMore && (
             <button
-              className='font-medium text-gray-400 hover:underline'
+              className='mt-1 text-sm font-medium text-gray-400 hover:underline'
               onClick={toggleShowMore}
             >
               {collapsed ? 'Read more' : 'Show less'}

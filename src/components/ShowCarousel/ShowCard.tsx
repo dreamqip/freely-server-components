@@ -13,7 +13,7 @@ interface Props {
 const ShowCard: FC<Props> = ({ show }) => {
   if ('title' in show && show.title) {
     return (
-      <Link href={`/movie/${show.id}`} className='movie-card'>
+      <Link href={`/movies/${show.id}`} className='movie-card'>
         <ShowImage show={show as IMovie} />
       </Link>
     );

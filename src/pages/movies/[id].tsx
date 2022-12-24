@@ -60,6 +60,12 @@ const MoviePage: NextPage<
             .join(', ') || '',
       },
     ],
+    additionalLinkTags: [
+      {
+        rel: 'canonical',
+        href: `https://www.themoviedb.org/movie/${movie?.id}`,
+      },
+    ],
   };
 
   useEffect(() => {

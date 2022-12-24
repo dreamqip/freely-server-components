@@ -1,26 +1,55 @@
 import type { FC } from 'react';
-import { Tabs } from 'antd';
-import Images from './Images';
-import Videos from './Videos';
-import Overview from './Overview';
+import { Content, List, Root, Trigger } from '@radix-ui/react-tabs';
+import dynamic from 'next/dynamic';
+import Spinner from '@/components/Spinner';
+import s from '@/styles/tabs.module.css';
 
-const items = [
-  { label: 'Overview', key: '1', children: <Overview /> },
-  { label: 'Images', key: '2', children: <Images /> },
-  { label: 'Videos', key: '3', children: <Videos /> },
-];
+const OverviewTab = dynamic(() => import('@/components/SeriesPage/Overview'), {
+  loading: () => <Spinner />,
+});
+const ImagesTab = dynamic(() => import('@/components/SeriesPage/Images'), {
+  loading: () => <Spinner />,
+});
+const VideosTab = dynamic(() => import('@/components/SeriesPage/Videos'), {
+  loading: () => <Spinner />,
+});
 
-const SeriesTabs: FC = () => {
+const Tabs: FC = () => {
   return (
-    <Tabs
-      className='w-full pt-10'
-      defaultActiveKey='1'
-      size='large'
-      centered
-      animated={{ inkBar: false, tabPane: true }}
-      items={items}
-    />
+    <>
+      <Root className='flex w-full flex-col' defaultValue='overview'>
+        <List
+          className='flex w-full flex-row items-center justify-center gap-x-6 py-6'
+          aria-label='tabs example'
+        >
+          <Trigger value='overview' asChild>
+            <div className={s.trigger}>
+              <span>Overview</span>
+            </div>
+          </Trigger>
+          <Trigger value='images' asChild>
+            <div className={s.trigger}>
+              <span>Images</span>
+            </div>
+          </Trigger>
+          <Trigger value='videos' asChild>
+            <div className={s.trigger}>
+              <span>Videos</span>
+            </div>
+          </Trigger>
+        </List>
+        <Content forceMount value='overview' className={s.content}>
+          <OverviewTab />
+        </Content>
+        <Content forceMount value='images' className={s.content}>
+          <ImagesTab />
+        </Content>
+        <Content forceMount value='videos' className={s.content}>
+          <VideosTab />
+        </Content>
+      </Root>
+    </>
   );
 };
 
-export default SeriesTabs;
+export default Tabs;

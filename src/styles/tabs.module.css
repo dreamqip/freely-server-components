@@ -1,0 +1,29 @@
+.trigger {
+    @apply flex items-center justify-center text-xl duration-300 cursor-pointer relative py-4 px-2;
+    text-shadow: 0 0 0.25px currentcolor;
+}
+
+.trigger::before {
+    content: '';
+    @apply absolute w-full bg-white opacity-0 duration-300 pointer-events-none border bottom-0;
+}
+
+.trigger[data-state="active"] {
+    @apply text-primary-dark;
+}
+
+.trigger[data-state="active"]::before {
+    @apply opacity-100;
+}
+
+.trigger[data-state="inactive"] {
+    @apply text-white hover:text-primary-dark;
+}
+
+.content[data-state="active"] {
+    @apply bg-transparent;
+}
+
+.content[data-state="inactive"] {
+    @apply hidden;
+}
