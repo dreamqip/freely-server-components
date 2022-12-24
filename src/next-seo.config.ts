@@ -71,6 +71,10 @@ const config: DefaultSeoProps = {
       name: 'application-name',
       content: 'Freely',
     },
+    {
+      name: 'google-site-verification',
+      content: 'GyBTjGV8x2Y91TCOchednsyamPwdOlqVb-F7YZ9okLI',
+    },
   ],
   additionalLinkTags: [
     {
