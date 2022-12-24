@@ -37,7 +37,7 @@ const Comment: FC<Props> = ({ review }) => {
   return (
     <div className='relative mb-4 flex last:mb-0'>
       <div className='mr-4'>
-        <div className='h-[40px] w-[40px]'>
+        <div className='h-8 w-8 md:h-[40px] md:w-[40px]'>
           <ImageWithFallback
             className='rounded-full'
             src={`https://ui-avatars.com/api/?rounded=true&name=${review.author}&background=random`}
@@ -48,7 +48,7 @@ const Comment: FC<Props> = ({ review }) => {
         </div>
       </div>
       <div>
-        <h3 className='text-md font-medium dark:text-primary-dark'>
+        <h3 className='md:text-md text-sm font-medium dark:text-primary-dark'>
           {review.author}
         </h3>
         <div>
