@@ -1,8 +1,7 @@
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
-import Hero from '@/components/IndexPage/Hero';
-import Explore from '@/components/IndexPage/Explore';
-import Watch from '@/components/IndexPage/Watch';
+import Hero from '@/components/Home/Hero';
+import Explore from '@/components/Home/Explore';
 import { wrapper } from '@/store';
 import {
   getNowPlayingMovies,
@@ -23,6 +22,8 @@ const ShowCarousel = dynamic(
     loading: () => <Spinner />,
   }
 );
+
+const Watch = dynamic(() => import('@/components/Home/Watch'));
 
 const Home: NextPage = () => {
   const { data: topRated } = useGetTopRatedMoviesQuery(1);
