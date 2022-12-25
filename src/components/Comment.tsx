@@ -7,7 +7,7 @@ interface Props {
   review: IReview;
 }
 
-const maxHeight = 60;
+const maxHeight = 96;
 
 const Comment: FC<Props> = ({ review }) => {
   const [showMore, setShowMore] = useState(false);
@@ -16,8 +16,8 @@ const Comment: FC<Props> = ({ review }) => {
 
   useEffect(() => {
     if (contentRef.current) {
-      const { offsetHeight } = contentRef.current;
-      if (offsetHeight > maxHeight) {
+      const { scrollHeight } = contentRef.current;
+      if (scrollHeight > maxHeight) {
         setShowMore(true);
       } else {
         setShowMore(false);
@@ -36,7 +36,7 @@ const Comment: FC<Props> = ({ review }) => {
 
   return (
     <div className='relative mb-4 flex last:mb-0'>
-      <div className='mr-4'>
+      <div className='mr-2 md:mr-4'>
         <div className='h-8 w-8 md:h-[40px] md:w-[40px]'>
           <ImageWithFallback
             className='rounded-full'

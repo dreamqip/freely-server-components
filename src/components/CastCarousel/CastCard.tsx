@@ -10,7 +10,7 @@ interface Props {
 const CastCard: FC<Props> = ({ person }) => {
   return (
     <Link
-      href={`/actor/${person.id}`}
+      href={`/person/${person.id}`}
       className='flex h-full cursor-pointer flex-col transition-all duration-300 ease-in-out hover:scale-105'
     >
       <>

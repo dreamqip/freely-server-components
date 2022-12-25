@@ -50,7 +50,7 @@ const ActorMovieCard: FC<Props> = ({ show }) => {
 
   return (
     <Link
-      href={`/movie/${show.id}`}
+      href={`/movies/${show.id}`}
       className='flex cursor-pointer flex-col justify-center transition-all duration-300 ease-in-out hover:scale-105'
     >
       <>
