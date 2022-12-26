@@ -16,11 +16,15 @@ module.exports = {
         'text-gradient-2': 'linear-gradient(to left, #FF4D4D, #F9CB28)',
         'text-gradient-3': 'linear-gradient(to left, #007CF0, #00DFD8)',
       },
+      backgroundColor: {
+        'dark-90': '#00000090',
+        'white-90': '#ffffff90',
+      },
       fontFamily: {
         montserrat: ['var(--font-montserrat)', ...fontFamily.sans],
       },
       colors: {
-        'dark-theme': '#121212',
+        'dark-theme': '#000000',
         'primary-dark': '#BB86FC',
         'primary-500': '#6200EE',
         'primary-700': '#3700B3',

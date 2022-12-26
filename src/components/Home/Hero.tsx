@@ -7,7 +7,7 @@ const Hero: FC = () => {
     <div className='flex flex-col items-center justify-between md:flex-row'>
       <h1
         aria-label='Movie change the world'
-        className='flex flex-col pt-20 text-center text-7xl font-extrabold leading-none tracking-tighter dark:text-white md:p-0 md:text-left md:text-8xl xl:text-9xl'
+        className='flex flex-col pt-20 text-center text-7xl font-extrabold tracking-tighter dark:text-white md:p-0 md:text-left md:text-8xl xl:text-9xl'
       >
         <span className='heading-line heading-line-first'>
           <span className='heading-line-gradient'>Movie</span>
