@@ -2,7 +2,9 @@ import type { FC } from 'react';
 import VideoCard from './VideoCard';
 import { useAppSelector } from '@/hooks/redux';
 import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
-import Empty from '@/components/Empty';
+import dynamic from 'next/dynamic';
+
+const Empty = dynamic(() => import('@/components/Empty'));
 
 const Videos: FC = () => {
   const { videos } = useAppSelector((state) => state.movie);

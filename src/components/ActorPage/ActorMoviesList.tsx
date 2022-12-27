@@ -1,11 +1,12 @@
 import type { FC } from 'react';
-import { memo } from 'react';
 import ActorMovieCard from './ActorMovieCard';
 import { sortActorMoviesByPopularity } from '@/utilities/sortActorMoviesByPopularity';
 import { SwiperSlide } from 'swiper/react';
 import type { IActorCast } from '@/types/cast';
 import SwiperLazy from '@/components/SwiperLazy';
-import Empty from '@/components/Empty';
+import dynamic from 'next/dynamic';
+
+const Empty = dynamic(() => import('@/components/Empty'));
 
 interface MoviesListProps {
   movies: IActorCast[];
@@ -17,7 +18,7 @@ const ActorMoviesList: FC<MoviesListProps> = ({ movies, title }) => {
 
   return (
     <div className='py-10'>
-      <h2 className='text-center text-3xl font-bold dark:text-white md:text-6xl'>
+      <h2 className='mb-4 text-center text-3xl font-semibold dark:text-white md:text-4xl'>
         {title}
       </h2>
       <SwiperLazy>
@@ -37,4 +38,4 @@ const ActorMoviesList: FC<MoviesListProps> = ({ movies, title }) => {
   );
 };
 
-export default memo(ActorMoviesList);
+export default ActorMoviesList;

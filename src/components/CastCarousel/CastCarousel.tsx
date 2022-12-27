@@ -2,8 +2,10 @@ import type { IMovieCredits, ITvShowCredits } from '@/types/credits';
 import type { FC } from 'react';
 import CastCard from './CastCard';
 import { SwiperSlide } from 'swiper/react';
-import Empty from '@/components/Empty';
 import SwiperLazy from '@/components/SwiperLazy';
+import dynamic from 'next/dynamic';
+
+const Empty = dynamic(() => import('@/components/Empty'));
 
 interface CastListProps {
   credits: ITvShowCredits | IMovieCredits;

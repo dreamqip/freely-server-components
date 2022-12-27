@@ -2,10 +2,12 @@ import type { MixedShow } from '@/types/search';
 import type { ITvShows } from '@/types/series';
 import type { IMovies } from '@/types/movies';
 import type { FC } from 'react';
-import Empty from '@/components/Empty';
 import { SwiperSlide } from 'swiper/react';
 import ShowCard from './ShowCard';
 import SwiperLazy from '@/components/SwiperLazy';
+import dynamic from 'next/dynamic';
+
+const Empty = dynamic(() => import('@/components/Empty'));
 
 interface Props {
   series: IMovies | ITvShows;

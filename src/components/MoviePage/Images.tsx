@@ -3,7 +3,9 @@ import type { Backdrop } from '@/types/images';
 import { Image } from 'antd';
 import { useAppSelector } from '@/hooks/redux';
 import { imageBaseUrlOriginal } from '@/services/themoviedb';
-import Empty from '@/components/Empty';
+import dynamic from 'next/dynamic';
+
+const Empty = dynamic(() => import('@/components/Empty'));
 
 const Images: FC = () => {
   const { images } = useAppSelector((state) => state.movie);
