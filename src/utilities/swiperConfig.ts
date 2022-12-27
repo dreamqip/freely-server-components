@@ -12,20 +12,21 @@ export const swiperOptions: SwiperOptions = {
     enabled: false,
   },
   slidesPerView: 3.1,
-  slidesPerGroup: 1,
+  slidesPerGroup: 2,
+  preloadImages: false,
+  speed: 700,
+  preventInteractionOnTransition: false,
+  grabCursor: true,
   breakpoints: {
     568: {
       slidesPerView: 4.1,
-      slidesPerGroup: 2,
       spaceBetween: 15,
     },
     1024: {
       slidesPerView: 6,
-      slidesPerGroup: 3,
       spaceBetween: 20,
       navigation: {
         enabled: true,
-        hideOnClick: true,
       },
       freeMode: {
         enabled: false,
@@ -33,12 +34,13 @@ export const swiperOptions: SwiperOptions = {
     },
     1440: {
       slidesPerView: 8,
-      slidesPerGroup: 4,
       spaceBetween: 10,
+      navigation: {
+        enabled: true,
+      },
+      freeMode: {
+        enabled: false,
+      },
     },
   },
-  preloadImages: false,
-  speed: 700,
-  preventInteractionOnTransition: false,
-  grabCursor: true,
 };

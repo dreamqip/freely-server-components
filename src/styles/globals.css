@@ -28,6 +28,16 @@
   #__next {
     height: 100%;
   }
+
+  .dark:root {
+    --swiper-theme-color: #fff !important;
+    --swiper-navigation-size: 2rem !important;
+  }
+
+  :root {
+    --swiper-theme-color: #6200ee !important;
+    --swiper-navigation-size: 2rem !important;
+  }
 }
 
 @layer components {
@@ -90,17 +100,17 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-  right: 20px !important;
+  @apply right-6 rounded-full p-6 !important;
 }
 
 .dark .swiper-button-next,
 .dark .swiper-button-prev {
-  color: white !important;
+  @apply bg-neutral-700 text-neutral-200;
 }
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: #6200ee !important;
+  @apply bg-neutral-100 text-neutral-600;
 }
 
 .movie-card {
@@ -139,11 +149,4 @@
 
 .play-btn:hover {
   background: rgba(255, 255, 255, 0.7);
-}
-
-@media screen and (max-width: 1024px) {
-  .swiper-button-next,
-  .swiper-button-prev {
-    display: none !important;
-  }
 }
