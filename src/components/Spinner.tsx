@@ -1,10 +1,13 @@
-import type { FC } from 'react';
+import type { FC, HTMLAttributes } from 'react';
 
 // By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL
 
-const Spinner: FC = () => {
+const Spinner: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
   return (
-    <div className='flex items-center justify-center'>
+    <div
+      {...props}
+      className={`relative flex items-center justify-center ${props.className}`}
+    >
       <svg
         viewBox='0 0 38 38'
         xmlns='http://www.w3.org/2000/svg'

@@ -28,13 +28,13 @@ const Tabs = dynamic(() => import('@/components/Tabs'), {
 });
 
 const OverviewTab = dynamic(() => import('@/components/MoviePage/Overview'), {
-  loading: () => <Spinner />,
+  loading: () => <Spinner className='h-screen' />,
 });
 const ImagesTab = dynamic(() => import('@/components/MoviePage/Images'), {
-  loading: () => <Spinner />,
+  loading: () => <Spinner className='h-screen' />,
 });
 const VideosTab = dynamic(() => import('@/components/MoviePage/Videos'), {
-  loading: () => <Spinner />,
+  loading: () => <Spinner className='h-screen' />,
 });
 
 const MoviePage: NextPage<

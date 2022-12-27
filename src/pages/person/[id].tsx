@@ -10,13 +10,15 @@ import {
 import { wrapper } from '@/store';
 import { NextSeo, NextSeoProps } from 'next-seo';
 
-const ActorMovies = dynamic(() => import('@/components/ActorPage/ActorMovies'));
+const ActorMoviesList = dynamic(
+  () => import('@/components/ActorPage/ActorMoviesList')
+);
 
 const ProfileImageList = dynamic(
   () => import('@/components/ActorPage/ProfileImageList')
 );
 
-const ActorPage: NextPage<
+const PersonPage: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ id }) => {
   const router = useRouter();
@@ -48,7 +50,10 @@ const ActorPage: NextPage<
       {data ? (
         <>
           <Details person={data} />
-          <ActorMovies movies={data.combined_credits.cast} />
+          <ActorMoviesList
+            movies={data.combined_credits.cast}
+            title='Known for'
+          />
           <ProfileImageList images={data.images.profiles} />
         </>
       ) : null}
@@ -56,7 +61,7 @@ const ActorPage: NextPage<
   );
 };
 
-export default ActorPage;
+export default PersonPage;
 
 export const getServerSideProps = wrapper.getServerSideProps(
   ({ dispatch }) =>

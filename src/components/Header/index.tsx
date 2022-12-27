@@ -34,7 +34,7 @@ const MainHeader: FC = () => {
   const headerClasses = classNames(
     'fixed flex items-center z-50 inset-0 w-full h-20 bg-white dark:bg-black lg:bg-white-90 dark:lg:bg-dark-90 transition-all duration-300',
     {
-      'dark:bg-transparent show-page': isShowPage,
+      'dark:bg-transparent dark:lg:bg-transparent show-page': isShowPage,
     }
   );
 
