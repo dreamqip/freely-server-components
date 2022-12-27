@@ -123,7 +123,7 @@ export const movieApi = createApi({
 
 export const {
   useGetMovieByIdQuery,
-  useSearchMoviesQuery,
+  useLazySearchMoviesQuery,
   useGetActorByIdQuery,
   useGetTvShowByIdQuery,
   useGetPopularTvShowsQuery,

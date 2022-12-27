@@ -84,38 +84,6 @@
   display: initial !important;
 }
 
-.ant-tabs-top > .ant-tabs-nav::before {
-  content: none !important;
-}
-
-.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-  color: #6200ee !important;
-}
-
-.dark .ant-tabs-tab {
-  color: white !important;
-}
-
-.ant-tabs-tab:hover {
-  color: #3700b3 !important;
-}
-
-.dark .ant-tabs-tab:hover {
-  color: #bb86fc !important;
-}
-
-.dark .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-  color: #bb86fc !important;
-}
-
-.ant-tabs-ink-bar {
-  background: #6200ee !important;
-}
-
-.dark .ant-tabs-ink-bar {
-  background: white !important;
-}
-
 .dark .ant-empty-description {
   color: white;
 }
@@ -133,38 +101,6 @@
 .swiper-button-next,
 .swiper-button-prev {
   color: #6200ee !important;
-}
-
-.ant-input-group-wrapper {
-  position: absolute !important;
-  left: 0 !important;
-}
-
-.ant-input-affix-wrapper-lg {
-  padding: 21px 30px !important;
-  background: rgb(75, 78, 90) !important;
-}
-
-.ant-input-affix-wrapper {
-  border: none !important;
-}
-
-.ant-input-lg {
-  padding-left: calc(3.5vw + 24px) !important;
-  color: white !important;
-  font-size: 44px !important;
-  background: inherit !important;
-}
-
-.anticon.ant-input-clear-icon,
-.ant-input-clear-icon {
-  color: white !important;
-  font-size: 32px !important;
-  display: flex;
-}
-
-.ant-input-group-addon {
-  display: none !important;
 }
 
 .movie-card {
@@ -209,29 +145,5 @@
   .swiper-button-next,
   .swiper-button-prev {
     display: none !important;
-  }
-}
-
-@media screen and (max-width: 568px) {
-  .ant-input-lg {
-    font-size: 28px !important;
-    padding-left: calc(2vw + 12px) !important;
-  }
-
-  .ant-input-group-addon {
-    display: table-cell !important;
-    background: rgb(75, 78, 90) !important;
-  }
-
-  .ant-input-search-button {
-    background: rgb(75, 78, 90) !important;
-    border: 0 !important;
-  }
-
-  .ant-input-search
-    > .ant-input-group
-    > .ant-input-group-addon:last-child
-    .ant-input-search-button:not(.ant-btn-primary) {
-    color: white !important;
   }
 }

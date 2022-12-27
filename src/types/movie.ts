@@ -34,6 +34,7 @@ export interface IMovie extends IMovieCast {
   keywords: {
     keywords: IKeyword[];
   };
+  // Only available when searching for a movie
   media_type: string;
   images: Images;
   videos: IVideos;

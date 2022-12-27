@@ -27,3 +27,15 @@ interface CombinedCredits {
   cast: IActorCast[];
   crew: IActorCrew[];
 }
+
+export interface ISearchPerson {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for: IActorCast[];
+  known_for_department: string;
+  media_type: string;
+  name: string;
+  popularity: number;
+  profile_path: string | null;
+}

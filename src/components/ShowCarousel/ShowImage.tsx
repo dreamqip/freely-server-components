@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import type { ISearchPerson } from '@/types/person';
 import type { MixedShow } from '@/types/search';
 import { memo, useState } from 'react';
 import { LazyMotion, m } from 'framer-motion';
@@ -8,7 +9,7 @@ import ImageWithFallback from '@/components/Image';
 import { imageBaseUrlW400 } from '@/services/themoviedb';
 
 interface Props {
-  show: MixedShow;
+  show: MixedShow | ISearchPerson;
 }
 
 const ShowImage: FC<Props> = ({ show }) => {
@@ -25,11 +26,19 @@ const ShowImage: FC<Props> = ({ show }) => {
       >
         <ImageWithFallback
           className='aspect-[2/3] object-cover'
-          src={`${imageBaseUrlW400}${show.poster_path}`}
+          src={`${imageBaseUrlW400}${
+            show.media_type === 'person'
+              ? 'profile_path' in show && show.profile_path
+              : 'poster_path' in show && show.poster_path
+          }`}
           width={400}
           height={600}
           sizes='(max-width: 320px) 33vw, (max-width: 568px) 25vw, (max-width: 1024px) 15vw, (max-width: 1440px) 10vw, (max-width: 1920px) 8vw, 7vw'
-          alt={('title' in show && show.title) || show.name}
+          alt={
+            ('title' in show && show.title) ||
+            show.name ||
+            (show as ISearchPerson).name
+          }
           onLoadingComplete={() => setLoaded(true)}
         />
       </m.div>

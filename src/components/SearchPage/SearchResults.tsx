@@ -1,30 +1,33 @@
 import type { MixedShow } from '@/types/search';
-import { FC, memo } from 'react';
+import type { FC } from 'react';
 import { useAppSelector } from '@/hooks/redux';
-import { Empty } from 'antd';
 import Spinner from '../Spinner';
 import ShowCard from '../ShowCarousel/ShowCard';
+import dynamic from 'next/dynamic';
+
+const Empty = dynamic(() => import('@/components/Empty'));
 
 interface Props {
-  refetching: boolean;
-  error: boolean;
+  isFetching: boolean;
 }
 
-const SearchResults: FC<Props> = ({ refetching, error }) => {
+const SearchResults: FC<Props> = ({ isFetching }) => {
   const { results: data } = useAppSelector((state) => state.search);
 
-  if (error) return <div>An error occurred!</div>;
-
   if (data?.total_results === 0)
-    return <Empty className='mt-6' description='No results' />;
+    return (
+      <div className='mt-10'>
+        <Empty description='No results found' />
+      </div>
+    );
 
-  if (refetching) return <Spinner />;
+  if (isFetching) return <Spinner />;
 
   return (
     <div>
       {data && (
         <div className='mt-6'>
-          <div className='grid grid-cols-2 gap-6 md:grid-cols-4'>
+          <div className='grid grid-cols-3 gap-6 md:grid-cols-5'>
             {data.results.map((show: MixedShow) => {
               return <ShowCard key={show.id} show={show} />;
             })}
@@ -35,4 +38,4 @@ const SearchResults: FC<Props> = ({ refetching, error }) => {
   );
 };
 
-export default memo(SearchResults);
+export default SearchResults;

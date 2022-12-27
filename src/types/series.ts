@@ -49,6 +49,8 @@ export interface ITvShow {
   similar: ITvShowSimilar;
   recommendations: ITvShowRecommendations;
   credits: ITvShowCredits;
+  // Only available when searching for a series
+  media_type: string;
 }
 
 interface CreatedBy {

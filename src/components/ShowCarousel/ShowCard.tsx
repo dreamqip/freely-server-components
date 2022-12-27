@@ -5,9 +5,10 @@ import type { IMovie } from '@/types/movie';
 import { memo } from 'react';
 import Link from 'next/link';
 import ShowImage from './ShowImage';
+import type { ISearchPerson } from '@/types/person';
 
 interface Props {
-  show: MixedShow;
+  show: MixedShow | ISearchPerson;
 }
 
 const ShowCard: FC<Props> = ({ show }) => {
@@ -15,6 +16,15 @@ const ShowCard: FC<Props> = ({ show }) => {
     return (
       <Link href={`/movies/${show.id}`} className='movie-card'>
         <ShowImage show={show as IMovie} />
+      </Link>
+    );
+  }
+
+  // Would be available only in the search page
+  if (show.media_type === 'person') {
+    return (
+      <Link href={`/person/${show.id}`} className='movie-card'>
+        <ShowImage show={show as ISearchPerson} />
       </Link>
     );
   }
