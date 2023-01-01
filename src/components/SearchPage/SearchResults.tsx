@@ -27,7 +27,7 @@ const SearchResults: FC<Props> = ({ isFetching }) => {
     <div>
       {data && (
         <div className='mt-6'>
-          <div className='grid grid-cols-3 gap-6 md:grid-cols-5'>
+          <div className='grid grid-cols-2 gap-6 md:grid-cols-5'>
             {data.results.map((show: MixedShow) => {
               return <ShowCard key={show.id} show={show} />;
             })}

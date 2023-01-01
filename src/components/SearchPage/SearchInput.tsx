@@ -34,10 +34,10 @@ const SearchInput: FC<Props> = ({ trigger }) => {
   return (
     <div className='relative'>
       <input
-        placeholder='You can search for movies, tv shows, people...'
+        placeholder='Search for movies, tv shows, people...'
         type='text'
         onChange={handleSearch}
-        className='h-16 w-full rounded-md border-2 border-gray-400 px-4 text-2xl text-gray-500 outline-0 transition-all focus:border-gray-600 dark:bg-black dark:text-gray-300 dark:focus:border-gray-300'
+        className='h-16 w-full rounded-md border-2 border-gray-400 text-md px-4 md:text-2xl text-gray-500 outline-0 transition-all focus:border-gray-600 dark:bg-black dark:text-gray-300 dark:focus:border-gray-300'
         value={search}
       />
       {search && (

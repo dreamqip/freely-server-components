@@ -150,3 +150,10 @@
 .play-btn:hover {
   background: rgba(255, 255, 255, 0.7);
 }
+
+@media screen and (max-width: 1024px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    @apply hidden !important;
+  }
+}

@@ -15,12 +15,14 @@ export const swiperOptions: SwiperOptions = {
   slidesPerGroup: 2,
   preloadImages: false,
   speed: 700,
-  preventInteractionOnTransition: false,
   grabCursor: true,
   breakpoints: {
     568: {
       slidesPerView: 4.1,
       spaceBetween: 15,
+      navigation: {
+        enabled: false,
+      },
     },
     1024: {
       slidesPerView: 6,
