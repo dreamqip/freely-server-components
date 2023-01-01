@@ -6,7 +6,10 @@ This is study project to improve my knowledge of React & Next.js
 
 - Light/dark mode toggle
 - Live previews
-- Fullscreen mode
+- Cross-platform
+- Responsive
+- SEO friendly
+- Offline support
 - Cross browser support
 
 ## Demo
@@ -50,7 +53,7 @@ Start the server
 
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
+To run this project, you will need to add the following environment variables to your .env.local file
 
-`API_KEY`
-you can get key here https://developers.themoviedb.org/3/getting-started/introduction
+`NEXT_PUBLIC_API_KEY`
+you can get your own key here https://developers.themoviedb.org/3/getting-started/introduction
