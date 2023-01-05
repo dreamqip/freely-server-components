@@ -1,8 +1,9 @@
 import { getMovieById } from '@/services/themoviedb';
 import DefaultTags from '@/app/DefaultTags';
+import { use } from 'react';
 
-export default async function Head({ params }: { params: { id: string } }) {
-  const movie = await getMovieById(Number(params.id), { cache: 'no-cache' });
+export default function Head({ params }: { params: { id: string } }) {
+  const movie = use(getMovieById(Number(params.id), { cache: 'no-cache' }));
 
   if (!movie) {
     return null;
