@@ -1,3 +1,5 @@
+'use client';
+
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import type { ITvShow } from '@/types/series';
@@ -12,7 +14,7 @@ export interface IHeroProps {
   series: ITvShow;
 }
 
-const Hero: FC<IHeroProps> = ({ series }) => {
+const ShowHero: FC<IHeroProps> = ({ series }) => {
   const [loaded, setLoaded] = useState(false);
   const [loadedLogo, setLoadedLogo] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -112,4 +114,4 @@ const Hero: FC<IHeroProps> = ({ series }) => {
   );
 };
 
-export default Hero;
+export default ShowHero;

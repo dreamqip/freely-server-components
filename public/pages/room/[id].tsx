@@ -4,7 +4,7 @@ import type { ITvShow } from '@/types/series';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useEffect, useMemo, useState } from 'react';
-import { wrapper } from '../../store';
+import { wrapper } from '@/store';
 import {
   getMovieById,
   getRunningQueriesThunk,

@@ -1,22 +1,28 @@
 import type { FC } from 'react';
 import type { Backdrop } from '@/types/images';
-import { Image } from 'antd';
 import { useAppSelector } from '@/hooks/redux';
 import { imageBaseUrlOriginal } from '@/services/themoviedb';
 import dynamic from 'next/dynamic';
 
 const Empty = dynamic(() => import('@/components/Empty'));
+const AntdImagePreview = dynamic(
+  () => import('antd').then((m) => m.Image.PreviewGroup),
+  { ssr: false }
+);
+const AntdImage = dynamic(() => import('antd').then((m) => m.Image), {
+  ssr: false,
+});
 
 const Images: FC = () => {
   const { images } = useAppSelector((state) => state.series);
 
   return (
-    <div className='grid grid-cols-1 gap-6 py-4 sm:grid-cols-2 md:grid-cols-4 md:py-10'>
-      <Image.PreviewGroup>
-        {images && images?.backdrops.length > 0 ? (
-          images?.backdrops.map((image: Backdrop) => {
-            return (
-              <Image
+    <>
+      {images && images.backdrops.length > 0 ? (
+        <div className='grid grid-cols-1 gap-6 py-4 sm:grid-cols-2 md:grid-cols-4 md:py-10'>
+          <AntdImagePreview>
+            {images?.backdrops.map((image: Backdrop) => (
+              <AntdImage
                 className='aspect-video object-cover'
                 key={image.file_path}
                 placeholder
@@ -26,13 +32,13 @@ const Images: FC = () => {
                 loading='lazy'
                 decoding='async'
               />
-            );
-          })
-        ) : (
-          <Empty description='No images found' />
-        )}
-      </Image.PreviewGroup>
-    </div>
+            ))}
+          </AntdImagePreview>
+        </div>
+      ) : (
+        <Empty description='No images found' />
+      )}
+    </>
   );
 };
 

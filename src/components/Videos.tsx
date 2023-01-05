@@ -1,3 +1,5 @@
+'use client';
+
 import type { FC } from 'react';
 import VideoCard from './VideoCard';
 import { useAppSelector } from '@/hooks/redux';
