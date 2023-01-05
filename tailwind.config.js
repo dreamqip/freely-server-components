@@ -1,8 +1,9 @@
-const { screens, flex, fontFamily } = require('tailwindcss/defaultTheme');
+const { fontFamily } = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
+    './src/app/**/*.{js,ts,jsx,tsx}',
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
     './src/layouts/**/*.{js,ts,jsx,tsx}',
@@ -29,15 +30,37 @@ module.exports = {
         'primary-500': '#6200EE',
         'primary-700': '#3700B3',
         secondary: '#03DAC5',
+        red: '#FF0000',
       },
-    },
-    screens: {
-      xs: '390px',
-      ...screens,
-    },
-    flex: {
-      '0-auto': '0 0 auto',
-      ...flex,
+      screens: {
+        xs: '390px',
+      },
+      flex: {
+        '0-auto': '0 0 auto',
+      },
+      keyframes: {
+        shimmer: {
+          '100%': {
+            transform: 'translateX(100%)',
+          },
+        },
+        translateXReset: {
+          '100%': {
+            transform: 'translateX(0)',
+          },
+        },
+        fadeToTransparent: {
+          '0%': {
+            opacity: 1,
+          },
+          '40%': {
+            opacity: 1,
+          },
+          '100%': {
+            opacity: 0,
+          },
+        },
+      },
     },
   },
   important: true,

@@ -1,17 +1,19 @@
 // @ts-check
 
-const runtimeCaching = require('next-pwa/cache');
-const withPWA = require('next-pwa')({
-  runtimeCaching,
-  dest: 'public',
-  disable: process.env.NODE_ENV === 'development',
-});
+// Don't work in Next 13 app directory yet
+
+// const runtimeCaching = require('next-pwa/cache');
+// const withPWA = require('next-pwa')({
+//   runtimeCaching,
+//   dest: 'public',
+//   disable: process.env.NODE_ENV === 'development',
+// });
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const plugins = [withPWA, withBundleAnalyzer];
+const plugins = [/*withPWA,*/ withBundleAnalyzer];
 
 const removeConsoleConfig = {
   exclude: ['error', 'warn'],
@@ -40,6 +42,9 @@ const nextConfig = {
   compiler: {
     removeConsole:
       process.env.NODE_ENV === 'production' ? removeConsoleConfig : false,
+  },
+  experimental: {
+    appDir: true,
   },
 };
 

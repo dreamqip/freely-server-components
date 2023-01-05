@@ -1,21 +1,22 @@
-import type { FC } from 'react';
+'use client';
+
+import { type FC, useRef } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import classNames from 'classnames';
 import HeaderMenu from '@/components/Header/Menu';
 import SwitchButton from '@/components/Header/SwitchButton';
 import dynamic from 'next/dynamic';
 import Logo from '@/components/Logo';
-import { Bars3Icon } from '@heroicons/react/24/solid';
 import useEventListener from '@/hooks/useEventListener';
-import { useRef } from 'react';
+import { Bars3Icon } from '@heroicons/react/24/solid';
+import { useIsShowPage } from '@/hooks/useIsShowPage';
 
 const MobileNav = dynamic(() => import('@/components/Header/MobileNav'), {
   loading: () => <Bars3Icon className='h-6 w-6' />,
 });
 
 const MainHeader: FC = () => {
-  const router = useRouter();
+  const isShowPage = useIsShowPage();
   const headerRef = useRef<HTMLDivElement | null>(null);
 
   useEventListener('scroll', () => {
@@ -27,9 +28,6 @@ const MainHeader: FC = () => {
       }
     }
   });
-
-  const isShowPage =
-    router.pathname === '/movies/[id]' || router.pathname === '/series/[id]';
 
   const headerClasses = classNames(
     'fixed flex items-center z-50 inset-0 w-full h-20 bg-white dark:bg-black lg:bg-white-90 dark:lg:bg-dark-90 transition-all duration-300',

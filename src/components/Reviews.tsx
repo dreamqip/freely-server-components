@@ -1,3 +1,5 @@
+'use client';
+
 import type { FC } from 'react';
 import type { IReviews } from '@/types/reviews';
 import Comment from '@/components/Comment';
@@ -11,7 +13,7 @@ interface Props {
 
 const Reviews: FC<Props> = ({ reviews }) => {
   return (
-    <div className='py-4 md:py-10'>
+    <div className='py-4 md:py-10 relative'>
       <h2 className='mb-4 text-center text-3xl font-semibold dark:text-white md:text-4xl'>
         Reviews
       </h2>

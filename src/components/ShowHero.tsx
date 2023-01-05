@@ -1,8 +1,8 @@
 'use client';
 
-import type { FC } from 'react';
-import { useEffect, useState } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import type { ITvShow } from '@/types/series';
+import type { IMovie } from '@/types/movie';
 import { LazyMotion, m, useMotionValue, useScroll } from 'framer-motion';
 import { animationVariants } from '@/utilities/animationVariants';
 import { PlayIcon } from '@heroicons/react/24/solid';
@@ -11,7 +11,7 @@ import ImageWithFallback from '@/components/Image';
 import { imageBaseUrlOriginal } from '@/services/themoviedb';
 
 export interface IHeroProps {
-  series: ITvShow;
+  series: IMovie | ITvShow;
 }
 
 const ShowHero: FC<IHeroProps> = ({ series }) => {
@@ -87,13 +87,17 @@ const ShowHero: FC<IHeroProps> = ({ series }) => {
             </div>
           ) : (
             <h1 className='m-0 py-6 text-2xl text-white md:py-10 md:text-5xl'>
-              {series?.name}
+              {'title' in series ? series?.title : series?.name}
             </h1>
           )}
-          <div className='font-light tracking-widest text-white'>
-            {series?.number_of_seasons}{' '}
-            {series && series.number_of_seasons > 1 ? 'Seasons' : 'Season'}
-          </div>
+          {'number_of_seasons' in series && (
+            <div className='font-light tracking-widest text-white'>
+              <p className='text-sm md:text-base'>
+                {series.number_of_seasons}{' '}
+                {series && series.number_of_seasons > 1 ? 'Seasons' : 'Season'}
+              </p>
+            </div>
+          )}
           <div className='my-4 leading-6 tracking-widest text-white'>
             {series?.genres?.map((genre) => genre.name).join(', ')}
           </div>

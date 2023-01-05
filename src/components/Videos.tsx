@@ -1,24 +1,27 @@
 'use client';
 
 import type { FC } from 'react';
-import VideoCard from './VideoCard';
 import { useAppSelector } from '@/hooks/redux';
-import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
 import dynamic from 'next/dynamic';
+import VideoCard from '@/components/VideoCard';
+import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
 
 const Empty = dynamic(() => import('@/components/Empty'));
 
 const Videos: FC = () => {
-  const { videos } = useAppSelector((state) => state.movie);
-  const filteredVideos = videos?.results.filter(
-    (video) => video.site === 'YouTube'
-  );
+  const {
+    series: { videos: seriesVideos },
+    movie: { videos: movieVideos },
+  } = useAppSelector((state) => state);
+  const filteredVideos =
+    seriesVideos?.results.filter((video) => video.site === 'YouTube') ||
+    movieVideos?.results.filter((video) => video.site === 'YouTube');
 
   if (filteredVideos && filteredVideos.length === 0)
     return <Empty description='No videos found' />;
 
   return (
-    <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3'>
+    <div className='grid grid-cols-1 gap-8 pb-4 sm:grid-cols-2 md:grid-cols-4 md:pb-10'>
       {filteredVideos?.map((video) => {
         return (
           <VideoCard

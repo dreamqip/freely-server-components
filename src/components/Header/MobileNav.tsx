@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef } from 'react';
+import { FC, useCallback, useRef } from 'react';
 import { LazyMotion, m, useCycle } from 'framer-motion';
 import { loadFeatures } from '@/utilities/loadAnimationFeatures';
 import useWindowSize from '@/hooks/useWindowSize';
@@ -6,11 +6,10 @@ import { sidebarVariants } from '@/utilities/animationVariants';
 import Navigation from '@/components/Header/Navigation';
 import NavigationToggle from '@/components/Header/NavigationToggle';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
-import { useRouter } from 'next/router';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 const MobileNav: FC = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef<HTMLElement | null>(null);
   const { height } = useWindowSize();
@@ -35,13 +34,13 @@ const MobileNav: FC = () => {
 
   useOnClickOutside(containerRef, handleOutsideClick);
 
-  useEffect(() => {
-    router.events.on('routeChangeComplete', handleOutsideClick);
-
-    return () => {
-      router.events.off('routeChangeComplete', handleOutsideClick);
-    };
-  }, [handleOutsideClick, router.events]);
+  // useEffect(() => {
+  //   router.events.on('routeChangeComplete', handleOutsideClick);
+  //
+  //   return () => {
+  //     router.events.off('routeChangeComplete', handleOutsideClick);
+  //   };
+  // }, [handleOutsideClick, router.events]);
 
   return (
     <LazyMotion features={loadFeatures}>

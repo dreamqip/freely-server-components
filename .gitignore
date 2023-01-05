@@ -48,5 +48,10 @@ yarn-error.log*
 **/public/fallback-*.js
 **/public/fallback-*.js.map
 
-# Yarn
+# Lock files
 yarn.lock
+package-lock.json
+pnpm-lock.yaml
+
+# Visual Studio Code
+.vscode/

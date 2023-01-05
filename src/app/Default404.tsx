@@ -1,10 +1,9 @@
-import type { NextPage } from 'next';
 import Link from 'next/link';
-import { Button } from 'antd';
+import Button from '@/components/Button';
 
-const Error: NextPage = () => {
+export default function DefaultNotFound() {
   return (
-    <div className='flex h-full flex-col items-center justify-center'>
+    <div className='flex h-full flex-col items-center justify-center py-10'>
       <div className='mb-6 text-center text-[120px] font-black leading-none text-gray-700 dark:text-gray-400 md:text-[220px]'>
         404
       </div>
@@ -16,17 +15,8 @@ const Error: NextPage = () => {
         address, or the page has been moved to another URL.
       </div>
       <Link href='/' className='mt-10'>
-        <Button
-          className='bg-primary-500 hover:scale-105 dark:bg-primary-dark'
-          type='primary'
-          shape='round'
-          size='large'
-        >
-          Take me back to home page
-        </Button>
+        <Button>Go to Home</Button>
       </Link>
     </div>
   );
-};
-
-export default Error;
+}

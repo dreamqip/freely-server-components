@@ -1,3 +1,5 @@
+'use client';
+
 import type { MixedShow } from '@/types/search';
 import type { ITvShows } from '@/types/series';
 import type { IMovies } from '@/types/movies';

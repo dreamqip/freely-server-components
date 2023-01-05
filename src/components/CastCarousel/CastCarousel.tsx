@@ -14,7 +14,7 @@ interface CastListProps {
 
 const CastCarousel: FC<CastListProps> = ({ credits, title }) => {
   return (
-    <div className='relative py-4 md:py-10'>
+    <div className='relative'>
       <h2 className='mb-4 text-center text-3xl font-semibold dark:text-white md:text-4xl'>
         {title}
       </h2>

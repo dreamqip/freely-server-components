@@ -1,17 +1,21 @@
 import type { FC, HTMLAttributes } from 'react';
 
 // By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL
+interface Props extends HTMLAttributes<HTMLDivElement> {
+  spinnerSize?: number;
+}
 
-const Spinner: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
+const Spinner: FC<Props> = ({ spinnerSize = 64, ...rest }) => {
   return (
     <div
-      {...props}
-      className={`relative flex items-center justify-center ${props.className}`}
+      {...rest}
+      className={`relative flex items-center justify-center ${rest.className}`}
     >
       <svg
         viewBox='0 0 38 38'
         xmlns='http://www.w3.org/2000/svg'
-        className='h-16 w-16 text-primary-500 dark:text-primary-dark'
+        className='text-primary-500 dark:text-primary-dark'
+        style={{ width: spinnerSize, height: spinnerSize }}
       >
         <defs>
           <linearGradient x1='8.042%' y1='0%' x2='65.682%' y2='23.865%' id='a'>

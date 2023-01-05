@@ -1,3 +1,5 @@
+'use client';
+
 import type { FC } from 'react';
 import { useAppSelector } from '@/hooks/redux';
 import Cast from './Cast';
