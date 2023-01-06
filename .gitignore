@@ -51,7 +51,6 @@ yarn-error.log*
 # Lock files
 yarn.lock
 package-lock.json
-pnpm-lock.yaml
 
 # Visual Studio Code
 .vscode/
