@@ -10,7 +10,6 @@ import popularMoviesReducer from '@/features/movie/popularSlice';
 // export const APP_HYDRATE = createAction<RootState>(HYDRATE);
 
 export const rootReducer = combineReducers({
-  // [movieApi.reducerPath]: movieApi.reducer,
   movie: movieReducer,
   search: searchReducer,
   series: seriesReducer,
@@ -23,7 +22,6 @@ export const makeStore = () => {
   return configureStore({
     reducer: rootReducer,
     devTools: process.env.NODE_ENV !== 'production',
-    // middleware: (gDM) => gDM().concat(movieApi.middleware),
   });
 };
 

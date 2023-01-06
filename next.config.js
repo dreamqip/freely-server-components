@@ -27,7 +27,7 @@ const nextConfig = {
   swcMinify: true,
   images: {
     dangerouslyAllowSVG: true,
-    unoptimized: true,
+    // unoptimized: true,
     formats: ['image/webp', 'image/avif'],
     remotePatterns: [
       {
